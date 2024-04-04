@@ -23,7 +23,7 @@ talk_to_character(Character) :-
 
 % Rozmowa z kupcem
 kupiec_rozmowa :-
-  write('Kupiec odpowiada: Witaj! Czym mogę służyć?'), nl,
+  write('Witaj! Czym mogę służyć?'), nl,
   write('1. Kup przedmiot'), nl,
   write('2. Sprzedaj przedmiot'), nl,
   write('0. Wyjdź z rozmowy'), nl,
@@ -40,37 +40,43 @@ kupiec_kup_przedmiot :-
   ( Przedmiot = 1 -> kupiec_kup_siarke; Przedmiot = 2 -> kupiec_kup_karte_do_gwinta; Przedmiot = 0 -> true ; write('Nie mamy takiego przedmiotu.') ).
 
 kupiec_kup_siarke :-
-  write('Czy masz 10 monet?'), nl,
-  read(Odpowiedź), nl,
-  ( Odpowiedź = tak ->
+  cena(siarka, Cena),  % Pobranie ceny siarki
+  ( ma_wystarczajaca_ilosc_monet(Cena) ->
+    dodaj_monety(-Cena),  % Odejmowanie ceny od posiadanych monet
+    add_to_inventory(siarka, 1),
     write('Gratuluję! Kupiłeś siarkę.')
   ; write('Niestety nie masz wystarczająco dużo monet.') ).
 
 kupiec_kup_karte_do_gwinta :-
-  write('Czy masz 20 monet?'), nl,
-  read(Odpowiedź), nl,
-  ( Odpowiedź = tak ->
+  cena(karta, Cena),  % Pobranie ceny karty do gwinta
+  ( ma_wystarczajaca_ilosc_monet(Cena) ->
+    dodaj_monety(-Cena),  % Odejmowanie ceny od posiadanych monet
+    add_to_inventory(karta, 1),
     write('Gratuluję! Kupiłeś kartę do gwinta "Leczo z Guleczo".')
   ; write('Niestety nie masz wystarczająco dużo monet.') ).
 
 
 kupiec_sprzedaj_przedmiot :-
-  write('Jakie przedmioty chcesz sprzedać?'), nl.
-/*
-  write('Jakie przedmioty chcesz sprzedać?'), nl, 
-  ekwipunek(Ekwipunek),
-  ( \+ member(Przedmiot, Ekwipunek) ->
-    write('Nie masz tego przedmiotu.')
-  ; ( forall(member(Przedmiot, Ekwipunek), write(Przedmiot), write(', ')), nl )
-  ),
-  read(Przedmiot), nl,
-  ( member(Przedmiot, Ekwipunek) ->
-    usun_z_ekwipunku(Przedmiot),
-    dodaj_monety(5),
-    write('Sprzedałeś przedmiot za 5 monet.')
-  ; write('Nie masz tego przedmiotu.')
-  ).
-*/
+  inventory(Inventory),  % Pobranie aktualnego ekwipunku
+  Inventory \= [],  % Sprawdzenie, czy ekwipunek nie jest pusty
+  write('Przedmioty w twoim ekwipunku:'), nl,
+  display_inventory,  % Wyświetlenie ekwipunku
+  write('Wybierz przedmiot do sprzedaży: '), read(Przedmiot), nl,
+  sprzedaj_przedmiot(Przedmiot).  % Sprzedaż wybranego przedmiotu
 
+kupiec_sprzedaj_przedmiot :-
+  % Jeśli ekwipunek jest pusty
+  write('Twój ekwipunek jest pusty. Nie masz przedmiotów do sprzedaży.'), nl.
 
-
+% Sprzedaż przedmiotu
+sprzedaj_przedmiot(Przedmiot) :-
+  inventory(Inventory),  % Pobranie aktualnego ekwipunku
+  member((Przedmiot, Ilosc), Inventory),  % Sprawdzenie, czy postać posiada wybrany przedmiot
+  Ilosc > 0,  % Sprawdzenie, czy ilość przedmiotu jest większa od zera
+  % Sprawdzenie ceny przedmiotu
+  cena(Przedmiot, Cena),
+  % Usunięcie przedmiotu z ekwipunku
+  remove_from_inventory(Przedmiot, 1),
+  % Dodanie monet do posiadanych przez postać
+  dodaj_monety(Cena),
+  write('Sprzedałeś '), write(Przedmiot), write(' za '), write(Cena), write(' monet.'), nl.
