@@ -219,10 +219,12 @@ go(s) :- i_am_at(c1),
         write('W gęstym borze wpadasz w pułapkę zastawioną przez Leszych.'), nl, 
         write("Po cięzkim boju serce Białego Wilka zostaje brutalnie przebite przez potężnych strażników lasu..."), 
         !, halt.
+
 go(w) :- (i_am_at(d2); i_am_at(d3)), 
         write('W gęstym borze wpadasz w pułapkę zastawioną przez Leszych.'), nl, 
         write("Po cięzkim boju serce Białego Wilka zostaje brutalnie przebite przez potężnych strażników lasu..."), 
         !, halt.
+
 go(s) :- i_am_at(e3), 
         write('Cicha, pozbawiona jakiejkolwiek aktywności potwórów jaskinia okazuje się skrywać straszny sekret.'), 
         nl, write('Geralt nie zdążył zorientować się jakie monstrum pozbawiło go życia.'), nl,
@@ -235,16 +237,16 @@ go(s) :- (i_am_at(f5); i_am_at(c6); i_am_at(c7)),
         write('To jezioro wydaje się być nasycone silną magią elfów Aen Elle. Pływanie tutaj może być niebezpieczne.'), nl, !.
 
 go(w) :- i_am_at(f2),
-        write('Wysoki klif na który nie da się wspiąć... Jak Płotka się tam dostała?'), nl,
+        write('Wysoki klif na który nie da się wspiąć... Jak Płotka się tam dostała?'), nl, !.
 
 go(e) :- i_am_at(f4),
-        write('Wysoki klif na który nie da się wspiąć. Na jej szczycie znajduje się solidna wieża'), nl,
+        write('Wysoki klif na który nie da się wspiąć. Na jej szczycie znajduje się solidna wieża'), nl, !.
 
 go(s) :- (i_am_at(f2); i_am_at(f4)),
-        write('Wysoki klif na który nie da się wspiąć.'), nl,
+        write('Wysoki klif na który nie da się wspiąć.'), nl, !.
 
 go(n) :- (i_am_at(b1); i_am_at(b2); i_am_at(b3); i_am_at(b4); i_am_at(b5); i_am_at(b6); i_am_at(b7)),
-        write("Nie jestem Zoltanem żebym się przebił przez pasmo Gór Va'Matz"), nl,
+        write("Zaraza. Nie jestem Zoltanem żebym się przebił przez pasmo Gór Va'Matz...."), nl, !.
 
 go(Direction) :-
         i_am_at(Here),
@@ -253,9 +255,6 @@ go(Direction) :-
         assert(i_am_at(There)),
         !, look.
 
-go(_) :-
-        write('Dotarłeś do miejsca gdzie diabeł mówi dobranoc. Zawróć.'), nl.
-
 n :- go(n).
 
 s :- go(s).
@@ -263,6 +262,9 @@ s :- go(s).
 e :- go(e).
 
 w :- go(w).
+
+go(_) :-
+        write('Dotarłeś do miejsca gdzie diabeł mówi dobranoc. Zawróć.'), nl.
 
 describe(Place) :-
     place(Place, Terrain, Characters),  % Check if place exists
