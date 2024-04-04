@@ -1,10 +1,10 @@
-describe(a1) :- mountains.
-describe(a2) :- mountains.
-describe(a3) :- mountains.
+describe(a1) :- west_mountains.
+describe(a2) :- ridge.
+describe(a3) :- ridge.
 describe(a4) :- mountains.
-describe(a5) :- mountains.
-describe(a6) :- mountains.
-describe(a7) :- mountains.
+describe(a5) :- ridge.
+describe(a6) :- east_mountains.
+describe(a7) :- east_mountains.
 
 describe(b1) :- other.
 describe(b2) :- meadow.
@@ -54,13 +54,20 @@ describe(g5) :- lake.
 describe(g6) :- lake.
 describe(g7) :- lake.
 
-mountains :- write('Góry Va-Matz'), nl.
-forest :- write('Las Vegas'), nl.
+
+west_mountains :- write("Zachodni szczyt Gór Va'Matz"), nl.
+ridge :- write("Niedostępna grań Gór Va'Matz"), nl.
+ridge:- write("Niedostępna grań Gór Va'Matz"), nl.
+mountains :- write("Wysokie Góry Va'Matz"), nl.
+ridge :- write("Niedostępna grań Gór Va'Matz"), nl.
+east_mountains :- write("Wschodnie szczyty Gór Va'Matz"), nl.
+east_mountains :- write("Wschodnie szczyty Gór Va'Matz"), nl.
+forest :- write("Bór K'Backi. Czuć dobiegającą z niego gęstą esencję Leszych..."), nl.
 canyon :- write('Kanion'), nl.
 cave :- write('Jaskinia'), nl.
-nest :- write('Gniazdo gryfa'), nl.
+nest :- write('Gniazdo gryfa.'), nl.
 village :- write('Wieś Jaworek'), nl.
 tower :- write('Wieża Babel'), nl.
-lake :- write('Jezioro'), nl.
-meadow :- write('Łąka'), nl.
+lake :- write('Jezioro emanujące elficką magią.'), nl.
+meadow :- write('Łąka, na której pasą się krowy'), nl.
 other :- write('Nieużytki'), nl.
