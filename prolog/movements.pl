@@ -225,7 +225,7 @@ go(w) :- (i_am_at(d2); i_am_at(d3)),
         write("Po cięzkim boju serce Białego Wilka zostaje brutalnie przebite przez potężnych strażników lasu..."), 
         !, halt.
 
-go(s) :- i_am_at(e3), 
+go(s) :- i_am_at(f3), 
         write('Cicha, pozbawiona jakiejkolwiek aktywności potwórów jaskinia okazuje się skrywać straszny sekret.'), 
         nl, write('Geralt nie zdążył zorientować się jakie monstrum pozbawiło go życia.'), nl,
         write('Ukryty znów może cieszyć się spokojem w swojej kryjówce...'), !, halt.
@@ -267,18 +267,32 @@ go(_) :-
         write('Dotarłeś do miejsca gdzie diabeł mówi dobranoc. Zawróć.'), nl.
 
 describe(Place) :-
-    place(Place, Terrain, Characters),  % Check if place exists
-    write('Obecna lokalizacja: '), write(Terrain), nl,
+    place(Place, Terrain, Characters, Items),  % Check if place exists
+    write('Obecna lokalizacja: '), Terrain, nl,
     ( Characters \== [] ->  % Use `\==` for non-unification comparison
         write('Postacie w tej lokalizacji: '), nl,
         print_characters(Characters)
-    ; write('Brak postaci.')  % Print message for empty list
+
+    ; true
+    ),
+    ( Items \== [] ->  % Use `\==` for non-unification comparison
+        write('Itemy w tej lokalizacji: '), nl,
+        print_items(Items)
+        
+    ; true
     ).
 
 print_characters([]).
 print_characters([Character | Rest]) :-
+    write('\t'), 
     write(Character), nl,  % Print character and newline
     print_characters(Rest).  % Recursive call for the rest
+
+print_items([]).
+print_items([Item | Rest]) :-
+    write('\t'), 
+    write(Item), nl,  % Print character and newline
+    print_items(Rest).  % Recursive call for the rest
 
 look :-
     i_am_at(Place),
