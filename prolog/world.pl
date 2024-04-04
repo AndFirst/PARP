@@ -39,9 +39,9 @@ describe(e6) :- lake.
 describe(e7) :- lake.
 
 describe(f1) :- other.
-describe(f2) :- canyon.
+describe(f2) :- cliff_canyon.
 describe(f3) :- canyon.
-describe(f4) :- canyon.
+describe(f4) :- cliff_canyon.
 describe(f5) :- tower.
 describe(f6) :- lake.
 describe(f7) :- lake.
@@ -63,11 +63,12 @@ ridge :- write("Niedostępna grań Gór Va'Matz"), nl.
 east_mountains :- write("Wschodnie szczyty Gór Va'Matz"), nl.
 east_mountains :- write("Wschodnie szczyty Gór Va'Matz"), nl.
 forest :- write("Bór K'Backi. Czuć dobiegającą z niego gęstą esencję Leszych..."), nl.
-canyon :- write('Kanion'), nl.
-cave :- write('Jaskinia'), nl.
+canyon :- write('Malowniczy kanion prowadzący do jaskini.'), nl.
+cliff_canyon :- write('Potężny klif na końcu kanionu.'), nl.
+cave :- write('Tajemnicza jaskinia. Z jakiegoś powodu nie wygląda, żeby żadne potwory chciały się tam zapuszczać...'), nl.
 nest :- write('Gniazdo gryfa.'), nl.
 village :- write('Wieś Jaworek'), nl.
-tower :- write('Wieża Babel'), nl.
+tower :- write('Wieża Babel. Obok znajdują się ruiny drugiej, ewidentnie uderzonej przez Wiwernę'), nl.
 lake :- write('Jezioro emanujące elficką magią.'), nl.
 meadow :- write('Łąka, na której pasą się krowy'), nl.
-other :- write('Nieużytki'), nl.
+other :- write('Równiny pełne roślinności'), nl.
