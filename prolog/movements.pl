@@ -234,10 +234,17 @@ go(w) :- (i_am_at(d2); i_am_at(d3); i_am_at(e4); i_am_at(e5); i_am_at(f4); i_am_
 go(s) :- (i_am_at(f5); i_am_at(c6); i_am_at(c7)),
         write('To jezioro wydaje się być nasycone silną magią elfów Aen Elle. Pływanie tutaj może być niebezpieczne.'), nl, !.
 
+go(w) :- i_am_at(f2),
+        write('Wysoki klif na który nie da się wspiąć... Jak Płotka się tam dostała?'), nl,
 
-        
-        # write('Wysoki klif z którego nie ma ucieczki. Geralt z Rivii spada w przepaść...'), nl,
-        # write('Jego ciało zostaje odnalezione dopiero po wielu dniach...'), !, halt.
+go(e) :- i_am_at(f4),
+        write('Wysoki klif na który nie da się wspiąć. Na jej szczycie znajduje się solidna wieża'), nl,
+
+go(s) :- (i_am_at(f2); i_am_at(f4)),
+        write('Wysoki klif na który nie da się wspiąć.'), nl,
+
+go(n) :- (i_am_at(b1); i_am_at(b2); i_am_at(b3); i_am_at(b4); i_am_at(b5); i_am_at(b6); i_am_at(b7)),
+        write("Nie jestem Zoltanem żebym się przebił przez pasmo Gór Va'Matz"), nl,
 
 go(Direction) :-
         i_am_at(Here),
