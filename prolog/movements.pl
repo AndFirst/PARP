@@ -228,6 +228,17 @@ go(s) :- i_am_at(e3),
         nl, write('Geralt nie zdążył zorientować się jakie monstrum pozbawiło go życia.'), nl,
         write('Ukryty znów może cieszyć się spokojem w swojej kryjówce...'), !, halt.
 
+go(w) :- (i_am_at(d2); i_am_at(d3); i_am_at(e4); i_am_at(e5); i_am_at(f4); i_am_at(f5)),
+        write('To jezioro wydaje się być nasycone silną magią elfów Aen Elle. Pływanie tutaj może być niebezpieczne.'), nl, !.
+
+go(s) :- (i_am_at(f5); i_am_at(c6); i_am_at(c7)),
+        write('To jezioro wydaje się być nasycone silną magią elfów Aen Elle. Pływanie tutaj może być niebezpieczne.'), nl, !.
+
+
+        
+        # write('Wysoki klif z którego nie ma ucieczki. Geralt z Rivii spada w przepaść...'), nl,
+        # write('Jego ciało zostaje odnalezione dopiero po wielu dniach...'), !, halt.
+
 go(Direction) :-
         i_am_at(Here),
         path(Here, Direction, There),

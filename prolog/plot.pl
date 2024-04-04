@@ -7,7 +7,7 @@ intro :-
 
 instructions :-
     nl,
-    write('Wprowadź zaklęcia w Starszej Mowie (standardowej składni Prologu).'), nl,
+    write('Wprowadź zaklęcia w Starszej Mowie (standardowej składni Prologa).'), nl,
     write('Dostępne zaklęcia:'), nl,
     write('n.  s.  e.  w.     -- aby przejść w danym kierunku.'), nl,
     write('look.              -- aby ponownie rozejrzeć się obok siebie.'), nl,
