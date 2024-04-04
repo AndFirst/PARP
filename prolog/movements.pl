@@ -215,6 +215,19 @@ path(g6, w, g5).
 path(g7, n, f7).
 path(g7, w, g6).
 
+go(s) :- i_am_at(c1),
+        write('W gęstym borze wpadasz w pułapkę zastawioną przez Leszych.'), nl, 
+        write("Po cięzkim boju serce Białego Wilka zostaje brutalnie przebite przez potężnych strażników lasu..."), 
+        !, halt.
+go(w) :- (i_am_at(d2); i_am_at(d3)), 
+        write('W gęstym borze wpadasz w pułapkę zastawioną przez Leszych.'), nl, 
+        write("Po cięzkim boju serce Białego Wilka zostaje brutalnie przebite przez potężnych strażników lasu..."), 
+        !, halt.
+go(s) :- i_am_at(e3), 
+        write('Cicha, pozbawiona jakiejkolwiek aktywności potwórów jaskinia okazuje się skrywać straszny sekret.'), 
+        nl, write('Geralt nie zdążył zorientować się jakie monstrum pozbawiło go życia.'), nl,
+        write('Ukryty znów może cieszyć się spokojem w swojej kryjówce...'), !, halt.
+
 go(Direction) :-
         i_am_at(Here),
         path(Here, Direction, There),
@@ -258,4 +271,4 @@ look(Direction) :-
     !.
 
 look(_) :-
-    write('Nie powinieneś tam iść'), nl.
+        write('Zaraza. Nie powinienem tam iść'), nl.

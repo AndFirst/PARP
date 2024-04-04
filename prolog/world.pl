@@ -1,10 +1,10 @@
-place(a1, mountains, []).
-place(a2, mountains, []).
-place(a3, mountains, []).
+place(a1, west_mountains, []).
+place(a2, ridge, []).
+place(a3, ridge, []).
 place(a4, mountains, []).
-place(a5, mountains, []).
-place(a6, mountains, []).
-place(a7, mountains, []).
+place(a5, ridge, []).
+place(a6, east_mountains, []).
+place(a7, east_mountains, []).
 
 place(b1, other, []).
 place(b2, meadow, []).
@@ -39,9 +39,9 @@ place(e6, lake, []).
 place(e7, lake, []).
 
 place(f1, other, []).
-place(f2, canyon, []).
+place(f2, cliff_canyon, []).
 place(f3, canyon, []).
-place(f4, canyon, []).
+place(f4, cliff_canyon, []).
 place(f5, tower, []).
 place(f6, lake, []).
 place(f7, lake, []).
@@ -55,13 +55,18 @@ place(g6, lake, []).
 place(g7, lake, []).
 
 
-mountains :- write('Góry Va-Matz'), nl.
-forest :- write('Las Vegas'), nl.
-canyon :- write('Kanion'), nl.
-cave :- write('Jaskinia'), nl.
-nest :- write('Gniazdo gryfa'), nl.
+
+west_mountains :- write("Zachodni szczyt Gór Va'Matz"), nl.
+ridge :- write("Niedostępna grań Gór Va'Matz"), nl.
+mountains :- write("Wysokie Góry Va'Matz"), nl.
+east_mountains :- write("Wschodnie szczyty Gór Va'Matz"), nl.
+forest :- write("Bór K'Backi. Czuć dobiegającą z niego gęstą esencję Leszych..."), nl.
+canyon :- write('Malowniczy kanion prowadzący do jaskini.'), nl.
+cliff_canyon :- write('Potężny klif na końcu kanionu.'), nl.
+cave :- write('Tajemnicza jaskinia. Z jakiegoś powodu nie wygląda, żeby żadne potwory chciały się tam zapuszczać...'), nl.
+nest :- write('Gniazdo gryfa.'), nl.
 village :- write('Wieś Jaworek'), nl.
-tower :- write('Wieża Babel'), nl.
-lake :- write('Jezioro'), nl.
-meadow :- write('Łąka'), nl.
-other :- write('Nieużytki'), nl.
+tower :- write('Wieża Babel. Obok znajdują się ruiny drugiej, ewidentnie uderzonej przez Wiwernę'), nl.
+lake :- write('Jezioro emanujące elficką magią.'), nl.
+meadow :- write('Łąka, na której pasą się krowy'), nl.
+other :- write('Równiny pełne roślinności'), nl.
