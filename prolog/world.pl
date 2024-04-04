@@ -1,58 +1,58 @@
-place(a1, west_mountains, []).
-place(a2, ridge, []).
-place(a3, ridge, []).
-place(a4, mountains, []).
-place(a5, ridge, []).
-place(a6, east_mountains, []).
-place(a7, east_mountains, []).
+place(a1, west_mountains, [], [], []).
+place(a2, ridge, [], [], []).
+place(a3, ridge, [], [], []).
+place(a4, mountains, [], [], []).
+place(a5, ridge, [], [], []).
+place(a6, east_mountains, [], [], []).
+place(a7, east_mountains, [], [], []).
 
-place(b1, other, []).
-place(b2, meadow, []).
-place(b3, meadow, []).
-place(b4, other, []).
-place(b5, other, []).
-place(b6, other, []).
-place(b7, nest, []).
+place(b1, other, [], [], []).
+place(b2, meadow, [], [], []).
+place(b3, meadow, [], [], []).
+place(b4, other, [], [], []).
+place(b5, other, [], [], []).
+place(b6, other, [], [], []).
+place(b7, nest, [], [], []).
 
-place(c1, other, []).
-place(c2, other, []).
-place(c3, village, [kupiec, karczmarka]).
-place(c4, other, []).
-place(c5, other, []).
-place(c6, other, []).
-place(c7, other, []).
+place(c1, other, [], [], []).
+place(c2, other, [], [], []).
+place(c3, village, [kupiec, karczmarka], [], []).
+place(c4, other, [], [], []).
+place(c5, other, [], [], []).
+place(c6, other, [], [], []).
+place(c7, other, [], [], []).
 
-place(d1, forest, []).
-place(d2, other, []).
-place(d3, other, []).
-place(d4, other, []).
-place(d5, other, []).
-place(d6, lake, []).
-place(d7, lake, []).
+place(d1, forest, [], [], []).
+place(d2, other, [], [], []).
+place(d3, other, [], [], []).
+place(d4, other, [], [], []).
+place(d5, other, [], [], []).
+place(d6, lake, [], [], []).
+place(d7, lake, [], [], []).
 
-place(e1, forest, []).
-place(e2, other, []).
-place(e3, other, []).
-place(e4, other, []).
-place(e5, other, []).
-place(e6, lake, []).
-place(e7, lake, []).
+place(e1, forest, [], [], []).
+place(e2, other, [], [], []).
+place(e3, other, [], [], []).
+place(e4, other, [], [], []).
+place(e5, other, [], [], []).
+place(e6, lake, [], [], []).
+place(e7, lake, [], [], []).
 
-place(f1, other, []).
-place(f2, cliff_canyon, []).
-place(f3, canyon, []).
-place(f4, cliff_canyon, []).
-place(f5, tower, []).
-place(f6, lake, []).
-place(f7, lake, []).
+place(f1, other, [], [], []).
+place(f2, cliff_canyon, [], [], []).
+place(f3, canyon, [], [], []).
+place(f4, cliff_canyon, [], [], []).
+place(f5, tower, [], [], []).
+place(f6, lake, [], [], []).
+place(f7, lake, [], [], []).
 
-place(g1, other, []).
-place(g2, other, []).
-place(g3, cave, []).
-place(g4, other, []).
-place(g5, lake, []).
-place(g6, lake, []).
-place(g7, lake, []).
+place(g1, other, [], [], []).
+place(g2, other, [], [], []).
+place(g3, cave, [], [], []).
+place(g4, other, [], [], []).
+place(g5, lake, [], [], []).
+place(g6, lake, [], [], []).
+place(g7, lake, [], [], []).
 
 
 

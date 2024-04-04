@@ -16,3 +16,10 @@ instructions :-
     write('halt.              -- aby zakończyć grę i wyjść.'), nl,
     nl.
 
+% Implementacja akcji związanej z użyciem przedmiotu (przykład)
+bestiariusz :-
+    write('You open the bestiary and find information about Gryf:'), nl,
+    write('- Gryf is a fearsome creature that dwells in dark caves.'), nl,
+    write('- It is vulnerable to light-based attacks.'), nl.
+
+
