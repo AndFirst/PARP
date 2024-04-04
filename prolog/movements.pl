@@ -233,17 +233,29 @@ e :- go(e).
 
 w :- go(w).
 
+describe(Place) :-
+    place(Place, Terrain, Characters),  % Check if place exists
+    write('Obecna lokalizacja: '), write(Terrain), nl,
+    ( Characters \== [] ->  % Use `\==` for non-unification comparison
+        write('Postacie w tej lokalizacji: '), nl,
+        print_characters(Characters)
+    ; write('Brak postaci.')  % Print message for empty list
+    ).
+
+print_characters([]).
+print_characters([Character | Rest]) :-
+    write(Character), nl,  % Print character and newline
+    print_characters(Rest).  % Recursive call for the rest
+
 look :-
     i_am_at(Place),
-    write('Obecna lokalizacja: '), describe(Place),
-    nl.
-
+    describe(Place).
 
 look(Direction) :-
-        i_am_at(Here),
-        path(Here, Direction, There),
-        write('Patrzysz na: '), describe(There), nl,
-        !.
+    i_am_at(Here),
+    path(Here, Direction, There),
+    describe(There),
+    !.
 
 look(_) :-
-        write('Nie powinieneś tam iść'), nl.
+    write('Nie powinieneś tam iść'), nl.
