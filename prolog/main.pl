@@ -3,7 +3,7 @@
 :- retractall(i_am_at(_)).
 :- retractall(equipment(_)).
 :- dynamic monety/1.
-
+:- discontiguous go/1.
 
 % Złożenie pzynęty na gryfa
 craft_bait() :-

@@ -267,7 +267,7 @@ go(_) :-
         write('Dotarłeś do miejsca gdzie diabeł mówi dobranoc. Zawróć.'), nl.
 
 describe(Place) :-
-    place(Place, Terrain, Characters, Items),  % Check if place exists
+    place(Place, Terrain, Characters, Items, Opponents),  % Check if place exists
     write('Obecna lokalizacja: '), Terrain, nl,
     ( Characters \== [] ->  % Use `\==` for non-unification comparison
         write('Postacie w tej lokalizacji: '), nl,
@@ -280,6 +280,12 @@ describe(Place) :-
         print_items(Items)
         
     ; true
+    ),
+    ( Opponents \== [] ->  % Use `\==` for non-unification comparison
+        write('Przeciwnicy w tej lokalizacji: '), nl,
+        print_opponents(Opponents)
+        
+    ; true
     ).
 
 print_characters([]).
@@ -287,6 +293,12 @@ print_characters([Character | Rest]) :-
     write('\t'), 
     write(Character), nl,  % Print character and newline
     print_characters(Rest).  % Recursive call for the rest
+
+print_opponents([]).
+print_opponents([Opponent | Rest]) :-
+    write('\t'), 
+    write(Opponent), nl,  % Print character and newline
+    print_opponents(Rest).  % Recursive call for the rest
 
 print_items([]).
 print_items([Item | Rest]) :-
