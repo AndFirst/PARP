@@ -1,5 +1,5 @@
 intro :-
-    write('Geralt z Rivii przemierzając Velen dotarł w końcu na szlak wiodący do wsi Jawornik.'), nl,
+    write('Geralt z Rivii przemierzając Velen dotarł w końcu na szlak wiodący do wsi Jaworek.'), nl,
     write('Po wielu dniach samotnej podróży, nadszedł czas by uzupełnić zapasy i rozejrzeć się za zleceniem.'), nl,
     write('Zbliżając się do wioski, czułe zmysły Białego Wilka natychmiast wychwyciły podejrzanie ślady...'), nl,
     nl,
@@ -7,7 +7,7 @@ intro :-
 
 instructions :-
     nl,
-    write('Wprowadź zaklęcia w Starszej Mowie (standardowej składni Prologu).'), nl,
+    write('Wprowadź zaklęcia w Starszej Mowie (standardowej składni Prologa).'), nl,
     write('Dostępne zaklęcia:'), nl,
     write('n.  s.  e.  w.     -- aby przejść w danym kierunku.'), nl,
     write('look.              -- aby ponownie rozejrzeć się obok siebie.'), nl,
