@@ -1,3 +1,5 @@
+% place(coordinates, location, NPCs, Items, Opponents)
+
 place(a1, west_mountains, [], [], []).
 place(a2, ridge, [], [], []).
 place(a3, ridge, [], [], []).
