@@ -12,6 +12,7 @@ instructions :-
     write('n.  s.  e.  w.     -- aby przejść w danym kierunku.'), nl,
     write('look.              -- aby ponownie rozejrzeć się obok siebie.'), nl,
     write('look(kierunek).    -- aby spojrzeć w jednym z czterech kierunków.'), nl,
+    write('enter(miejsce).    -- aby wejść przez drzwi do spejalnych lokacji'), nl, 
     write('instructions.      -- aby ponownie zobaczyć tę wiadomość.'), nl,
     write('halt.              -- aby zakończyć grę i wyjść.'), nl,
     nl.
