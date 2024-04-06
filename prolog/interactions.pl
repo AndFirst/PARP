@@ -18,13 +18,13 @@ talk_to_character(Character) :-
     karczmarka_rozmowa ; % Rozmowa z karczmarką
   Character = zielarz ->
     zielarz_rozmowa ; % Rozmowa z zielarzem
-   write('Nie wiem, jak rozmawiać z tą postacią.')  % Domyślny komunikat dla nieznanych postaci
+   write('Zaraza. Nie wiem, jak rozmawiać z tym odmieńcem.')  % Domyślny komunikat dla nieznanych postaci
   ).
 
 % Rozmowa z kupcem
 kupiec_rozmowa :-
-  write('Witaj! Czym mogę służyć?'), nl,
-  write('1. Kup przedmiot'), nl,
+  write('Witaj Mistrzu wiedźminie! Czym mogę służyć?'), nl,
+  write('1. Pokaż mi swoje towary'), nl,
   write('2. Sprzedaj przedmiot'), nl,
   write('0. Wyjdź z rozmowy'), nl,
   read(Opcja), nl,
@@ -32,28 +32,28 @@ kupiec_rozmowa :-
 
 % Kupno przedmiotu od kupca
 kupiec_kup_przedmiot :-
-  write('Jakie przedmioty chcesz kupić?'), nl,
+  write('Pokażę ci swoje towary. Które z nich chcesz kupić?'), nl,
   write('1. Siarka.'), nl,
-  write('2. Karta do gwinta - Leczo z Guleczo'), nl,
+  write('2. Karta do gwinta - Vernon Roche (Partiota, ale zbój)'), nl,
   write('0. Wyjdź z rozmowy'), nl,
   read(Przedmiot), nl,
-  ( Przedmiot = 1 -> kupiec_kup_siarke; Przedmiot = 2 -> kupiec_kup_karte_do_gwinta; Przedmiot = 0 -> true ; write('Nie mamy takiego przedmiotu.') ).
+  ( Przedmiot = 1 -> kupiec_kup_siarke; Przedmiot = 2 -> kupiec_kup_karte_do_gwinta; Przedmiot = 0 -> true ; write('Nie mam tego w skrzyni.') ).
 
 kupiec_kup_siarke :-
   cena(siarka, Cena),  % Pobranie ceny siarki
   ( ma_wystarczajaca_ilosc_monet(Cena) ->
     dodaj_monety(-Cena),  % Odejmowanie ceny od posiadanych monet
     add_to_inventory(siarka, 1),
-    write('Gratuluję! Kupiłeś siarkę.')
-  ; write('Niestety nie masz wystarczająco dużo monet.') ).
+    write('Kupiłeś siarkę.')
+  ; write('Niestety, potrzebujesz więcej orenów żeby to kupić') ).
 
 kupiec_kup_karte_do_gwinta :-
   cena(karta, Cena),  % Pobranie ceny karty do gwinta
   ( ma_wystarczajaca_ilosc_monet(Cena) ->
     dodaj_monety(-Cena),  % Odejmowanie ceny od posiadanych monet
     add_to_inventory(karta, 1),
-    write('Gratuluję! Kupiłeś kartę do gwinta "Leczo z Guleczo".')
-  ; write('Niestety nie masz wystarczająco dużo monet.') ).
+    write('Kupiłeś kartę do gwinta "Vernon Roche".')
+  ; write('Niestety, potrzebujesz więcej orenów żeby to kupić') ).
 
 
 kupiec_sprzedaj_przedmiot :-
@@ -61,12 +61,12 @@ kupiec_sprzedaj_przedmiot :-
   Inventory \= [],  % Sprawdzenie, czy ekwipunek nie jest pusty
   write('Przedmioty w twoim ekwipunku:'), nl,
   display_inventory,  % Wyświetlenie ekwipunku
-  write('Wybierz przedmiot do sprzedaży: '), read(Przedmiot), nl,
+  write('Wybierz przedmiot, który chcesz spieniężyć: '), read(Przedmiot), nl,
   sprzedaj_przedmiot(Przedmiot).  % Sprzedaż wybranego przedmiotu
 
 kupiec_sprzedaj_przedmiot :-
   % Jeśli ekwipunek jest pusty
-  write('Twój ekwipunek jest pusty. Nie masz przedmiotów do sprzedaży.'), nl.
+  write('Twój ekwipunek jest pustszy niż głowa utopca. Nie masz nic do sprzedania.'), nl.
 
 % Sprzedaż przedmiotu
 sprzedaj_przedmiot(Przedmiot) :-
@@ -79,4 +79,4 @@ sprzedaj_przedmiot(Przedmiot) :-
   remove_from_inventory(Przedmiot, 1),
   % Dodanie monet do posiadanych przez postać
   dodaj_monety(Cena),
-  write('Sprzedałeś '), write(Przedmiot), write(' za '), write(Cena), write(' monet.'), nl.
+  write('Sprzedałeś '), write(Przedmiot), write(' za '), write(Cena), write(' orenów.'), nl.

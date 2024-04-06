@@ -17,11 +17,11 @@ craft_bait() :-
     remove_from_inventory(ziele_szatana, 1),
     remove_from_inventory(krowia_skora, 2),
     add_to_inventory(przynęta_na_gryfa, 1),
-    write('Udało Ci się wytworzyć przynętę na gryfa'), nl.
+    write('Wytworzono przynętę na gryfa. Teraz na pewno uda się go ukatrupić'), nl.
 
 % Informacja, gdy gracz nie ma niezbędnych składników
 craft_bait :-
-    write('Nie masz przedmiotów niezbędnych do wytworzenia przynęty. \n Do wytworzenia przynęty niezbędne są: \n- 2 krowie skóry \n- siarka \n-ziele szatana'), nl.
+    write('Nie masz przedmiotów niezbędnych do wytworzenia przynęty. \n Potrzebujesz: \n- 2 krowie skóry \n- siarka \n-ziele z bagn Oorsynowskich'), nl.
 
 start :-
     assert(i_am_at(c3)),
