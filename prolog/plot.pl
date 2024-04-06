@@ -19,8 +19,11 @@ instructions :-
 
 % Implementacja akcji związanej z użyciem przedmiotu (przykład)
 bestiariusz :-
-    write('You open the bestiary and find information about Gryf:'), nl,
-    write('- Gryf is a fearsome creature that dwells in dark caves.'), nl,
-    write('- It is vulnerable to light-based attacks.'), nl.
+    write('Otwierasz bestiariusz i wyszukujesz informacje o Gryfie:'), nl,
+    write('-> Gryf jest straszną bestią dominującą przestworza.'), nl,
+    write('-> Zakłada gniazda w pobliżu pasm górskich.'), nl,
+    write('-> Wywabić gryfa, stworzyć należy przynętę z siarki oraz jaskółczego ziela zawiniętego w krowie truchło.'), nl,
+    write('-> Gryf wrażliwy jest na znak Aard, który strąci go z powietrza.'), nl,
+    write('-> Aby zmusić go do walki w zwarciu, użyj kuszy.'), nl.
 
 
