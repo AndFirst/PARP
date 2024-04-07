@@ -218,73 +218,73 @@ path(g7, w, g6).
 path(f5, x, f5b).
 path(f5b, x, f5).
 
-go(s) :- i_am_at(c1),
+idź(s) :- i_am_at(c1),
         write('W gęstym borze wpadasz w pułapkę zastawioną przez Leszych.'), nl, 
         write("Po cięzkim boju serce Białego Wilka zostaje brutalnie przebite przez potężnych strażników lasu..."), 
         !, halt.
 
-go(w) :- (i_am_at(d2); i_am_at(d3)), 
+idź(w) :- (i_am_at(d2); i_am_at(d3)), 
         write('W gęstym borze wpadasz w pułapkę zastawioną przez Leszych.'), nl, 
         write("Po cięzkim boju serce Białego Wilka zostaje brutalnie przebite przez potężnych strażników lasu..."), 
         !, halt.
 
-go(s) :- i_am_at(f3), 
+idź(s) :- i_am_at(f3), 
         write('Cicha, pozbawiona jakiejkolwiek aktywności potwórów jaskinia okazuje się skrywać straszny sekret.'), 
-        nl, write('Geralt nie zdążył zorientować się jakie monstrum pozbawiło go życia.'), nl,
+        nl, write('Geralt nie zdążył zorientować się jakie monstrum pozbawiło idź życia.'), nl,
         write('Ukryty znów może cieszyć się spokojem w swojej kryjówce...'), !, halt.
 
-go(w) :- (i_am_at(d2); i_am_at(d3); i_am_at(e4); i_am_at(e5); i_am_at(f4); i_am_at(f5)),
+idź(w) :- (i_am_at(d2); i_am_at(d3); i_am_at(e4); i_am_at(e5); i_am_at(f4); i_am_at(f5)),
         write('To jezioro wydaje się być nasycone silną magią elfów Aen Elle. Pływanie tutaj może być niebezpieczne.'), nl, !.
 
-go(s) :- (i_am_at(f5); i_am_at(c6); i_am_at(c7)),
+idź(s) :- (i_am_at(f5); i_am_at(c6); i_am_at(c7)),
         write('To jezioro wydaje się być nasycone silną magią elfów Aen Elle. Pływanie tutaj może być niebezpieczne.'), nl, !.
 
-go(w) :- i_am_at(f2),
+idź(w) :- i_am_at(f2),
         write('Wysoki klif na który nie da się wspiąć... Jak Płotka się tam dostała?'), nl, !.
 
-go(e) :- i_am_at(f4),
+idź(e) :- i_am_at(f4),
         write('Wysoki klif na który nie da się wspiąć. Na jej szczycie znajduje się solidna wieża'), nl, !.
 
-go(s) :- (i_am_at(f2); i_am_at(f4)),
+idź(s) :- (i_am_at(f2); i_am_at(f4)),
         write('Wysoki klif na który nie da się wspiąć.'), nl, !.
 
-go(n) :- (i_am_at(b1); i_am_at(b2); i_am_at(b3); i_am_at(b4); i_am_at(b5); i_am_at(b6); i_am_at(b7)),
+idź(n) :- (i_am_at(b1); i_am_at(b2); i_am_at(b3); i_am_at(b4); i_am_at(b5); i_am_at(b6); i_am_at(b7)),
         write("Zaraza. Nie jestem Zoltanem żebym się przebił przez pasmo Gór Va'Matz...."), nl, !.
 
-go(Direction) :-
+idź(Direction) :-
         i_am_at(Here),
         path(Here, Direction, There),
         retract(i_am_at(Here)),
         assert(i_am_at(There)),
-        !, look.
+        !, patrz.
 
-n :- go(n).
+n :- idź(n).
 
-s :- go(s).
+s :- idź(s).
 
-e :- go(e).
+e :- idź(e).
 
-w :- go(w).
+w :- idź(w).
 
-go(_) :-
+idź(_) :-
         write('Dotarłeś do miejsca gdzie diabeł mówi dobranoc. Zawróć.'), nl.
 
 describe(Place) :-
     place(Place, Terrain, Characters, Items, Opponents),  % Check if place exists
     write('Obecna lokalizacja Wiedźmaka: '), Terrain, nl,
-    ( Characters \== [] ->  % Use `\==` for non-unification comparison
+    ( Characters \== [] ->  % uzyj `\==` for non-unification comparison
         write('Postacie w tej lokalizacji: '), nl,
         print_characters(Characters)
 
     ; true
     ),
-    ( Items \== [] ->  % Use `\==` for non-unification comparison
+    ( Items \== [] ->  % uzyj `\==` for non-unification comparison
         write('Przedmioty, które można znaleźć w tej lokalizacji: '), nl,
         print_items(Items)
         
     ; true
     ),
-    ( Opponents \== [] ->  % Use `\==` for non-unification comparison
+    ( Opponents \== [] ->  % uzyj `\==` for non-unification comparison
         write('Przeciwnicy w tej lokalizacji: '), nl,
         print_opponents(Opponents)
         
@@ -309,15 +309,15 @@ print_items([Item | Rest]) :-
     write(Item), nl,  % Print character and newline
     print_items(Rest).  % Recursive call for the rest
 
-look :-
+patrz :-
     i_am_at(Place),
     describe(Place).
 
-look(Direction) :-
+patrz(Direction) :-
     i_am_at(Here),
     path(Here, Direction, There),
     describe(There),
     !.
 
-look(_) :-
+patrz(_) :-
         write('Zaraza. Nie powinienem tam iść'), nl.

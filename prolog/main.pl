@@ -3,10 +3,10 @@
 :- retractall(i_am_at(_)).
 :- retractall(equipment(_)).
 :- dynamic monety/1.
-:- discontiguous go/1.
+:- discontiguous idź/1.
 
 % Złożenie pzynęty na gryfa
-craft_bait() :-
+stworz_przynete() :-
     % Sprawdzenie, czy gracz ma odpowiednią ilość każdego składnika
     inventory(Inventory),
     member((siarka, 1), Inventory),
@@ -20,11 +20,11 @@ craft_bait() :-
     write('Wytworzono przynętę na gryfa. Teraz na pewno uda się go ukatrupić'), nl.
 
 % Informacja, gdy gracz nie ma niezbędnych składników
-craft_bait :-
+stworz_przynete :-
     write('Nie masz przedmiotów niezbędnych do wytworzenia przynęty. \n Potrzebujesz: \n- 2 krowie skóry \n- siarka \n-ziele z bagn Oorsynowskich'), nl.
 
 start :-
-    assert(i_am_at(f5)),
+    assert(i_am_at(c3)),
     assert(inventory([])),
     initialization(init_door),
     assert(monety(0)),
