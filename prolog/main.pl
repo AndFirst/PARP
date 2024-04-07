@@ -4,6 +4,7 @@
 :- retractall(equipment(_)).
 :- dynamic monety/1.
 :- discontiguous idź/1.
+:- dynamic gryf_fight_status/1.
 
 % Złożenie pzynęty na gryfa
 stworz_przynete() :-
@@ -28,4 +29,5 @@ start :-
     assert(inventory([])),
     initialization(init_door),
     assert(monety(0)),
+    add_to_inventory(przynęta_na_gryfa, 1),
     intro.
