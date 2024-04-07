@@ -4,7 +4,7 @@ has_characters(Place) :-
   Characters \= [].  % Sprawdź, czy lista postaci nie jest pusta
 
 % Funkcja do interakcji z postacią
-interact(Character) :-
+rozmawiaj(Character) :-
   i_am_at(Place),
   place(Place, _, CharactersList, _, _),  % Pobierz postacie z bieżącej lokalizacji
   member(Character, CharactersList),  % Sprawdź, czy wybrana postać jest obecna
@@ -60,7 +60,7 @@ kupiec_sprzedaj_przedmiot :-
   inventory(Inventory),  % Pobranie aktualnego ekwipunku
   Inventory \= [],  % Sprawdzenie, czy ekwipunek nie jest pusty
   write('Przedmioty w twoim ekwipunku:'), nl,
-  display_inventory,  % Wyświetlenie ekwipunku
+  ekwipunek,  % Wyświetlenie ekwipunku
   write('Wybierz przedmiot, który chcesz spieniężyć: '), read(Przedmiot), nl,
   sprzedaj_przedmiot(Przedmiot).  % Sprzedaż wybranego przedmiotu
 

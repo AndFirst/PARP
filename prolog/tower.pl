@@ -24,7 +24,7 @@ aard :-
     write('Nie powinienem rzucać znaków nadaremno. Co by Vesemir powiedział...'), nl.
 
 % Predykat obsługujący próbę wejścia do wieży
-enter(tower) :-
+wejdz(tower) :-
     i_am_at(f5),
     % Sprawdzenie, czy drzwi są otwarte
     door_status(open),
@@ -34,18 +34,18 @@ enter(tower) :-
     write('Przy szczątkach wiedźmina ze szkoły Gryfa zauważasz jego srebrny miecz. Wygląda na dzieło mistrza Harr Nasia z Pvogrodu.'), nl,
     write('Tak potęzny oręż na pewno przyda się w nadchodzącej bitwie, lub przyniesie spory zysk.'), nl.
     
-enter(tower) :-
+wejdz(tower) :-
     i_am_at(f5),
     % Sprawdzenie, czy drzwi są zamknięte
     door_status(closed),
     % Informacja o zamkniętych drzwiach
     write('Wrota są zamknięte, jednak zawiasy nie wydają się być dość wytrzymałe by stanowiły przeszkodę. Powiniem użyć wiedzmińskiego znaku, aby je wyważyć.'), nl.
 
-enter(tower) :-
-    write('W tej okolicy nie ma żadnej wieży do której mógłbyś wejść. Ogranicz spożycie fistechu...').
+wejdz(tower) :-
+    write('W tej okolicy nie ma żadnej wieży do której mógłbyś wejść. Ogranicz spożycie fisstechu...'), nl.
 
-exit(tower) :-
+wyjdz(tower) :-
     i_am_at(f5b),
     write('Zdecydowałeś się wyjść z wieży...'), nl,
-    go(x).
+    idź(x).
     

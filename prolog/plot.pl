@@ -3,19 +3,30 @@ intro :-
     write('Po wielu dniach samotnej podróży, nadszedł czas by uzupełnić zapasy i rozejrzeć się za zleceniem.'), nl,
     write('Zbliżając się do wioski, czułe zmysły Białego Wilka natychmiast wychwyciły podejrzanie ślady...'), nl,
     nl,
-    write('Zapoznaj się z zasadami rzucając zaklęcie \'instructions.\''), nl.
+    write('Zapoznaj się z zasadami rzucając zaklęcie \'komendy.\''), nl.
 
-instructions :-
+komendy :-
     nl,
     write('Wprowadź zaklęcia w Starszej Mowie (standardowej składni Prologa).'), nl,
     write('Dostępne zaklęcia:'), nl,
-    write('n.  s.  e.  w.     -- aby przejść w danym kierunku.'), nl,
-    write('look.              -- aby ponownie rozejrzeć się obok siebie.'), nl,
-    write('look(kierunek).    -- aby spojrzeć w jednym z czterech kierunków.'), nl,
-    write('enter(miejsce).    -- aby wejść przez drzwi do spejalnych lokacji'), nl, 
-    write('instructions.      -- aby ponownie zobaczyć tę wiadomość.'), nl,
-    write('halt.              -- aby zakończyć grę i wyjść.'), nl,
-    nl.
+    write('n.  s.  e.  w.      -- aby przejść w danym kierunku.'), nl,
+    write('idź(kierunek).       -- aby przejść w danym kierunku.'), nl,
+    write('patrz.               -- aby ponownie rozejrzeć się obok siebie.'), nl,
+    write('patrz(kierunek).     -- aby spojrzeć w jednym z czterech kierunków.'), nl,
+    write('wejdz(miejsce).     -- aby wejść przez drzwi do spejalnych lokacji'), nl, 
+    write('komendy.            -- aby ponownie zobaczyć tę wiadomość.'), nl,
+    write('halt.               -- aby zakończyć grę i wyjść.'), nl,
+    write('bestiariusz.        -- aby dowiedzieć się więcej o potworach.'), nl,
+    write('monety.             -- aby sprawdzić ilość monet.'), nl,
+    write('ekwipunek.          -- aby zobaczyć zawartość ekwipunku.'), nl,
+    write('podnies(przedmiot). -- aby podnieść przedmiot.'), nl,
+    write('uzyj(przedmiot).    -- aby użyć przedmiotu.'), nl,
+    write('rozmawiaj(postać).   -- aby porozmawiać z postacią.'), nl,
+    write('stworz_przynete.    -- aby stworzyć przynętę na gryfa.'), nl,
+    write('wejdz. -- aby wejść do wieży.'), nl,
+    write('wyjdz.  -- aby wyjść z wieży.'), nl,
+    write('aard.  -- aby użyć znaku Aard.'), nl.
+
 
 % Implementacja akcji związanej z użyciem przedmiotu (przykład)
 bestiariusz :-

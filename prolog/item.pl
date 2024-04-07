@@ -31,9 +31,9 @@ remove_from_inventory(Item, Quantity) :-
         assert(inventory(Inventory))
     ).
 
-display_inventory :-
+ekwipunek :-
     inventory(Inventory),
-    write('Your inventory:'), nl,
+    write('Zawartość twojego ekwipunku:'), nl,
     display_items(Inventory).
 
 % Wyświetlanie przedmiotów w ekwipunku
@@ -48,12 +48,12 @@ write_quantity(Quantity) :-
     write(' (x'), write(Quantity), write(')').
 
 % Użycie przedmiotu z ekwipunku
-use(Item) :-
+uzyj(Item) :-
     % Sprawdzenie, czy przedmiot istnieje w ekwipunku
     inventory(Inventory),
     member((Item, _), Inventory),
     % Wykonanie akcji związanej z użyciem przedmiotu
-    use_item(Item),
+    uzyj_item(Item),
     nl.
 
 use_item(Item) :- Item = przynęta_na_gryfa,
