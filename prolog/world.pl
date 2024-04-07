@@ -45,6 +45,7 @@ place(f2, cliff_canyon, [], [], []).
 place(f3, canyon, [], [], []).
 place(f4, cliff_canyon, [], [], []).
 place(f5, tower, [], [], []).
+place(f5b, inside_tower, [], [gwyhyr], []).
 place(f6, lake, [], [], []).
 place(f7, lake, [], [], []).
 
@@ -69,6 +70,7 @@ cave :- write('Tajemnicza jaskinia. Z jakiegoś powodu nie wygląda, żeby żadn
 nest :- write('Gniazdo gryfa.'), nl.
 village :- write('Wieś Jaworek'), nl.
 tower :- write('Wieża Babel. Obok znajdują się ruiny drugiej, ewidentnie uderzonej przez Wiwernę'), nl.
+inside_tower :- write('Wnętrze wieży Babel. Zdaje się, że nikt tu dawno nie zaglądał.'), nl.
 lake :- write('Jezioro emanujące elficką magią.'), nl.
 meadow :- write('Łąka, na której pasą się krowy'), nl.
 other :- write('Równiny pełne roślinności'), nl.
