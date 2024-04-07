@@ -81,29 +81,67 @@ sprzedaj_przedmiot(Przedmiot) :-
   dodaj_monety(Cena),
   write('Sprzedałeś '), write(Przedmiot), write(' za '), write(Cena), write(' orenów.'), nl.
 
-atakuj(monster) :- (i_am_at(b2); i_am_at(b3)),
+atakuj(krowa) :- (i_am_at(b2); i_am_at(b3)),
     write('Atakujesz krowę.'), nl,
     add_to_inventory(skóra, 1),
     write('Zabiłeś krowę i zdobyłeś krowią skórę.'), nl.
 
-atakuj(monster) :- (i_am_at(b7); place(b7, _, _, _, gryf)) ,
+atakuj(gryf) :- (i_am_at(b7); place(b7, _, _, _, gryf)) ,
   write('Zaatakowałeś gryfa, wybierz co powienieś zrobić'), nl,
   write('1. Strzel z kuszy, by go powalić.'), nl,
-  write('2. Zaatakuj gryfa mieczem'), nl,
+  write('2. Zaatakuj mieczem'), nl,
   write('0. Uciekaj'), nl,
   read(Ruch), nl,
   ( Ruch = 1 -> atak_kusza1; Ruch = 2 -> atak_miecz1; Ruch = 0 -> ucieczka ; write('Nie możesz tego zrobić') ).
 
 atak_kusza1 :- 
+  write('Udało Ci się trafć gryfa kuszą strącając go na ziemię. \n Wybierz, co powienieneś zrobić następnie.'), nl,
+  write('1. Strzel z kuszy.'), nl,
+  write('2. Zaatakuj mieczem'), nl,
+  write('0. Uciekaj'), nl,
+  read(Ruch), nl,
+  ( Ruch = 1 -> atak_kusza2; Ruch = 2 -> zabicie_gryfa; Ruch = 0 -> ucieczka ; write('Nie możesz tego zrobić') ).
+
+atak_kusza2 :- 
+  write('Strzał kuszą w obalonego gryfa nie był wystarczający do zabicia bestii. \n Wybierz, co powienieneś zrobić następnie.'), nl,
+  write('1. Strzel z kuszy.'), nl,
+  write('2. Zaatakuj mieczem'), nl,
+  write('0. Uciekaj'), nl,
+  read(Ruch), nl,
+  ( Ruch = 1 -> atak_kusza2; Ruch = 2 -> zabicie_gryfa; Ruch = 0 -> ucieczka ; write('Nie możesz tego zrobić'), atak_kusza2 ).
 
 atak_miecz1 :- 
+  write('Nie udało Ci się trafić pikującego gryfa. \n Uważaj, bo następnym razem gryf może Cię trafić.'), nl,
+  write('1. Strzel z kuszy.'), nl,
+  write('2. Zaatakuj mieczem'), nl,
+  write('0. Uciekaj'), nl,
+  read(Ruch), nl,
+  ( Ruch = 1 -> atak_kusza1; Ruch = 2 -> atak_miecz2; Ruch = 0 -> ucieczka ; write('Nie możesz tego zrobić'), atak_miecz1).
+
+atak_miecz2 :- 
+  write('Pikujący gryf krytycznie trafił Cię szponem.'), nl,
+  write('Niestey odniesiona rana okazała się krytyczna i doprowadziła do Twojej śmierci.'), nl,
+  halt.
+
+zabicie_gryfa :-
+  write('Gryf padł martwy od ciosu miecza. \n Zdobywasz trofeum z gryfa.'), nl,
+  usun_przeciwnika(b7, gryf),
+  add_to_inventory(trofeum_z_gryfa, 1),
+  nl,
+  write('Udało Ci się ukończyć wiedźmińską przygodę, gratulacje.'), nl.
 
 ucieczka :- 
-  
+  write('Udało Ci się uciec od gryfa do wsi Jaworek.'), nl,
+  i_am_at(Here),
+  retract(i_am_at(Here)),
+  assert(i_am_at(c3)).
 
-atakuj(monster) :- 
+atakuj(gryf) :- 
   i_am_at(b7),
   write("Gniazdo gryfa jest puste, powienieneś najpierw zastawić przynętę.").
 
-atakuj(monster) :-
+atakuj(gryf) :-
+  write('W okolicy nie ma żadnego potwora do zabicia.'), nl.
+
+atakuj(krowa) :-
   write('W okolicy nie ma żadnego potwora do zabicia.'), nl.
