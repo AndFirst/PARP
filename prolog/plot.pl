@@ -10,7 +10,7 @@ komendy :-
     write('Wprowadź zaklęcia w Starszej Mowie (standardowej składni Prologa).'), nl,
     write('Dostępne zaklęcia:'), nl,
     write('n.  s.  e.  w.      -- aby przejść w danym kierunku.'), nl,
-    wrtie('idź(kierunek).       -- aby przejść w danym kierunku.'), nl,
+    write('idź(kierunek).       -- aby przejść w danym kierunku.'), nl,
     write('patrz.               -- aby ponownie rozejrzeć się obok siebie.'), nl,
     write('patrz(kierunek).     -- aby spojrzeć w jednym z czterech kierunków.'), nl,
     write('wejdz(miejsce).     -- aby wejść przez drzwi do spejalnych lokacji'), nl, 
