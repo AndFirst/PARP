@@ -11,4 +11,4 @@ ma_wystarczajaca_ilosc_monet(Requred) :-
 
 monety :-
     monety(Ilosc),
-    format('Posiadasz ~d monet.~n', [Ilosc]).
+    format('Posiadasz ~d orenów temerskich.~n', [Ilosc]).

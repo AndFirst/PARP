@@ -10,35 +10,39 @@ init_door :-
 aard :-
     i_am_at(f5),
     door_status(open),
-    write('Drzwi zostały już otwarte, nie musisz tego robić ponownie.'), nl,
-    !. 
+    % Informacja o otwartych drzwiach
+    write('Wrota wieży babel zostały już otwarte, nie marnuj magicznej energii.'), nl,
+    !. % Przerwij dalsze działanie predykatu
 
 aard :-
     i_am_at(f5),
     retractall(door_status(_)),
     assertz(door_status(open)),
-    write('Dzięki użyciu znaku aard udało Ci się wyważyć drzwi.'), nl,
-    !.
+    write('Dzięki użyciu znaku Aard udało Ci się wyważyć wrota wieży Babel.'), nl.
 
 aard :- 
-    write('Nie możesz użyć tego znaku w tym miejscu.'), nl.
+    write('Nie powinienem rzucać znaków nadaremno. Co by Vesemir powiedział...'), nl.
 
-
+% Predykat obsługujący próbę wejścia do wieży
 enter(tower) :-
     i_am_at(f5),
+    % Sprawdzenie, czy drzwi są otwarte
     door_status(open),
-    write('Zdecydowałeś się wejść przez wyważone drzwi...'), nl,
-    go(x),
-    !.
-
+    % Próba wejścia do wieży
+    write('Zdecydowałeś się wejść przez wyważone wrota... Po drugiej stronie spotyka cię obraz nędzy i rozpaczy.'), nl,
+    write('Wszędzie widać zwłoki, a na ścianach magiczne malunki z krwi. Wszystko wskazuje na to, że wieża została zaatakowana przez potwory.'), nl,
+    write('Przy szczątkach wiedźmina ze szkoły Gryfa zauważasz jego srebrny miecz. Wygląda na dzieło mistrza Harr Nasia z Pvogrodu.'), nl,
+    write('Tak potęzny oręż na pewno przyda się w nadchodzącej bitwie, lub przyniesie spory zysk.'), nl.
+    
 enter(tower) :-
     i_am_at(f5),
+    % Sprawdzenie, czy drzwi są zamknięte
     door_status(closed),
-    write('Drzwi są zamknięte, jednak zawiasy nie wydają się być wytrzymałe. Może powinieś użyć wiedzmińskiego znaku, aby je wyważyć.'), nl,
-    !.
+    % Informacja o zamkniętych drzwiach
+    write('Wrota są zamknięte, jednak zawiasy nie wydają się być dość wytrzymałe by stanowiły przeszkodę. Powiniem użyć wiedzmińskiego znaku, aby je wyważyć.'), nl.
 
 enter(tower) :-
-    write('W tej okolicy nie ma żadnej wieży do której mógłbyś wejść.'), nl.
+    write('W tej okolicy nie ma żadnej wieży do której mógłbyś wejść. Ogranicz spożycie fistechu...')
 
 exit(tower) :-
     i_am_at(f5b),

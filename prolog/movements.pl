@@ -271,7 +271,7 @@ go(_) :-
 
 describe(Place) :-
     place(Place, Terrain, Characters, Items, Opponents),  % Check if place exists
-    write('Obecna lokalizacja: '), Terrain, nl,
+    write('Obecna lokalizacja Wiedźmaka: '), Terrain, nl,
     ( Characters \== [] ->  % Use `\==` for non-unification comparison
         write('Postacie w tej lokalizacji: '), nl,
         print_characters(Characters)
@@ -279,7 +279,7 @@ describe(Place) :-
     ; true
     ),
     ( Items \== [] ->  % Use `\==` for non-unification comparison
-        write('Itemy w tej lokalizacji: '), nl,
+        write('Przedmioty, które można znaleźć w tej lokalizacji: '), nl,
         print_items(Items)
         
     ; true
