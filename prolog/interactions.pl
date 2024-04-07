@@ -1,12 +1,12 @@
 % Funkcja sprawdzająca, czy bieżąca lokalizacja ma postacie
 has_characters(Place) :-
-  place(Place, _, Characters),
+  place(Place, _, Characters, _, _),
   Characters \= [].  % Sprawdź, czy lista postaci nie jest pusta
 
 % Funkcja do interakcji z postacią
 interact(Character) :-
   i_am_at(Place),
-  place(Place, _, CharactersList),  % Pobierz postacie z bieżącej lokalizacji
+  place(Place, _, CharactersList, _, _),  % Pobierz postacie z bieżącej lokalizacji
   member(Character, CharactersList),  % Sprawdź, czy wybrana postać jest obecna
   !,  % Cut, jeśli postać została znaleziona
   talk_to_character(Character).

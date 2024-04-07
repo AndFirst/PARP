@@ -58,7 +58,7 @@ use(Item) :-
 
 podnies(Item) :-
     i_am_at(Place),  % Pobierz obecną lokalizację postaci
-    place(Place, _, _, Items),  % Sprawdź, jakie przedmioty znajdują się w tej lokalizacji
+    place(Place, _, _, Items, _),  % Sprawdź, jakie przedmioty znajdują się w tej lokalizacji
     member(Item, Items),  % Sprawdź, czy wybrany przedmiot jest w tej lokalizacji
     add_to_inventory(Item, 1),  % Dodaj przedmiot do ekwipunku
     write('Podnosisz '), write(Item), write(' z ziemi.'), nl.  % Wyświetl komunikat o podniesieniu przedmiotu
