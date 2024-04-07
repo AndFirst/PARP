@@ -56,6 +56,21 @@ use(Item) :-
     use_item(Item),
     nl.
 
+use_item(Item) :- Item = przynęta_na_gryfa,
+    i_am_at(b7),
+    write('Postawiłeś przynętę, gryf powinien się lada moment zjawić...'), nl,
+    dodaj_przeciwnika(b7, gryf),
+    write('Słysz jak gryf przylatuje do gniazda, czas na niego zapolować.'), nl.
+
+use_item(Item) :- Item = przynęta_na_gryfa, 
+    inventory(Inventory),
+    member(przynęta_na_gryfa, Inventory),
+    write('Przynęta musi być postawiona w gnieździe gryfa.'), nl.    
+
+use_item(Item) :- 
+    Item = przyneta_na_gryfa,
+    write('Musisz najpierw wywtorzyć przynętę.'), nl.
+
 podnies(Item) :-
     i_am_at(Place),  % Pobierz obecną lokalizację postaci
     place(Place, _, _, Items, _),  % Sprawdź, jakie przedmioty znajdują się w tej lokalizacji

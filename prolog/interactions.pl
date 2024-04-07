@@ -80,3 +80,30 @@ sprzedaj_przedmiot(Przedmiot) :-
   % Dodanie monet do posiadanych przez postać
   dodaj_monety(Cena),
   write('Sprzedałeś '), write(Przedmiot), write(' za '), write(Cena), write(' orenów.'), nl.
+
+atakuj(monster) :- (i_am_at(b2); i_am_at(b3)),
+    write('Atakujesz krowę.'), nl,
+    add_to_inventory(skóra, 1),
+    write('Zabiłeś krowę i zdobyłeś krowią skórę.'), nl.
+
+atakuj(monster) :- (i_am_at(b7); place(b7, _, _, _, gryf)) ,
+  write('Zaatakowałeś gryfa, wybierz co powienieś zrobić'), nl,
+  write('1. Strzel z kuszy, by go powalić.'), nl,
+  write('2. Zaatakuj gryfa mieczem'), nl,
+  write('0. Uciekaj'), nl,
+  read(Ruch), nl,
+  ( Ruch = 1 -> atak_kusza1; Ruch = 2 -> atak_miecz1; Ruch = 0 -> ucieczka ; write('Nie możesz tego zrobić') ).
+
+atak_kusza1 :- 
+
+atak_miecz1 :- 
+
+ucieczka :- 
+  
+
+atakuj(monster) :- 
+  i_am_at(b7),
+  write("Gniazdo gryfa jest puste, powienieneś najpierw zastawić przynętę.").
+
+atakuj(monster) :-
+  write('W okolicy nie ma żadnego potwora do zabicia.'), nl.

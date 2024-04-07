@@ -26,4 +26,8 @@ bestiariusz :-
     write('-> Gryf wrażliwy jest na znak Aard, który strąci go z powietrza.'), nl,
     write('-> Aby zmusić go do walki w zwarciu, użyj kuszy.'), nl.
 
-
+outro :-
+    write(''), nl,
+    write(''), nl,
+    write(''), nl,
+    halt.

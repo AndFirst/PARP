@@ -3,6 +3,7 @@
 :- retractall(i_am_at(_)).
 :- retractall(equipment(_)).
 :- dynamic monety/1.
+:- dynamic gryf_fight_status/1.
 :- discontiguous go/1.
 
 % Złożenie pzynęty na gryfa
@@ -24,8 +25,9 @@ craft_bait :-
     write('Nie masz przedmiotów niezbędnych do wytworzenia przynęty. \n Potrzebujesz: \n- 2 krowie skóry \n- siarka \n-ziele z bagn Oorsynowskich'), nl.
 
 start :-
-    assert(i_am_at(f5)),
+    assert(i_am_at(c3)),
     assert(inventory([])),
     initialization(init_door),
     assert(monety(0)),
+    add_to_inventory(przynęta_na_gryfa, 1),
     intro.

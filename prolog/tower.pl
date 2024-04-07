@@ -42,7 +42,7 @@ enter(tower) :-
     write('Wrota są zamknięte, jednak zawiasy nie wydają się być dość wytrzymałe by stanowiły przeszkodę. Powiniem użyć wiedzmińskiego znaku, aby je wyważyć.'), nl.
 
 enter(tower) :-
-    write('W tej okolicy nie ma żadnej wieży do której mógłbyś wejść. Ogranicz spożycie fistechu...')
+    write('W tej okolicy nie ma żadnej wieży do której mógłbyś wejść. Ogranicz spożycie fistechu...').
 
 exit(tower) :-
     i_am_at(f5b),

@@ -9,8 +9,8 @@ place(a6, east_mountains, [], [], []).
 place(a7, east_mountains, [], [], []).
 
 place(b1, other, [], [], []).
-place(b2, meadow, [], [], []).
-place(b3, meadow, [], [], []).
+place(b2, meadow, [], [], [krowa]).
+place(b3, meadow, [], [], [krowa]).
 place(b4, other, [], [], []).
 place(b5, other, [], [], []).
 place(b6, other, [], [], []).
@@ -74,3 +74,7 @@ inside_tower :- write('Wnętrze wieży Babel. Zdaje się, że nikt tu dawno nie 
 lake :- write('Jezioro emanujące elficką magią.'), nl.
 meadow :- write('Łąka, na której pasą się krowy'), nl.
 other :- write('Równiny pełne roślinności'), nl.
+
+dodaj_przeciwnika(Miejsce, Opponent) :-
+    place(Miejsce, _, _, _, _),
+    assertz(place(Miejsce, _, _, _, Opponent)).
