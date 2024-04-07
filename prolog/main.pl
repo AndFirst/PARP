@@ -11,11 +11,11 @@ stworz_przynete() :-
     % Sprawdzenie, czy gracz ma odpowiednią ilość każdego składnika
     inventory(Inventory),
     member((siarka, 1), Inventory),
-    member((ziele_szatana, 1), Inventory),
+    member((polne_ziele, 1), Inventory),
     member((skóra, 2), Inventory),
     % Usunięcie składników z ekwipunku
     remove_from_inventory(siarka, 1),
-    remove_from_inventory(ziele_szatana, 1),
+    remove_from_inventory(polne_ziele, 1),
     remove_from_inventory(krowia_skora, 2),
     add_to_inventory(przynęta_na_gryfa, 1),
     write('Wytworzono przynętę na gryfa. Teraz na pewno uda się go ukatrupić'), nl.
@@ -27,7 +27,6 @@ stworz_przynete :-
 start :-
     assert(i_am_at(c3)),
     assert(inventory([])),
-    initialization(init_door),
     assert(monety(0)),
     add_to_inventory(przynęta_na_gryfa, 1),
     intro.

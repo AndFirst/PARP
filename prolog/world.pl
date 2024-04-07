@@ -9,8 +9,8 @@ place(a6, east_mountains, [], [], []).
 place(a7, east_mountains, [], [], []).
 
 place(b1, other, [], [], []).
-place(b2, meadow, [], [], [krowa]).
-place(b3, meadow, [], [], [krowa]).
+place(b2, meadow, [], [polne_ziele], [krowa]).
+place(b3, meadow, [], [polne_ziele], [krowa]).
 place(b4, other, [], [], []).
 place(b5, other, [], [], []).
 place(b6, other, [], [], []).
@@ -78,3 +78,7 @@ other :- write('Równiny pełne roślinności'), nl.
 dodaj_przeciwnika(Miejsce, Opponent) :-
     place(Miejsce, _, _, _, _),
     assertz(place(Miejsce, _, _, _, Opponent)).
+
+usun_przeciwnika(Miejsce, Opponent) :-
+    place(Miejsce, _, _, _, Opponent),
+    retract(place(Miejsce, _, _, _, Opponent)).

@@ -56,20 +56,19 @@ uzyj(Item) :-
     uzyj_item(Item),
     nl.
 
-use_item(Item) :- Item = przynęta_na_gryfa,
+uzyj(Item) :-
+    % Próba użycia przedmiotu, którego nie ma w ekwipunku
+    write('Nie masz tego przedmiotu w ekwipunku.'), nl.
+
+uzyj_item(Item) :- Item = przynęta_na_gryfa,
     i_am_at(b7),
     write('Postawiłeś przynętę, gryf powinien się lada moment zjawić...'), nl,
     dodaj_przeciwnika(b7, gryf),
+    remove_from_inventory(przynęta_na_gryfa, 1),
     write('Słysz jak gryf przylatuje do gniazda, czas na niego zapolować.'), nl.
 
-use_item(Item) :- Item = przynęta_na_gryfa, 
-    inventory(Inventory),
-    member(przynęta_na_gryfa, Inventory),
+uzyj_item(przynęta_na_gryfa) :-
     write('Przynęta musi być postawiona w gnieździe gryfa.'), nl.    
-
-use_item(Item) :- 
-    Item = przyneta_na_gryfa,
-    write('Musisz najpierw wywtorzyć przynętę.'), nl.
 
 podnies(Item) :-
     i_am_at(Place),  % Pobierz obecną lokalizację postaci
@@ -82,4 +81,4 @@ podnies(Item) :-
 cena(siarka, 15).
 cena(skóra, 5).
 cena(karta, 15).
-
+cena(gwyhyr, 50).
