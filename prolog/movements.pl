@@ -215,6 +215,9 @@ path(g6, w, g5).
 path(g7, n, f7).
 path(g7, w, g6).
 
+path(f5, x, f5b).
+path(f5b, x, f5).
+
 go(s) :- i_am_at(c1),
         write('W gęstym borze wpadasz w pułapkę zastawioną przez Leszych.'), nl, 
         write("Po cięzkim boju serce Białego Wilka zostaje brutalnie przebite przez potężnych strażników lasu..."), 

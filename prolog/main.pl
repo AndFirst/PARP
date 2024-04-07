@@ -24,7 +24,8 @@ craft_bait :-
     write('Nie masz przedmiotów niezbędnych do wytworzenia przynęty. \n Potrzebujesz: \n- 2 krowie skóry \n- siarka \n-ziele z bagn Oorsynowskich'), nl.
 
 start :-
-    assert(i_am_at(c3)),
+    assert(i_am_at(f5)),
     assert(inventory([])),
+    initialization(init_door),
     assert(monety(0)),
     intro.

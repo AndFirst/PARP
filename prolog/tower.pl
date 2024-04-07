@@ -6,12 +6,9 @@ init_door :-
     retractall(door_status(_)),
     assertz(door_status(closed)).
 
-:- initialization(init_door).
-
 % Predykat otwierający drzwi
-aard(door) :-
+aard :-
     i_am_at(f5),
-    % Sprawdzenie, czy drzwi są już otwarte
     door_status(open),
     % Informacja o otwartych drzwiach
     write('Wrota wieży babel zostały już otwarte, nie marnuj magicznej energii.'), nl,
@@ -19,7 +16,6 @@ aard(door) :-
 
 aard :-
     i_am_at(f5),
-    % Otwarcie drzwi
     retractall(door_status(_)),
     assertz(door_status(open)),
     write('Dzięki użyciu znaku Aard udało Ci się wyważyć wrota wieży Babel.'), nl.
@@ -49,4 +45,7 @@ enter(tower) :-
     write('W tej okolicy nie ma żadnej wieży do której mógłbyś wejść. Ogranicz spożycie fistechu...')
 
 exit(tower) :-
-    % insert operacje wyjścia z wieży
+    i_am_at(f5b),
+    write('Zdecydowałeś się wyjść z wieży...'), nl,
+    go(x).
+    
