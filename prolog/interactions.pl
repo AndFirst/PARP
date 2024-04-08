@@ -14,17 +14,13 @@ rozmawiaj(Character) :-
 talk_to_character(Character) :-
   ( Character = kupiec ->
     kupiec_rozmowa ; % Rozmowa z kupcem
-  Character = karczmarka ->
-    karczmarka_rozmowa ; % Rozmowa z karczmarką
-  Character = zielarz ->
-    zielarz_rozmowa ; % Rozmowa z zielarzem
    write('Zaraza. Nie wiem, jak rozmawiać z tym odmieńcem.')  % Domyślny komunikat dla nieznanych postaci
   ).
 
 % Rozmowa z kupcem
 kupiec_rozmowa :-
   write('Witaj Mistrzu wiedźminie! Czym mogę służyć?'), nl,
-  write('1. Pokaż mi swoje towary'), nl,
+  write('1. Pokaż mi swoje towary'), nl,  
   write('2. Sprzedaj przedmiot'), nl,
   write('0. Wyjdź z rozmowy'), nl,
   read(Opcja), nl,

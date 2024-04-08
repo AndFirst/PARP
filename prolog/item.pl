@@ -56,7 +56,7 @@ uzyj(Item) :-
     uzyj_item(Item),
     nl.
 
-uzyj(Item) :-
+uzyj(_) :-
     % Próba użycia przedmiotu, którego nie ma w ekwipunku
     write('Nie masz tego przedmiotu w ekwipunku.'), nl.
 

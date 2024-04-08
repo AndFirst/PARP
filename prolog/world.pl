@@ -76,9 +76,8 @@ meadow :- write('Łąka, na której pasą się krowy'), nl.
 other :- write('Równiny pełne roślinności'), nl.
 
 dodaj_przeciwnika(Miejsce, Opponent) :-
-    place(Miejsce, _, _, _, _),
+    retractall(place(Miejsce, _, _, _, _)),
     assertz(place(Miejsce, _, _, _, Opponent)).
 
 usun_przeciwnika(Miejsce, Opponent) :-
-    place(Miejsce, _, _, _, Opponent),
     retract(place(Miejsce, _, _, _, Opponent)).
