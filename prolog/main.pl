@@ -13,7 +13,7 @@ stworz_przynete() :-
     inventory(Inventory),
     member((siarka, SiarkaCount), Inventory), SiarkaCount >= 1,
     member((polne_ziele, ZieleCount), Inventory), ZieleCount >= 1,
-    member((skora, SkoraCount), Inventory), SkoraCount >= 2,
+    member((skóra, SkoraCount), Inventory), SkoraCount >= 2,
     % Usunięcie składników z ekwipunku
     remove_from_inventory(siarka, 1),
     remove_from_inventory(polne_ziele, 1),
