@@ -82,13 +82,27 @@ atakuj(krowa) :- (i_am_at(b2); i_am_at(b3)),
     add_to_inventory(skóra, 1),
     write('Zabiłeś krowę i zdobyłeś krowią skórę.'), nl.
 
-atakuj(gryf) :- (i_am_at(b7); place(b7, _, _, _, gryf)) ,
+atakuj(krowa) :-
+  write('W okolicy nie ma żadnego potwora do zabicia.'), nl.
+
+atakuj(gryf) :- 
+  i_am_at(b7),
+  place(b7, _, _, _, [gryf]),
   write('Zaatakowałeś gryfa, wybierz co powienieś zrobić'), nl,
   write('1. Strzel z kuszy, by go powalić.'), nl,
   write('2. Zaatakuj mieczem'), nl,
   write('0. Uciekaj'), nl,
   read(Ruch), nl,
   ( Ruch = 1 -> atak_kusza1; Ruch = 2 -> atak_miecz1; Ruch = 0 -> ucieczka ; write('Nie możesz tego zrobić') ).
+
+atakuj(gryf) :- 
+  i_am_at(b7),
+  place(b7, _, _, _, []),
+
+  write("Gniazdo gryfa jest puste, powienieneś najpierw zastawić przynętę.").
+
+atakuj(gryf) :-
+  write('W okolicy nie ma żadnego potwora do zabicia.'), nl.
 
 atak_kusza1 :- 
   write('Udało Ci się trafć gryfa kuszą strącając go na ziemię. \n Wybierz, co powienieneś zrobić następnie.'), nl,
@@ -116,28 +130,19 @@ atak_miecz1 :-
 
 atak_miecz2 :- 
   write('Pikujący gryf krytycznie trafił Cię szponem.'), nl,
-  write('Niestey odniesiona rana okazała się krytyczna i doprowadziła do Twojej śmierci.'), nl,
+  write('Niestey odniesiona rana okazała się fatalna i doprowadziła do Twojej śmierci.'), nl,
   halt.
 
 zabicie_gryfa :-
   write('Gryf padł martwy od ciosu miecza. \n Zdobywasz trofeum z gryfa.'), nl,
-  usun_przeciwnika(b7, gryf),
+  usun_przeciwnikow(b7),
   add_to_inventory(trofeum_z_gryfa, 1),
   nl,
-  write('Udało Ci się ukończyć wiedźmińską przygodę, gratulacje.'), nl.
+  write('Udało Ci się ukończyć wiedźmińską przygodę, gratulacje.'), nl,
+  halt.
 
 ucieczka :- 
   write('Udało Ci się uciec od gryfa do wsi Jaworek.'), nl,
   i_am_at(Here),
   retract(i_am_at(Here)),
   assert(i_am_at(c3)).
-
-atakuj(gryf) :- 
-  i_am_at(b7),
-  write("Gniazdo gryfa jest puste, powienieneś najpierw zastawić przynętę.").
-
-atakuj(gryf) :-
-  write('W okolicy nie ma żadnego potwora do zabicia.'), nl.
-
-atakuj(krowa) :-
-  write('W okolicy nie ma żadnego potwora do zabicia.'), nl.

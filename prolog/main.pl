@@ -29,5 +29,5 @@ start :-
     assert(i_am_at(c3)),
     assert(inventory([])),
     assert(monety(0)),
-    % add_to_inventory(przynęta_na_gryfa, 1),
+    add_to_inventory(przynęta_na_gryfa, 1),
     intro.

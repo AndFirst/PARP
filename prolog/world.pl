@@ -75,9 +75,12 @@ lake :- write('Jezioro emanujące elficką magią.'), nl.
 meadow :- write('Łąka, na której pasą się krowy'), nl.
 other :- write('Równiny pełne roślinności'), nl.
 
-dodaj_przeciwnika(Miejsce, Opponent) :-
-    retractall(place(Miejsce, _, _, _, _)),
-    assertz(place(Miejsce, _, _, _, Opponent)).
+dodaj_przeciwnika(Place, Opponent) :-
+    retract(place(Place, Terrain, Characters, Items, _)),  % Usunięcie starej definicji miejsca b7
+    assertz(place(Place, Terrain, Characters, Items, [Opponent])).  % Dodanie nowego przeciwnika na polu b7
 
-usun_przeciwnika(Miejsce, Opponent) :-
-    retract(place(Miejsce, _, _, _, Opponent)).
+
+usun_przeciwnikow(Place) :-
+    retract(place(Place, Terrain, Characters, Items, _)),  % Usunięcie starej definicji miejsca b7
+    assertz(place(Place, Terrain, Characters, Items, [])).  % Dodanie nowego przeciwnika na polu b7
+
