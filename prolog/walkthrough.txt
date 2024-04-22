@@ -1,0 +1,312 @@
+?- start.
+Geralt z Rivii przemierzając Velen dotarł w końcu na szlak wiodący do wsi Jaworek.
+Po wielu dniach samotnej podróży, nadszedł czas by uzupełnić zapasy i rozejrzeć się za zleceniem.
+Zbliżając się do wioski, czułe zmysły Białego Wilka natychmiast wychwyciły podejrzanie ślady...
+
+Zapoznaj się z zasadami rzucając zaklęcie 'komendy.'
+true.
+
+?- komendy.
+
+Wprowadź zaklęcia w Starszej Mowie (standardowej składni Prologa).
+Dostępne zaklęcia:
+n.  s.  e.  w.       -- aby przejść w danym kierunku.
+idź(kierunek).       -- aby przejść w danym kierunku.
+patrz.               -- aby ponownie rozejrzeć się obok siebie.
+patrz(kierunek).     -- aby spojrzeć w jednym z czterech kierunków.
+komendy.             -- aby ponownie zobaczyć tę wiadomość.
+halt.                -- aby zakończyć grę i wyjść.
+bestiariusz.         -- aby dowiedzieć się więcej o potworach.
+monety.              -- aby sprawdzić ilość monet.
+ekwipunek.           -- aby zobaczyć zawartość ekwipunku.
+podnies(przedmiot).  -- aby podnieść przedmiot.
+uzyj(przedmiot).     -- aby użyć przedmiotu.
+rozmawiaj(postać).   -- aby porozmawiać z postacią.
+stworz_przynete.     -- aby stworzyć przynętę na gryfa.
+wejdz.               -- aby wejść do wieży.
+wyjdz.               -- aby wyjść z wieży.
+aard.                -- aby użyć znaku Aard.
+true.
+
+?- n.
+Obecna lokalizacja Wiedźmaka: Łąka, na której pasą się krowy
+
+Przedmioty, które można znaleźć w tej lokalizacji: 
+	polne_ziele
+Przeciwnicy w tej lokalizacji: 
+	krowa
+true.
+
+?- podnies(polne_ziele).
+Podnosisz polne_ziele z ziemi.
+true.
+
+?- atakuj(krowa).
+Atakujesz krowę.
+Zabiłeś krowę i zdobyłeś krowią skórę.
+true .
+
+?- w.
+Obecna lokalizacja Wiedźmaka: Łąka, na której pasą się krowy
+
+Przedmioty, które można znaleźć w tej lokalizacji: 
+	polne_ziele
+Przeciwnicy w tej lokalizacji: 
+	krowa
+true.
+
+?- podnies(polne_ziele).
+Podnosisz polne_ziele z ziemi.
+true.
+
+?- atakuj(krowa).
+Atakujesz krowę.
+Zabiłeś krowę i zdobyłeś krowią skórę.
+true.
+
+?- s.
+Obecna lokalizacja Wiedźmaka: Równiny pełne roślinności
+
+true.
+
+?- e.
+Obecna lokalizacja Wiedźmaka: Wieś Jaworek
+
+Postacie w tej lokalizacji: 
+	kupiec
+	karczmarka
+true.
+
+?- e.
+Obecna lokalizacja Wiedźmaka: Równiny pełne roślinności
+
+true.
+
+?- e.
+Obecna lokalizacja Wiedźmaka: Równiny pełne roślinności
+
+true.
+
+?- e.
+Obecna lokalizacja Wiedźmaka: Równiny pełne roślinności
+
+true.
+
+?- s.
+To jezioro wydaje się być nasycone silną magią elfów Aen Elle. Pływanie tutaj może być niebezpieczne.
+true.
+
+?- w.
+Obecna lokalizacja Wiedźmaka: Równiny pełne roślinności
+
+true.
+
+?- s.
+Obecna lokalizacja Wiedźmaka: Równiny pełne roślinności
+
+true.
+
+?- s.
+Obecna lokalizacja Wiedźmaka: Równiny pełne roślinności
+
+true.
+
+?- patrz(s).
+Obecna lokalizacja Wiedźmaka: Wieża Babel. Obok znajdują się ruiny drugiej, ewidentnie uderzonej przez Wiwernę
+
+true.
+
+?- s.
+Obecna lokalizacja Wiedźmaka: Wieża Babel. Obok znajdują się ruiny drugiej, ewidentnie uderzonej przez Wiwernę
+
+true.
+
+?- wejdz.
+Wrota są zamknięte, jednak zawiasy nie wydają się być dość wytrzymałe by stanowiły przeszkodę. Powiniem użyć wiedzmińskiego znaku, aby je wyważyć.
+true .
+
+?- aard.
+Dzięki użyciu znaku Aard udało Ci się wyważyć wrota wieży Babel.
+true .
+
+?- wejdz.
+Zdecydowałeś się wejść przez wyważone wrota... Po drugiej stronie spotyka cię obraz nędzy i rozpaczy.
+Wszędzie widać zwłoki, a na ścianach magiczne malunki z krwi. Wszystko wskazuje na to, że wieża została zaatakowana przez potwory.
+Przy szczątkach wiedźmina ze szkoły Gryfa zauważasz jego srebrny miecz. Wygląda na dzieło mistrza Harr Nasia z Pvogrodu.
+Tak potęzny oręż na pewno przyda się w nadchodzącej bitwie, lub przyniesie spory zysk.
+Obecna lokalizacja Wiedźmaka: Wnętrze wieży Babel. Zdaje się, że nikt tu dawno nie zaglądał.
+
+Przedmioty, które można znaleźć w tej lokalizacji: 
+	gwyhyr
+true .
+
+?- podnies(gwyhyr).
+Podnosisz gwyhyr z ziemi.
+true.
+
+?- wyjdz.
+Zdecydowałeś się wyjść z wieży...
+Obecna lokalizacja Wiedźmaka: Wieża Babel. Obok znajdują się ruiny drugiej, ewidentnie uderzonej przez Wiwernę
+
+true .
+
+?- n.
+Obecna lokalizacja Wiedźmaka: Równiny pełne roślinności
+
+true.
+
+?- n.
+Obecna lokalizacja Wiedźmaka: Równiny pełne roślinności
+
+true.
+
+?- n.
+Obecna lokalizacja Wiedźmaka: Równiny pełne roślinności
+
+true.
+
+?- w.
+Obecna lokalizacja Wiedźmaka: Równiny pełne roślinności
+
+true.
+
+?- w.
+Obecna lokalizacja Wiedźmaka: Wieś Jaworek
+
+Postacie w tej lokalizacji: 
+	kupiec
+	karczmarka
+true.
+
+?- rozmawiaj(kupiec).
+Witaj Mistrzu wiedźminie! Czym mogę służyć?
+1. Pokaż mi swoje towary
+2. Sprzedaj przedmiot
+0. Wyjdź z rozmowy
+|: 2.
+
+Przedmioty w twoim ekwipunku:
+Zawartość twojego ekwipunku:
+- gwyhyr
+- skóra (x2)
+- polne_ziele (x2)
+Wybierz przedmiot, który chcesz spieniężyć: |: gwyhyr.
+
+Sprzedałeś gwyhyr za 50 orenów.
+true .
+
+?- rozmawiaj(kupiec).
+Witaj Mistrzu wiedźminie! Czym mogę służyć?
+1. Pokaż mi swoje towary
+2. Sprzedaj przedmiot
+0. Wyjdź z rozmowy
+|: 1.
+
+Pokażę ci swoje towary. Które z nich chcesz kupić?
+1. Siarka.
+2. Karta do gwinta - Vernon Roche (Partiota, ale zbój)
+0. Wyjdź z rozmowy
+|: 1.
+
+Kupiłeś siarkę.
+true.
+
+?- e.
+Obecna lokalizacja Wiedźmaka: Równiny pełne roślinności
+
+true.
+
+?- e.
+Obecna lokalizacja Wiedźmaka: Równiny pełne roślinności
+
+true.
+
+?- e.
+Obecna lokalizacja Wiedźmaka: Równiny pełne roślinności
+
+true.
+
+?- n.
+Obecna lokalizacja Wiedźmaka: Równiny pełne roślinności
+
+true.
+
+?- n.
+Zaraza. Nie jestem Zoltanem żebym się przebił przez pasmo Gór Va'Matz....
+true.
+
+?- patrz(e).
+Obecna lokalizacja Wiedźmaka: Gniazdo gryfa.
+
+true.
+
+?- e.
+Obecna lokalizacja Wiedźmaka: Gniazdo gryfa.
+
+true.
+
+?- bestiariusz.
+Otwierasz bestiariusz i wyszukujesz informacje o Gryfie:
+-> Gryf jest straszną bestią dominującą przestworza.
+-> Zakłada gniazda w pobliżu pasm górskich.
+-> Wywabić gryfa, stworzyć należy przynętę z siarki oraz jaskółczego ziela zawiniętego w krowie truchło.
+-> Gryf wrażliwy jest na znak Aard, który strąci go z powietrza.
+-> Aby zmusić go do walki w zwarciu, użyj kuszy.
+true.
+
+?- stworz_przynete.
+Wytworzono przynętę na gryfa. Teraz na pewno uda się go ukatrupić
+true .
+
+?- komendy.
+
+Wprowadź zaklęcia w Starszej Mowie (standardowej składni Prologa).
+Dostępne zaklęcia:
+n.  s.  e.  w.       -- aby przejść w danym kierunku.
+idź(kierunek).       -- aby przejść w danym kierunku.
+patrz.               -- aby ponownie rozejrzeć się obok siebie.
+patrz(kierunek).     -- aby spojrzeć w jednym z czterech kierunków.
+komendy.             -- aby ponownie zobaczyć tę wiadomość.
+halt.                -- aby zakończyć grę i wyjść.
+bestiariusz.         -- aby dowiedzieć się więcej o potworach.
+monety.              -- aby sprawdzić ilość monet.
+ekwipunek.           -- aby zobaczyć zawartość ekwipunku.
+podnies(przedmiot).  -- aby podnieść przedmiot.
+uzyj(przedmiot).     -- aby użyć przedmiotu.
+rozmawiaj(postać).   -- aby porozmawiać z postacią.
+stworz_przynete.     -- aby stworzyć przynętę na gryfa.
+wejdz.               -- aby wejść do wieży.
+wyjdz.               -- aby wyjść z wieży.
+aard.                -- aby użyć znaku Aard.
+true.
+
+?- uzyj(przynęta_na_gryfa).
+Postawiłeś przynętę, gryf powinien się lada moment zjawić...
+Słysz jak gryf przylatuje do gniazda, czas na niego zapolować.
+
+true .
+
+?- atakuj(gryf).
+Zaatakowałeś gryfa, wybierz co powienieś zrobić
+1. Strzel z kuszy, by go powalić.
+2. Zaatakuj mieczem
+0. Uciekaj
+|: 1.
+
+Udało Ci się trafć gryfa kuszą strącając go na ziemię. 
+ Wybierz, co powienieneś zrobić następnie.
+1. Strzel z kuszy.
+2. Zaatakuj mieczem
+0. Uciekaj
+|: 2.
+
+Gryf padł martwy od ciosu miecza. 
+ Zdobywasz trofeum z gryfa.
+
+Udało Ci się ukończyć wiedźmińską przygodę, gratulacje.
+true .
+
+?- ekwipunek.
+Zawartość twojego ekwipunku:
+- trofeum_z_gryfa
+true.
