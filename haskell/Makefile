@@ -1,20 +1,23 @@
-SOURCES := $(wildcard *.hs)
+GHC = ghc
 
-OBJECTS := $(patsubst %.hs,bin/%.o,$(SOURCES))
+BUILD_DIR = build
 
-EXECUTABLES := $(patsubst %.hs,bin/%,$(SOURCES))
+HS_FILES = $(wildcard *.hs)
 
-all: $(EXECUTABLES)
+OUTPUT = $(BUILD_DIR)/witcher
 
-bin/%.o: %.hs
-	mkdir -p bin
-	ghc -c $< -o $@
-	mv $(patsubst %.hs,%.hi,$<) bin/
+GHC_FLAGS = -outputdir=$(BUILD_DIR)
 
-bin/%: bin/%.o
-	ghc $< -o $@
+all: $(OUTPUT)
+
+$(OUTPUT): $(HS_FILES)
+	mkdir -p $(BUILD_DIR)
+	$(GHC) $(GHC_FLAGS) -o $(OUTPUT) $(HS_FILES)
+
+run: $(OUTPUT)
+	@echo "Running the program..."
+	@$(OUTPUT)
 
 clean:
-	rm -rf bin $(wildcard *.o)
-
-.PHONY: clean
+	@echo "Cleaning up..."
+	rm -rf $(BUILD_DIR)
