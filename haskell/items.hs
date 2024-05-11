@@ -3,7 +3,7 @@ module Items where
 import           Types
 
 herb :: Item
-herb = "polne ziele"
+herb = "ziele"
 
 sword :: Item
 sword = "gwyhyr"
@@ -22,3 +22,22 @@ addItem item gameState = gameState {equipment = item : equipment gameState}
 removeItem :: Item -> GameState -> GameState
 removeItem item gameState =
   gameState {equipment = filter (/= item) (equipment gameState)}
+
+buyItem :: Item -> Int -> GameState -> Either String GameState
+buyItem item price gameState =
+  if money gameState >= price
+    then Right
+           $ gameState
+               { equipment = item : equipment gameState
+               , money = money gameState - price
+               }
+    else Left "Nie masz wystarczającej ilości pieniędzy."
+
+sellItem :: Item -> Int -> GameState -> GameState
+sellItem item price gameState =
+  if item `elem` equipment gameState
+    then gameState
+           { equipment = filter (/= item) (equipment gameState)
+           , money = money gameState + price
+           }
+    else gameState

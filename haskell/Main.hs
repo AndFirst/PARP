@@ -198,7 +198,9 @@ gameLoop gameState = do
       putStrLn "Przeglądasz zawartość ekwipunku."
       printEquipment gameState
     "podnies" -> do
-      putStrLn "Podnosisz przedmiot."
+      let itemName = getSecondWord cmd
+      newState <- podnies itemName gameState
+      gameLoop newState
     "uzyj" -> do
       putStrLn "Używasz przedmiotu."
     "rozmawiaj" -> do
@@ -211,6 +213,26 @@ gameLoop gameState = do
       putStrLn "Wychodzisz na zewnątrz."
     "aard" -> do
       putStrLn "Używasz znaku Aard."
+    "kup" -> do
+      -- usuńcie kup i sprzedaj, to jest pokazanie jak działa
+      let itemName = getSecondWord cmd
+      putStrLn "Podaj cenę przedmiotu: "
+      price <- readLn
+      case buyItem itemName price gameState of
+        Right newState -> do
+          putStrLn $ "Kupujesz przedmiot: " ++ itemName
+          gameLoop newState
+        Left errorMsg -> do
+          putStrLn errorMsg
+          gameLoop gameState
+    "sprzedaj" -> do
+      -- usuńcie kup i sprzedaj, to jest pokazanie jak działa
+      let itemName = getSecondWord cmd
+      putStrLn "Podaj cenę przedmiotu: "
+      price <- readLn
+      let newState = sellItem itemName price gameState
+      putStrLn $ "Sprzedajesz przedmiot: " ++ itemName
+      gameLoop newState
     "komendy" -> do
       printInstructions
       gameLoop gameState

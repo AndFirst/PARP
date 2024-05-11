@@ -295,7 +295,8 @@ removeItemFromPlace :: Coordinate -> Item -> Places -> Places
 removeItemFromPlace coord itemToRemove places =
   case findPlaceByCoordinate coord places of
     Just (c, loc, npcs, items, opponents) ->
-      let updatedItems = filter (/= itemToRemove) items
+      let (before, after) = break (== itemToRemove) items
+          updatedItems = before ++ tail after -- Pomijamy pierwsze wystąpienie
           newPlace = (c, loc, npcs, updatedItems, opponents)
           updatedPlaces =
             map
@@ -338,3 +339,25 @@ removeOpponentFromPlace coord opponent places =
               places
        in updatedPlaces
     Nothing -> places
+
+isItemInPlace :: Item -> Coordinate -> Places -> Bool
+isItemInPlace item coord places =
+  case findPlaceByCoordinate coord places of
+    Just (_, _, _, items, _) -> item `elem` items
+    Nothing                  -> False
+
+podnies :: String -> GameState -> IO GameState
+podnies itemName gameState = do
+  let currentCoord = currentCoordinates gameState
+      currentMap = currentMapState gameState
+  if isItemInPlace itemName currentCoord currentMap
+    then do
+      putStrLn $ "Podnosisz przedmiot: " ++ itemName
+      let newMapState = removeItemFromPlace currentCoord itemName currentMap
+          newEquipment = itemName : equipment gameState
+          newState =
+            gameState {currentMapState = newMapState, equipment = newEquipment}
+      return newState -- Zwróć nowy stan gry po podniesieniu przedmiotu
+    else do
+      putStrLn $ "Nie ma przedmiotu \"" ++ itemName ++ "\" w tej lokalizacji."
+      return gameState
