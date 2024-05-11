@@ -179,7 +179,7 @@ paths =
   , ("g7", N, "f7")
   , ("g7", W, "g6")
   , ("f5", X, "f5b")
-  , ("f5b", X, "f5")
+  , ("f5b", Y, "f5")
   ]
 
 places :: Places

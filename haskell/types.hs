@@ -16,6 +16,7 @@ data Direction
   | E
   | W
   | X
+  | Y
   deriving (Show, Eq)
 
 type Coordinate = String
@@ -26,9 +27,11 @@ type Place = (Coordinate, Location, [NPC], [Item], [Opponent])
 
 type Places = [Place]
 
+
 data GameState = GameState
   { currentCoordinates :: Coordinate
   , currentMapState    :: Places
   , equipment          :: Items
   , money              :: Int
+  , doorStatus         :: Bool
   }

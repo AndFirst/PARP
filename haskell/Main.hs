@@ -89,6 +89,57 @@ move dir gameState = do
 updateGameState :: GameState -> Coordinate -> GameState
 updateGameState gameState newCoord = gameState {currentCoordinates = newCoord}
 
+enterDoor :: GameState -> IO GameState
+enterDoor gameState = do
+  let currentCoord = currentCoordinates gameState
+      nextCoord = getNextCoordinate currentCoord X paths
+  case nextCoord of
+    Just coord -> do
+      if doorStatus gameState
+        then do
+          putStrLn "Drzwi są otwarte, wchodzisz do środka."
+          let newGameState = updateGameState gameState coord
+          let currentMap = currentMapState gameState
+          case describePlace coord currentMap of
+                Just description -> putStrLn description
+
+          return newGameState
+        else do
+          putStrLn "Drzwi wydają się być zamknięte, chyba trzeba się ich pozbyć."
+          return gameState
+    Nothing -> do
+      putStrLn "W okolicy nie ma żadnego budynku, do którego mógłbyś wejść."
+      return gameState
+
+aard :: GameState -> IO GameState
+aard gameState
+  | currentCoordinates gameState /= "f5" = do
+      putStrLn "Nie możesz tutaj użyć znaku aard."
+      return gameState
+  | doorStatus gameState = do
+      putStrLn "Drzwi są już otwarte, nie ma sensu ponownie traktować ich aardem."
+      return gameState
+  | otherwise = do
+      putStrLn "Udało Ci się wyważyć drzwi przy pomocy znaku aard - w końcu będziesz w stanie wejść do wieży."
+      return $ gameState { doorStatus = True }
+
+exitDoor :: GameState -> IO GameState
+exitDoor gameState = do
+  let currentCoord = currentCoordinates gameState
+      nextCoord = getNextCoordinate currentCoord Y paths
+  case nextCoord of
+    Just coord -> do
+      putStrLn "Opuszczasz to miejsce."
+      let newGameState = updateGameState gameState coord
+      let currentMap = currentMapState gameState
+      case describePlace coord currentMap of
+            Just description -> putStrLn description
+
+      return newGameState
+    Nothing -> do
+      putStrLn "Nie ma tu nic, z czego mógłbyś wyjść."
+      return gameState
+
 gameLoop :: GameState -> IO ()
 gameLoop gameState = do
   cmd <- readCommand
@@ -204,13 +255,17 @@ gameLoop gameState = do
     "rozmawiaj" -> do
       putStrLn "Próbujesz porozmawiać z kimś."
     "stworz_przynete" -> do
-      putStrLn "Tworzysz przynętę."
+      let newState = craftBait gameState
+      gameLoop =<< newState
     "wejdz" -> do
-      putStrLn "Wchodzisz do budynku."
+      let newState = enterDoor gameState
+      gameLoop =<< newState
     "wyjdz" -> do
-      putStrLn "Wychodzisz na zewnątrz."
+      let newState = exitDoor gameState
+      gameLoop =<< newState
     "aard" -> do
-      putStrLn "Używasz znaku Aard."
+      let newState = aard gameState
+      gameLoop =<< newState
     "komendy" -> do
       printInstructions
       gameLoop gameState
@@ -227,9 +282,10 @@ main = do
   let state =
         GameState
           { currentCoordinates = "c3"
-          , equipment = []
+          , equipment = [herb, herb, sulfur, leather, leather]
           , currentMapState = places
           , money = 0
+          , doorStatus = False
           }
   intro
   gameLoop state
