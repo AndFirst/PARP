@@ -3,10 +3,19 @@ module Items where
 import           Types
 
 herb :: Item
-herb = "ziele"
+herb = "Bagienne ziele"
 
 sword :: Item
-sword = "gwyhyr"
+sword = "Miecz Gnomi Gwyhyr"
+
+sulfur :: Item
+sulfur = "Siarka"
+
+leather :: Item
+leather = "Krowia skóra"
+
+bait :: Item
+bait = "Przynęta na gryfa"
 
 printEquipment :: GameState -> IO ()
 printEquipment gameState =
@@ -41,3 +50,16 @@ sellItem item price gameState =
            , money = money gameState + price
            }
     else gameState
+
+craftBait :: GameState -> IO GameState
+craftBait gameState =
+  let requiredItems = [herb, herb, sulfur, leather, leather]
+      playerItems = equipment gameState
+   in if all (\item -> item `elem` playerItems) requiredItems
+        then do
+          let updatedEquipment = filter (`notElem` requiredItems) playerItems ++ ["Przynęta na gryfa"]
+          putStrLn "Udało Ci się stworzyć przynętę na gryfa."
+          return $ gameState { equipment = updatedEquipment }
+        else do
+          putStrLn "Nie masz wystarczającej ilości wymaganych przedmiotów."
+          return gameState
