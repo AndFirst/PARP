@@ -7,3 +7,4 @@ cow = "krowa"
 
 griffin :: Opponent
 griffin = "gryf"
+

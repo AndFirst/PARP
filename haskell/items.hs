@@ -3,7 +3,7 @@ module Items where
 import           Types
 
 herb :: Item
-herb = "Bagienne ziele"
+herb = "Ziele"
 
 sword :: Item
 sword = "Miecz Gnomi Gwyhyr"
@@ -16,6 +16,9 @@ leather = "Krowia skóra"
 
 bait :: Item
 bait = "Przynęta na gryfa"
+
+trophy :: Item
+trophy = "Trofeum z gryfa"
 
 printEquipment :: GameState -> IO ()
 printEquipment gameState =
@@ -63,3 +66,4 @@ craftBait gameState =
         else do
           putStrLn "Nie masz wystarczającej ilości wymaganych przedmiotów."
           return gameState
+

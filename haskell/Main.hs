@@ -2,6 +2,7 @@ module Main where
 
 import           Items
 import           Map
+import           Opponents
 import           Money
 import           System.Exit (exitSuccess)
 import           Types
@@ -140,6 +141,149 @@ exitDoor gameState = do
       putStrLn "Nie ma tu nic, z czego mógłbyś wyjść."
       return gameState
 
+useBait :: GameState -> IO GameState
+useBait gameState =
+  let bait = "Przynęta na gryfa"
+      currentCoord = currentCoordinates gameState
+      currentMap = currentMapState gameState
+  in if bait `elem` equipment gameState
+       then if currentCoord == "b7"
+              then do
+                putStrLn "Postawiłeś przynętę, gryf powinien się lada moment zjawić..."
+                putStrLn "Słysz jak gryf przylatuje do gniazda, czas na niego zapolować."
+                let updatedGameState = removeItem bait gameState
+                return $ gameState { currentMapState = addOpponentToPlace currentCoord griffin currentMap }
+              else do
+                putStrLn "Nie możesz użyć przynęty na gryfa tutaj."
+                return gameState
+       else do
+         putStrLn "Nie masz przynęty na gryfa w swoim ekwipunku."
+         return gameState
+
+------- Atacks
+
+isCowPresent :: Coordinate -> Places -> Bool
+isCowPresent coord places =
+  case findPlaceByCoordinate coord places of
+    Just (_, _, _, _, opponents) -> "krowa" `elem` opponents
+    Nothing -> False
+
+atakuj :: Opponent -> GameState -> IO GameState
+atakuj "krowa" gameState
+  | isCowPresent (currentCoordinates gameState) (currentMapState gameState) =
+      do
+        putStrLn "Atakujesz krowę."
+        putStrLn "Zabiłeś krowę i zdobyłeś krowią skórę."
+        return $ addItem leather gameState
+  | otherwise =
+      do
+        putStrLn "W okolicy nie ma żadnej krowy do zabicia."
+        return gameState
+
+atakuj "gryf" gameState
+  | currentCoordinates gameState == "b7" =
+      case placeInfo of
+        Just (_, _, _, _, [opponent]) -> do
+          putStrLn "Zaatakowałeś gryfa, wybierz co powinieneś zrobić"
+          putStrLn "1. Strzel z kuszy, by go powalić."
+          putStrLn "2. Zaatakuj mieczem"
+          putStrLn "0. Uciekaj"
+          ruch <- getLine
+          case ruch of
+            "1" -> atak_kusza1 gameState
+            "2" -> atak_miecz1 gameState
+            "0" -> ucieczka gameState
+            _ -> do
+              putStrLn "Nie możesz tego zrobić"
+              return gameState
+        Just _ -> do
+          putStrLn "Gniazdo gryfa jest puste, powinieneś najpierw zastawić przynętę."
+          return gameState
+  | otherwise = do
+      putStrLn "W okolicy nie ma żadnego potwora do zabicia."
+      return gameState
+  where
+    placeInfo = findPlaceByCoordinate (currentCoordinates gameState) (currentMapState gameState)
+
+atakuj _ gameState = do
+  putStrLn "W okolicy nie ma takiego stworzenia."
+  return gameState
+
+
+atak_kusza1 :: GameState -> IO GameState
+atak_kusza1 gameState = do
+  putStrLn "Udało Ci się trafć gryfa kuszą strącając go na ziemię."
+  putStrLn "Wybierz, co powinieneś zrobić następnie."
+  putStrLn "1. Strzel z kuszy."
+  putStrLn "2. Zaatakuj mieczem"
+  putStrLn "0. Uciekaj"
+  ruch <- getLine
+  case ruch of
+    "1" -> atak_kusza2 gameState
+    "2" -> zabicie_gryfa gameState
+    "0" -> ucieczka gameState
+    _ -> do
+      putStrLn "Nie możesz tego zrobić"
+      return gameState
+
+atak_kusza2 :: GameState -> IO GameState
+atak_kusza2 gameState = do
+  putStrLn "Strzał kuszą w obalonego gryfa nie był wystarczający do zabicia bestii."
+  putStrLn "Wybierz, co powinieneś zrobić następnie."
+  putStrLn "1. Strzel z kuszy."
+  putStrLn "2. Zaatakuj mieczem"
+  putStrLn "0. Uciekaj"
+  ruch <- getLine
+  case ruch of
+    "1" -> atak_kusza2 gameState
+    "2" -> zabicie_gryfa gameState
+    "0" -> ucieczka gameState
+    _ -> do
+      putStrLn "Nie możesz tego zrobić"
+      atak_kusza2 gameState
+
+atak_miecz1 :: GameState -> IO GameState
+atak_miecz1 gameState = do
+  putStrLn "Nie udało Ci się trafić pikującego gryfa."
+  putStrLn "Uważaj, bo następnym razem gryf może Cię trafić."
+  putStrLn "1. Strzel z kuszy."
+  putStrLn "2. Zaatakuj mieczem"
+  putStrLn "0. Uciekaj"
+  ruch <- getLine
+  case ruch of
+    "1" -> atak_kusza1 gameState
+    "2" -> atak_miecz2 gameState
+    "0" -> ucieczka gameState
+    _ -> do
+      putStrLn "Nie możesz tego zrobić"
+      atak_miecz1 gameState
+
+atak_miecz2 :: GameState -> IO GameState
+atak_miecz2 gameState = do
+  putStrLn "Pikujący gryf krytycznie trafił Cię szponem."
+  putStrLn "Niestety odniesiona rana okazała się fatalna i doprowadziła do Twojej śmierci."
+  exitSuccess
+
+zabicie_gryfa :: GameState -> IO GameState
+zabicie_gryfa gameState = do
+  putStrLn "Gryf padł martwy od ciosu miecza."
+  putStrLn "Zdobywasz trofeum z gryfa."
+  let updatedPlaces = removeOpponentFromPlace (currentCoordinates gameState) griffin (currentMapState gameState)
+      updatedGameState = gameState { currentMapState = updatedPlaces, equipment = trophy : equipment gameState }
+  putStrLn "Udało Ci się ukończyć wiedźmińską przygodę, gratulacje."
+  exitSuccess
+  return updatedGameState
+
+ucieczka :: GameState -> IO GameState
+ucieczka gameState = do
+  putStrLn "Udało Ci się uciec od gryfa do wsi Jaworek."
+  let updatedGameState = gameState { currentCoordinates = "c3" }
+  return updatedGameState
+  
+----------
+
+
+
 gameLoop :: GameState -> IO ()
 gameLoop gameState = do
   cmd <- readCommand
@@ -252,8 +396,17 @@ gameLoop gameState = do
       let itemName = getSecondWord cmd
       newState <- podnies itemName gameState
       gameLoop newState
+    "atakuj" -> do
+      let opponentName = getSecondWord cmd
+      newState <- atakuj opponentName gameState
+      gameLoop newState
     "uzyj" -> do
-      putStrLn "Używasz przedmiotu."
+      case getSecondWord cmd of
+        "przynęta" -> do
+          let newState = useBait gameState
+          gameLoop =<< newState
+        _ -> do
+          putStrLn "Nie możesz użyć tego przedmiotu."
     "rozmawiaj" -> do
       putStrLn "Próbujesz porozmawiać z kimś."
     "stworz_przynete" -> do
@@ -302,7 +455,7 @@ main = do
   let state =
         GameState
           { currentCoordinates = "c3"
-          , equipment = [herb, herb, sulfur, leather, leather]
+          , equipment = [bait]
           , currentMapState = places
           , money = 0
           , doorStatus = False
