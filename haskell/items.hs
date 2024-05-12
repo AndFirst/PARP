@@ -6,7 +6,7 @@ herb :: Item
 herb = "Ziele"
 
 sword :: Item
-sword = "Miecz Gnomi Gwyhyr"
+sword = "Gwyhyr"
 
 sulfur :: Item
 sulfur = "Siarka"
@@ -15,7 +15,7 @@ leather :: Item
 leather = "Krowia skóra"
 
 bait :: Item
-bait = "Przynęta na gryfa"
+bait = "Przynęta"
 
 trophy :: Item
 trophy = "Trofeum z gryfa"
