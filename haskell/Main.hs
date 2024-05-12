@@ -7,6 +7,7 @@ import           Money
 import           System.Exit (exitSuccess)
 import           Types
 import           Control.Monad (when)
+import           NPCs
 
 intro :: IO ()
 intro = do
@@ -37,6 +38,7 @@ printInstructions = do
   putStrLn "uzyj  <przedmiot>    -- aby użyć przedmiotu."
   putStrLn "rozmawiaj <postac>   -- aby porozmawiać z postacią."
   putStrLn "stworz_przynete      -- aby stworzyć przynętę na gryfa."
+  putStrLn "atakuj <przeciwnik>  -- aby zaatakować przeciwnika."
   putStrLn "wejdz                -- aby wejść do wieży."
   putStrLn "wyjdz                -- aby wyjść z wieży."
   putStrLn "aard                 -- aby użyć znaku Aard."
@@ -461,7 +463,7 @@ gameLoop gameState = do
       putStrLn "Otwierasz bestiariusz."
       bestiary
     "monety" -> do
-      putStrLn "Sprawdzasz ilość monet w kieszeni"
+      putStrLn "Sprawdzasz ilość monet w sakiewce..."
       checkMoney gameState
     "ekwipunek" -> do
       putStrLn "Przeglądasz zawartość ekwipunku."
@@ -482,7 +484,9 @@ gameLoop gameState = do
         _ -> do
           putStrLn "Nie możesz użyć tego przedmiotu."
     "rozmawiaj" -> do
-      putStrLn "Próbujesz porozmawiać z kimś."
+      let npcName = getSecondWord cmd
+      newState <- talk npcName gameState
+      gameLoop newState
     "stworz_przynete" -> do
       let newState = craftBait gameState
       gameLoop =<< newState
@@ -495,24 +499,24 @@ gameLoop gameState = do
     "aard" -> do
       let newState = aard gameState
       gameLoop =<< newState
-    "kup" -> do
-      let itemName = getSecondWord cmd
-      putStrLn "Podaj cenę przedmiotu: "
-      price <- readLn
-      case buyItem itemName price gameState of
-        Right newState -> do
-          putStrLn $ "Kupujesz przedmiot: " ++ itemName
-          gameLoop newState
-        Left errorMsg -> do
-          putStrLn errorMsg
-          gameLoop gameState
-    "sprzedaj" -> do
-      let itemName = getSecondWord cmd
-      putStrLn "Podaj cenę przedmiotu: "
-      price <- readLn
-      let newState = sellItem itemName price gameState
-      putStrLn $ "Sprzedajesz przedmiot: " ++ itemName
-      gameLoop newState
+    -- "kup" -> do
+    --   let itemName = getSecondWord cmd
+    --   putStrLn "Podaj cenę przedmiotu: "
+    --   price <- readLn
+    --   case buyItem itemName price gameState of
+    --     Right newState -> do
+    --       putStrLn $ "Kupujesz przedmiot: " ++ itemName
+    --       gameLoop newState
+    --     Left errorMsg -> do
+    --       putStrLn errorMsg
+    --       gameLoop gameState
+    -- "sprzedaj" -> do
+    --   let itemName = getSecondWord cmd
+    --   putStrLn "Podaj cenę przedmiotu: "
+    --   price <- readLn
+    --   let newState = sellItem itemName price gameState
+    --   putStrLn $ "Sprzedajesz przedmiot: " ++ itemName
+    --   gameLoop newState
     "komendy" -> do
       printInstructions
       gameLoop gameState

@@ -13,14 +13,14 @@ aard :-
     i_am_at(f5),
     door_status(open),
     % Informacja o otwartych drzwiach
-    write('Wrota wieży babel zostały już otwarte, nie marnuj magicznej energii.'), nl,
+    write('Wrota wieży Babelzostały już otwarte, nie marnuj magicznej energii.'), nl,
     !. % Przerwij dalsze działanie predykatu
 
 aard :-
     i_am_at(f5),
     retractall(door_status(_)),
     assertz(door_status(open)),
-    write('Dzięki użyciu znaku Aard udało Ci się wyważyć wrota wieży Babel.'), nl.
+    write('Dzięki użyciu znaku Aard udało Ci się wyważyć wrota wieży Babel'), nl.
 
 aard :- 
     write('Nie powinienem rzucać znaków nadaremno. Co by Vesemir powiedział...'), nl.

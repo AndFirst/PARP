@@ -41,7 +41,7 @@ village = "Wies Jaworek"
 
 tower :: Location
 tower =
-  "Wieża Babel. Obok znajdują się ruiny drugiej, ewidentnie uderzonej przez Wiwernę"
+  "Wieża Bab'el. Obok znajdują się ruiny drugiej, ewidentnie uderzonej przez Wiwernę"
 
 insideTower :: Location
 insideTower = "Wnętrze wieży Bab'el. Zdaje się, że nikt tu dawno nie zaglądał."
