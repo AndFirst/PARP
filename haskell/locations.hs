@@ -48,3 +48,9 @@ meadow = "Łąka, na której pasą się krowy"
 
 other :: Location
 other = "Równiny pełne roślinności"
+
+illegalMove :: Location
+illegalMove = "Miejsce nie do przejścia"
+
+outOfBounds :: Location
+outOfBounds = "Miejsce poza mapą"

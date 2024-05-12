@@ -234,6 +234,8 @@ places =
   , ("g5", lake, [], [], [])
   , ("g6", lake, [], [], [])
   , ("g7", lake, [], [], [])
+  , ("xx", illegalMove, [], [], [])
+  , ("yy", outOfBounds, [], [], [])
   ]
 
 findPlaceByCoordinate :: Coordinate -> Places -> Maybe Place
@@ -247,7 +249,7 @@ describePlace coord places = do
       npcLines =
         if null npcs
           then []
-          else ["Postaci w tej lokalizacji:"]
+          else ["Postacie w tej lokalizacji:"]
                  ++ map (\npc -> "    " ++ npc) npcs
       itemLines =
         if null items
@@ -266,13 +268,13 @@ describePlace coord places = do
         ++ unlines itemLines
         ++ unlines opponentLines
 
-getNextCoordinate :: Coordinate -> Direction -> Paths -> Maybe Coordinate
+getNextCoordinate :: Coordinate -> Direction -> Paths -> Coordinate
 getNextCoordinate currentCoord direction paths =
   case filter
          (\(coord, dir, _) -> coord == currentCoord && dir == direction)
          paths of
-    []                  -> Nothing
-    [(_, _, nextCoord)] -> Just nextCoord
+    []                  -> "yy"
+    [(_, _, nextCoord)] -> nextCoord
     _                   -> error "Invalid path definition"
 
 addItemsToPlace :: Coordinate -> [Item] -> Places -> Places

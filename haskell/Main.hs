@@ -5,6 +5,7 @@ import           Map
 import           Money
 import           System.Exit (exitSuccess)
 import           Types
+import           Control.Monad (when)
 
 intro :: IO ()
 intro = do
@@ -76,15 +77,89 @@ getSecondWord str =
 move :: Direction -> GameState -> IO GameState
 move dir gameState = do
   let nextCoord = getNextCoordinate (currentCoordinates gameState) dir paths
-  case nextCoord of
-    Just coord -> do
-      putStrLn $ "Nowa lokacja:"
+  checkedCoord <- checkSpecialCases nextCoord
+  case checkedCoord of
+    "xx" ->
+      return gameState
+    "yy" -> do
+      putStrLn "Dotarłeś do miejsca gdzie diabeł mówi dobranoc. Zawróć."
+      return gameState
+    coord -> do
+      putStrLn "Nowa lokacja:"
       let description = describePlace coord (currentMapState gameState)
       maybe (return ()) putStrLn description
       return $ updateGameState gameState coord
-    Nothing -> do
-      putStrLn "Dotarłeś do miejsca gdzie diabeł mówi dobranoc. Zawróć."
-      return gameState
+    
+
+checkSpecialCases :: Coordinate -> IO Coordinate
+checkSpecialCases coord = do
+  case coord of
+    "d1" -> do
+      putStrLn "W gęstym borze wpadasz w pułapkę zastawioną przez Leszych."
+      putStrLn "Po cięzkim boju serce Białego Wilka zostaje brutalnie przebite przez potężnych strażników lasu..."
+      exitSuccess
+      return "d1"
+    "e1" -> do
+      putStrLn "W gęstym borze wpadasz w pułapkę zastawioną przez Leszych."
+      putStrLn "Po cięzkim boju serce Białego Wilka zostaje brutalnie przebite przez potężnych strażników lasu..."
+      exitSuccess
+      return "e1"
+    "g3" -> do
+      putStrLn "Cicha, pozbawiona jakiejkolwiek aktywności potwórów jaskinia okazuje się skrywać straszny sekret."
+      putStrLn "Geralt nie zdążył zorientować się jakie monstrum pozbawiło idź życia."
+      putStrLn "Ukryty znów może cieszyć się spokojem w swojej kryjówce..."
+      exitSuccess
+      return "g3"
+    "d6" -> do
+      putStrLn "To jezioro wydaje się być nasycone silną magią elfów Aen Elle. Pływanie tutaj może być niebezpieczne."
+      return "xx"
+    "d7" -> do
+      putStrLn "To jezioro wydaje się być nasycone silną magią elfów Aen Elle. Pływanie tutaj może być niebezpieczne."
+      return "xx"
+    "e6" -> do
+      putStrLn "To jezioro wydaje się być nasycone silną magią elfów Aen Elle. Pływanie tutaj może być niebezpieczne."
+      return "xx"
+    "f6" -> do
+      putStrLn "To jezioro wydaje się być nasycone silną magią elfów Aen Elle. Pływanie tutaj może być niebezpieczne."
+      return "xx"
+    "g5" -> do
+      putStrLn "To jezioro wydaje się być nasycone silną magią elfów Aen Elle. Pływanie tutaj może być niebezpieczne."
+      return "xx"
+    "f1" -> do
+      putStrLn "Wysoki klif na który nie da się wspiąć... Jak Płotka się tam dostała?"
+      return "xx"
+    "g2" -> do
+      putStrLn "Wysoki klif na który nie da się wspiąć... Jak Płotka się tam dostała?"
+      return "xx"
+    "f5" -> do
+      putStrLn "Wysoki klif na który nie da się wspiąć. Na jej szczycie znajduje się solidna wieża"
+      return "xx"
+    "g4" -> do
+      putStrLn "Wysoki klif na który nie da się wspiąć."
+      return "xx"
+    "a1" -> do
+      putStrLn "Zaraza. Nie jestem Zoltanem żebym się przebił przez pasmo Gór Va'Matz...."
+      return "xx"
+    "a2" -> do
+      putStrLn "Zaraza. Nie jestem Zoltanem żebym się przebił przez pasmo Gór Va'Matz...."
+      return "xx"
+    "a3" -> do
+      putStrLn "Zaraza. Nie jestem Zoltanem żebym się przebił przez pasmo Gór Va'Matz...."
+      return "xx"
+    "a4" -> do
+      putStrLn "Zaraza. Nie jestem Zoltanem żebym się przebił przez pasmo Gór Va'Matz...."
+      return "xx"
+    "a5" -> do
+      putStrLn "Zaraza. Nie jestem Zoltanem żebym się przebił przez pasmo Gór Va'Matz...."
+      return "xx"
+    "a6" -> do
+      putStrLn "Zaraza. Nie jestem Zoltanem żebym się przebił przez pasmo Gór Va'Matz...."
+      return "xx"
+    "a7" -> do
+      putStrLn "Zaraza. Nie jestem Zoltanem żebym się przebił przez pasmo Gór Va'Matz...."
+      return "xx"
+    _ -> return coord
+
 
 updateGameState :: GameState -> Coordinate -> GameState
 updateGameState gameState newCoord = gameState {currentCoordinates = newCoord}
@@ -136,46 +211,46 @@ gameLoop gameState = do
           let nextCoord =
                 getNextCoordinate (currentCoordinates gameState) N paths
           case nextCoord of
-            Just coord -> do
+            "yy" -> putStrLn "Nie możesz patrzeć w tym kierunku."
+            coord -> do
               putStrLn "Patrzysz na północ"
               maybe
                 (return ())
                 putStrLn
                 (describePlace coord (currentMapState gameState))
-            Nothing -> putStrLn "Nie możesz patrzeć w tym kierunku."
         "s" -> do
           let nextCoord =
                 getNextCoordinate (currentCoordinates gameState) S paths
           case nextCoord of
-            Just coord -> do
+            "yy" -> putStrLn "Nie możesz patrzeć w tym kierunku."
+            coord -> do
               putStrLn "Patrzysz na południe"
               maybe
                 (return ())
                 putStrLn
                 (describePlace coord (currentMapState gameState))
-            Nothing -> putStrLn "Nie możesz patrzeć w tym kierunku."
         "e" -> do
           let nextCoord =
                 getNextCoordinate (currentCoordinates gameState) E paths
           case nextCoord of
-            Just coord -> do
+            "yy" -> putStrLn "Nie możesz patrzeć w tym kierunku."
+            coord -> do
               putStrLn "Patrzysz na wschód"
               maybe
                 (return ())
                 putStrLn
                 (describePlace coord (currentMapState gameState))
-            Nothing -> putStrLn "Nie możesz patrzeć w tym kierunku."
         "w" -> do
           let nextCoord =
                 getNextCoordinate (currentCoordinates gameState) W paths
           case nextCoord of
-            Just coord -> do
+            "yy" -> putStrLn "Nie możesz patrzeć w tym kierunku."
+            coord -> do
               putStrLn "Patrzysz na zachód"
               maybe
                 (return ())
                 putStrLn
                 (describePlace coord (currentMapState gameState))
-            Nothing -> putStrLn "Nie możesz patrzeć w tym kierunku."
         "" -> do
           putStrLn "Patrzysz dookoła siebie."
           let currentCoord = currentCoordinates gameState
