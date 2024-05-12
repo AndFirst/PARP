@@ -532,8 +532,8 @@ main :: IO ()
 main = do
   let state =
         GameState
-          { currentCoordinates = "c3"
-          , equipment = [bait]
+          { currentCoordinates = "c4"
+          , equipment = []
           , currentMapState = places
           , money = 0
           , doorStatus = False
