@@ -10,4 +10,4 @@ updateMoney amount gameState =
 
 checkMoney :: GameState -> IO ()
 checkMoney gameState = do
-  putStrLn $ "Aktualna ilość monet: " ++ show (money gameState)
+  putStrLn $ "Aktualna ilość orenów: " ++ show (money gameState)
