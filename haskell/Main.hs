@@ -78,7 +78,7 @@ getSecondWord str =
 move :: Direction -> GameState -> IO GameState
 move dir gameState = do
   let nextCoord = getNextCoordinate (currentCoordinates gameState) dir paths
-  checkedCoord <- checkSpecialCases nextCoord
+  checkedCoord <- checkSpecialCoordinates nextCoord
   case checkedCoord of
     "xx" ->
       return gameState
@@ -92,8 +92,8 @@ move dir gameState = do
       return $ updateGameState gameState coord
     
 
-checkSpecialCases :: Coordinate -> IO Coordinate
-checkSpecialCases coord = do
+checkSpecialCoordinates :: Coordinate -> IO Coordinate
+checkSpecialCoordinates coord = do
   case coord of
     "d1" -> do
       putStrLn "W gęstym borze wpadasz w pułapkę zastawioną przez Leszych."
