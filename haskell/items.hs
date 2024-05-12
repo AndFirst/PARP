@@ -6,7 +6,7 @@ herb :: Item
 herb = "Ziele"
 
 sword :: Item
-sword = "Miecz Gnomi Gwyhyr"
+sword = "Gwyhyr"
 
 sulfur :: Item
 sulfur = "Siarka"
@@ -15,15 +15,18 @@ leather :: Item
 leather = "Krowia skóra"
 
 bait :: Item
-bait = "Przynęta na gryfa"
+bait = "Przynęta"
 
 trophy :: Item
 trophy = "Trofeum z gryfa"
 
+card :: Item
+card = "Karta do gwinta - Vernon Roche (Partiota, ale zbój)"
+
 printEquipment :: GameState -> IO ()
 printEquipment gameState =
   if null (equipment gameState)
-    then putStrLn "Twój ekwipunek jest pusty."
+    then putStrLn "Twój ekwipunek jest pustszy niż głowa utopca."
     else do
       putStrLn "Twój ekwipunek zawiera:"
       mapM_ putStrLn (equipment gameState)
@@ -43,7 +46,7 @@ buyItem item price gameState =
                { equipment = item : equipment gameState
                , money = money gameState - price
                }
-    else Left "Nie masz wystarczającej ilości pieniędzy."
+    else Left "Niestety, potrzebujesz więcej orenów żeby to kupić."
 
 sellItem :: Item -> Int -> GameState -> GameState
 sellItem item price gameState =
@@ -67,3 +70,11 @@ craftBait gameState =
           putStrLn "Nie masz wystarczającej ilości wymaganych przedmiotów."
           return gameState
 
+
+getItemPrice :: Item -> Int
+getItemPrice item
+  | item == sword = 50
+  | item == card = 15
+  | item == sulfur = 15
+  | item == leather = 5
+  | otherwise = 0

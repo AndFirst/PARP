@@ -7,6 +7,7 @@ import           Money
 import           System.Exit (exitSuccess)
 import           Types
 import           Control.Monad (when)
+import           NPCs
 
 intro :: IO ()
 intro = do
@@ -37,6 +38,7 @@ printInstructions = do
   putStrLn "uzyj  <przedmiot>    -- aby użyć przedmiotu."
   putStrLn "rozmawiaj <postac>   -- aby porozmawiać z postacią."
   putStrLn "stworz_przynete      -- aby stworzyć przynętę na gryfa."
+  putStrLn "atakuj <przeciwnik>  -- aby zaatakować przeciwnika."
   putStrLn "wejdz                -- aby wejść do wieży."
   putStrLn "wyjdz                -- aby wyjść z wieży."
   putStrLn "aard                 -- aby użyć znaku Aard."
@@ -78,7 +80,7 @@ getSecondWord str =
 move :: Direction -> GameState -> IO GameState
 move dir gameState = do
   let nextCoord = getNextCoordinate (currentCoordinates gameState) dir paths
-  checkedCoord <- checkSpecialCases nextCoord
+  checkedCoord <- checkSpecialCoordinates nextCoord
   case checkedCoord of
     "xx" ->
       return gameState
@@ -92,8 +94,8 @@ move dir gameState = do
       return $ updateGameState gameState coord
     
 
-checkSpecialCases :: Coordinate -> IO Coordinate
-checkSpecialCases coord = do
+checkSpecialCoordinates :: Coordinate -> IO Coordinate
+checkSpecialCoordinates coord = do
   case coord of
     "d1" -> do
       putStrLn "W gęstym borze wpadasz w pułapkę zastawioną przez Leszych."
@@ -107,7 +109,7 @@ checkSpecialCases coord = do
       return "e1"
     "g3" -> do
       putStrLn "Cicha, pozbawiona jakiejkolwiek aktywności potwórów jaskinia okazuje się skrywać straszny sekret."
-      putStrLn "Geralt nie zdążył zorientować się jakie monstrum pozbawiło idź życia."
+      putStrLn "Geralt nie zdążył zorientować się jakie monstrum pozbawiło go życia."
       putStrLn "Ukryty znów może cieszyć się spokojem w swojej kryjówce..."
       exitSuccess
       return "g3"
@@ -131,9 +133,6 @@ checkSpecialCases coord = do
       return "xx"
     "g2" -> do
       putStrLn "Wysoki klif na który nie da się wspiąć... Jak Płotka się tam dostała?"
-      return "xx"
-    "f5" -> do
-      putStrLn "Wysoki klif na który nie da się wspiąć. Na jej szczycie znajduje się solidna wieża"
       return "xx"
     "g4" -> do
       putStrLn "Wysoki klif na który nie da się wspiąć."
@@ -170,7 +169,10 @@ enterDoor gameState = do
   let currentCoord = currentCoordinates gameState
       nextCoord = getNextCoordinate currentCoord X paths
   case nextCoord of
-    Just coord -> do
+    "yy" -> do
+      putStrLn "W okolicy nie ma żadnego budynku, do którego mógłbyś wejść."
+      return gameState
+    coord -> do
       if doorStatus gameState
         then do
           putStrLn "Drzwi są otwarte, wchodzisz do środka."
@@ -183,9 +185,7 @@ enterDoor gameState = do
         else do
           putStrLn "Drzwi wydają się być zamknięte, chyba trzeba się ich pozbyć."
           return gameState
-    Nothing -> do
-      putStrLn "W okolicy nie ma żadnego budynku, do którego mógłbyś wejść."
-      return gameState
+    
 
 aard :: GameState -> IO GameState
 aard gameState
@@ -204,7 +204,10 @@ exitDoor gameState = do
   let currentCoord = currentCoordinates gameState
       nextCoord = getNextCoordinate currentCoord Y paths
   case nextCoord of
-    Just coord -> do
+    "yy" -> do
+      putStrLn "Nie ma tu nic, z czego mógłbyś wyjść."
+      return gameState
+    coord -> do
       putStrLn "Opuszczasz to miejsce."
       let newGameState = updateGameState gameState coord
       let currentMap = currentMapState gameState
@@ -212,9 +215,7 @@ exitDoor gameState = do
             Just description -> putStrLn description
 
       return newGameState
-    Nothing -> do
-      putStrLn "Nie ma tu nic, z czego mógłbyś wyjść."
-      return gameState
+    
 
 useBait :: GameState -> IO GameState
 useBait gameState =
@@ -406,7 +407,7 @@ gameLoop gameState = do
           let nextCoord =
                 getNextCoordinate (currentCoordinates gameState) N paths
           case nextCoord of
-            "yy" -> putStrLn "Nie możesz patrzeć w tym kierunku."
+            "yy" -> putStrLn "Zaraza. Nie powinienem tam iść..."
             coord -> do
               putStrLn "Patrzysz na północ"
               maybe
@@ -417,7 +418,7 @@ gameLoop gameState = do
           let nextCoord =
                 getNextCoordinate (currentCoordinates gameState) S paths
           case nextCoord of
-            "yy" -> putStrLn "Nie możesz patrzeć w tym kierunku."
+            "yy" -> putStrLn "Zaraza. Nie powinienem tam iść..."
             coord -> do
               putStrLn "Patrzysz na południe"
               maybe
@@ -428,7 +429,7 @@ gameLoop gameState = do
           let nextCoord =
                 getNextCoordinate (currentCoordinates gameState) E paths
           case nextCoord of
-            "yy" -> putStrLn "Nie możesz patrzeć w tym kierunku."
+            "yy" -> putStrLn "Zaraza. Nie powinienem tam iść..."
             coord -> do
               putStrLn "Patrzysz na wschód"
               maybe
@@ -439,7 +440,7 @@ gameLoop gameState = do
           let nextCoord =
                 getNextCoordinate (currentCoordinates gameState) W paths
           case nextCoord of
-            "yy" -> putStrLn "Nie możesz patrzeć w tym kierunku."
+            "yy" -> putStrLn "Zaraza. Nie powinienem tam iść..."
             coord -> do
               putStrLn "Patrzysz na zachód"
               maybe
@@ -462,7 +463,7 @@ gameLoop gameState = do
       putStrLn "Otwierasz bestiariusz."
       bestiary
     "monety" -> do
-      putStrLn "Sprawdzasz ilość monet w kieszeni"
+      putStrLn "Sprawdzasz ilość monet w sakiewce..."
       checkMoney gameState
     "ekwipunek" -> do
       putStrLn "Przeglądasz zawartość ekwipunku."
@@ -477,13 +478,15 @@ gameLoop gameState = do
       gameLoop newState
     "uzyj" -> do
       case getSecondWord cmd of
-        "przynęta" -> do
+        "Przynęta" -> do
           let newState = useBait gameState
           gameLoop =<< newState
         _ -> do
           putStrLn "Nie możesz użyć tego przedmiotu."
     "rozmawiaj" -> do
-      putStrLn "Próbujesz porozmawiać z kimś."
+      let npcName = getSecondWord cmd
+      newState <- talk npcName gameState
+      gameLoop newState
     "stworz_przynete" -> do
       let newState = craftBait gameState
       gameLoop =<< newState
@@ -496,24 +499,24 @@ gameLoop gameState = do
     "aard" -> do
       let newState = aard gameState
       gameLoop =<< newState
-    "kup" -> do
-      let itemName = getSecondWord cmd
-      putStrLn "Podaj cenę przedmiotu: "
-      price <- readLn
-      case buyItem itemName price gameState of
-        Right newState -> do
-          putStrLn $ "Kupujesz przedmiot: " ++ itemName
-          gameLoop newState
-        Left errorMsg -> do
-          putStrLn errorMsg
-          gameLoop gameState
-    "sprzedaj" -> do
-      let itemName = getSecondWord cmd
-      putStrLn "Podaj cenę przedmiotu: "
-      price <- readLn
-      let newState = sellItem itemName price gameState
-      putStrLn $ "Sprzedajesz przedmiot: " ++ itemName
-      gameLoop newState
+    -- "kup" -> do
+    --   let itemName = getSecondWord cmd
+    --   putStrLn "Podaj cenę przedmiotu: "
+    --   price <- readLn
+    --   case buyItem itemName price gameState of
+    --     Right newState -> do
+    --       putStrLn $ "Kupujesz przedmiot: " ++ itemName
+    --       gameLoop newState
+    --     Left errorMsg -> do
+    --       putStrLn errorMsg
+    --       gameLoop gameState
+    -- "sprzedaj" -> do
+    --   let itemName = getSecondWord cmd
+    --   putStrLn "Podaj cenę przedmiotu: "
+    --   price <- readLn
+    --   let newState = sellItem itemName price gameState
+    --   putStrLn $ "Sprzedajesz przedmiot: " ++ itemName
+    --   gameLoop newState
     "komendy" -> do
       printInstructions
       gameLoop gameState
@@ -529,8 +532,8 @@ main :: IO ()
 main = do
   let state =
         GameState
-          { currentCoordinates = "c3"
-          , equipment = [bait]
+          { currentCoordinates = "c4"
+          , equipment = []
           , currentMapState = places
           , money = 0
           , doorStatus = False
