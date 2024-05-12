@@ -15,7 +15,7 @@ eastMountains :: Location
 eastMountains = "Wschodnie szczyty Gór Va'Matz"
 
 forest :: Location
-forest = "Bór Dębicki. Czuć dobiegającą z niego gęstą esencję Leszych..."
+forest = "Bór K'Backi. Czuć dobiegającą z niego gęstą esencję Leszych..."
 
 canyon :: Location
 canyon = "Malowniczy kanion prowadzący do jaskini."
@@ -48,3 +48,9 @@ meadow = "Łąka, na której pasą się krowy"
 
 other :: Location
 other = "Równiny pełne roślinności"
+
+illegalMove :: Location
+illegalMove = "Miejsce nie do przejścia"
+
+outOfBounds :: Location
+outOfBounds = "Miejsce poza mapą"
