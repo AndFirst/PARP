@@ -478,7 +478,7 @@ gameLoop gameState = do
       gameLoop newState
     "uzyj" -> do
       case getSecondWord cmd of
-        "przynęta" -> do
+        "Przynęta" -> do
           let newState = useBait gameState
           gameLoop =<< newState
         _ -> do
