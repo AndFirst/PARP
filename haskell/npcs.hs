@@ -34,7 +34,7 @@ talk npc gameState = do
     then do
         case npc of
             "kupiec" -> talkTrader gameState
-            -- "karczmarka" -> karczmarka_rozmowa
+            "karczmarka" -> talkInnkeeper gameState
             -- "wieśniak" -> wieśniak_rozmowa
             -- "rybak" -> rybak_rozmowa
             _ -> putStrLn "Zaraza. Nie wiem, jak rozmawiać z tym odmieńcem." >> return gameState
@@ -109,3 +109,16 @@ talkTrader gameState = do
         _ -> do
             putStrLn "Niepoprawna opcja."
             return gameState
+
+
+talkInnkeeper :: GameState -> IO GameState
+talkInnkeeper gameState = do
+    putStrLn "Chwała Wielkiemu Tooskowi! Mistrzu wiedźminie, przybywacie w idealnym momencie!"
+    putStrLn "Nasza skromna wieś Jaworek terroryzowana jest przez bestię straszliwą..."
+    putStrLn "Owa bestia przyleciała podobnóż z dalekich Va Do Widz, niszcząc wszystko na swojej drodze."
+    putStrLn "Nasze dzieci, nasze kobiety, nasze zwierzęta... nic nie jest bezpieczne przed jej żądzą."
+    putStrLn "Nie ma dnia byśmy nie drżeli w cieniu tego żółtego monstrum..."
+    putStrLn "Pomóżcie nam Mistrzu, a nie pożałujecie"
+    putStrLn "Baron Ozjasz Goldberg, władca naszych ziem zapłaci kufer koron śmiałkowi który pokona bestię."
+    putStrLn "Czy zechcecie podjąć się tej misji?"
+    return gameState

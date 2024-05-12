@@ -209,7 +209,7 @@ places =
   , ("d2", other, [], [], [])
   , ("d3", other, [], [herb, herb], [])
   , ("d4", other, [], [], [])
-  , ("d5", other, [], [], [])
+  , ("d5", other, [fisherman], [], [])
   , ("d6", lake, [], [], [])
   , ("d7", lake, [], [], [])
   , ("e1", forest, [], [], [])
