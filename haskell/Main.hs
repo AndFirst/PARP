@@ -107,7 +107,7 @@ checkSpecialCases coord = do
       return "e1"
     "g3" -> do
       putStrLn "Cicha, pozbawiona jakiejkolwiek aktywności potwórów jaskinia okazuje się skrywać straszny sekret."
-      putStrLn "Geralt nie zdążył zorientować się jakie monstrum pozbawiło idź życia."
+      putStrLn "Geralt nie zdążył zorientować się jakie monstrum pozbawiło go życia."
       putStrLn "Ukryty znów może cieszyć się spokojem w swojej kryjówce..."
       exitSuccess
       return "g3"
@@ -131,9 +131,6 @@ checkSpecialCases coord = do
       return "xx"
     "g2" -> do
       putStrLn "Wysoki klif na który nie da się wspiąć... Jak Płotka się tam dostała?"
-      return "xx"
-    "f5" -> do
-      putStrLn "Wysoki klif na który nie da się wspiąć. Na jej szczycie znajduje się solidna wieża"
       return "xx"
     "g4" -> do
       putStrLn "Wysoki klif na który nie da się wspiąć."
@@ -170,7 +167,10 @@ enterDoor gameState = do
   let currentCoord = currentCoordinates gameState
       nextCoord = getNextCoordinate currentCoord X paths
   case nextCoord of
-    Just coord -> do
+    "yy" -> do
+      putStrLn "W okolicy nie ma żadnego budynku, do którego mógłbyś wejść."
+      return gameState
+    coord -> do
       if doorStatus gameState
         then do
           putStrLn "Drzwi są otwarte, wchodzisz do środka."
@@ -183,9 +183,7 @@ enterDoor gameState = do
         else do
           putStrLn "Drzwi wydają się być zamknięte, chyba trzeba się ich pozbyć."
           return gameState
-    Nothing -> do
-      putStrLn "W okolicy nie ma żadnego budynku, do którego mógłbyś wejść."
-      return gameState
+    
 
 aard :: GameState -> IO GameState
 aard gameState
@@ -204,7 +202,10 @@ exitDoor gameState = do
   let currentCoord = currentCoordinates gameState
       nextCoord = getNextCoordinate currentCoord Y paths
   case nextCoord of
-    Just coord -> do
+    "yy" -> do
+      putStrLn "Nie ma tu nic, z czego mógłbyś wyjść."
+      return gameState
+    coord -> do
       putStrLn "Opuszczasz to miejsce."
       let newGameState = updateGameState gameState coord
       let currentMap = currentMapState gameState
@@ -212,9 +213,7 @@ exitDoor gameState = do
             Just description -> putStrLn description
 
       return newGameState
-    Nothing -> do
-      putStrLn "Nie ma tu nic, z czego mógłbyś wyjść."
-      return gameState
+    
 
 useBait :: GameState -> IO GameState
 useBait gameState =
@@ -406,7 +405,7 @@ gameLoop gameState = do
           let nextCoord =
                 getNextCoordinate (currentCoordinates gameState) N paths
           case nextCoord of
-            "yy" -> putStrLn "Nie możesz patrzeć w tym kierunku."
+            "yy" -> putStrLn "Zaraza. Nie powinienem tam iść..."
             coord -> do
               putStrLn "Patrzysz na północ"
               maybe
@@ -417,7 +416,7 @@ gameLoop gameState = do
           let nextCoord =
                 getNextCoordinate (currentCoordinates gameState) S paths
           case nextCoord of
-            "yy" -> putStrLn "Nie możesz patrzeć w tym kierunku."
+            "yy" -> putStrLn "Zaraza. Nie powinienem tam iść..."
             coord -> do
               putStrLn "Patrzysz na południe"
               maybe
@@ -428,7 +427,7 @@ gameLoop gameState = do
           let nextCoord =
                 getNextCoordinate (currentCoordinates gameState) E paths
           case nextCoord of
-            "yy" -> putStrLn "Nie możesz patrzeć w tym kierunku."
+            "yy" -> putStrLn "Zaraza. Nie powinienem tam iść..."
             coord -> do
               putStrLn "Patrzysz na wschód"
               maybe
@@ -439,7 +438,7 @@ gameLoop gameState = do
           let nextCoord =
                 getNextCoordinate (currentCoordinates gameState) W paths
           case nextCoord of
-            "yy" -> putStrLn "Nie możesz patrzeć w tym kierunku."
+            "yy" -> putStrLn "Zaraza. Nie powinienem tam iść..."
             coord -> do
               putStrLn "Patrzysz na zachód"
               maybe

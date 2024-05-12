@@ -23,6 +23,12 @@ canyon = "Malowniczy kanion prowadzący do jaskini."
 cliffCanyon :: Location
 cliffCanyon = "Potężny klif na końcu kanionu."
 
+canyonWall :: Location
+canyonWall = "Niedostępne zbocze kanionu."
+
+hill :: Location
+hill = "Strome zbocze prowadzące do wieży Bab'el."
+
 cave :: Location
 cave =
   "Tajemnicza jaskinia. Z jakiegoś powodu nie wygląda, żeby żadne potwory chciały się tam zapuszczać..."
@@ -38,7 +44,7 @@ tower =
   "Wieża Babel. Obok znajdują się ruiny drugiej, ewidentnie uderzonej przez Wiwernę"
 
 insideTower :: Location
-insideTower = "Wnętrze wieży Babel. Zdaje się, że nikt tu dawno nie zaglądał."
+insideTower = "Wnętrze wieży Bab'el. Zdaje się, że nikt tu dawno nie zaglądał."
 
 lake :: Location
 lake = "Jezioro emanujące elficką magią."
