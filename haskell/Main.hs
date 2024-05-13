@@ -1,13 +1,13 @@
 module Main where
 
+import           Control.Monad (when)
 import           Items
 import           Map
-import           Opponents
 import           Money
-import           System.Exit (exitSuccess)
-import           Types
-import           Control.Monad (when)
 import           NPCs
+import           Opponents
+import           System.Exit   (exitSuccess)
+import           Types
 
 intro :: IO ()
 intro = do
@@ -82,8 +82,7 @@ move dir gameState = do
   let nextCoord = getNextCoordinate (currentCoordinates gameState) dir paths
   checkedCoord <- checkSpecialCoordinates nextCoord
   case checkedCoord of
-    "xx" ->
-      return gameState
+    "xx" -> return gameState
     "yy" -> do
       putStrLn "Dotarłeś do miejsca gdzie diabeł mówi dobranoc. Zawróć."
       return gameState
@@ -92,74 +91,90 @@ move dir gameState = do
       let description = describePlace coord (currentMapState gameState)
       maybe (return ()) putStrLn description
       return $ updateGameState gameState coord
-    
 
 checkSpecialCoordinates :: Coordinate -> IO Coordinate
 checkSpecialCoordinates coord = do
   case coord of
     "d1" -> do
       putStrLn "W gęstym borze wpadasz w pułapkę zastawioną przez Leszych."
-      putStrLn "Po cięzkim boju serce Białego Wilka zostaje brutalnie przebite przez potężnych strażników lasu..."
+      putStrLn
+        "Po cięzkim boju serce Białego Wilka zostaje brutalnie przebite przez potężnych strażników lasu..."
       exitSuccess
       return "d1"
     "e1" -> do
       putStrLn "W gęstym borze wpadasz w pułapkę zastawioną przez Leszych."
-      putStrLn "Po cięzkim boju serce Białego Wilka zostaje brutalnie przebite przez potężnych strażników lasu..."
+      putStrLn
+        "Po cięzkim boju serce Białego Wilka zostaje brutalnie przebite przez potężnych strażników lasu..."
       exitSuccess
       return "e1"
     "g3" -> do
-      putStrLn "Cicha, pozbawiona jakiejkolwiek aktywności potwórów jaskinia okazuje się skrywać straszny sekret."
-      putStrLn "Geralt nie zdążył zorientować się jakie monstrum pozbawiło go życia."
+      putStrLn
+        "Cicha, pozbawiona jakiejkolwiek aktywności potwórów jaskinia okazuje się skrywać straszny sekret."
+      putStrLn
+        "Geralt nie zdążył zorientować się jakie monstrum pozbawiło go życia."
       putStrLn "Ukryty znów może cieszyć się spokojem w swojej kryjówce..."
       exitSuccess
       return "g3"
     "d6" -> do
-      putStrLn "To jezioro wydaje się być nasycone silną magią elfów Aen Elle. Pływanie tutaj może być niebezpieczne."
+      putStrLn
+        "To jezioro wydaje się być nasycone silną magią elfów Aen Elle. Pływanie tutaj może być niebezpieczne."
       return "xx"
     "d7" -> do
-      putStrLn "To jezioro wydaje się być nasycone silną magią elfów Aen Elle. Pływanie tutaj może być niebezpieczne."
+      putStrLn
+        "To jezioro wydaje się być nasycone silną magią elfów Aen Elle. Pływanie tutaj może być niebezpieczne."
       return "xx"
     "e6" -> do
-      putStrLn "To jezioro wydaje się być nasycone silną magią elfów Aen Elle. Pływanie tutaj może być niebezpieczne."
+      putStrLn
+        "To jezioro wydaje się być nasycone silną magią elfów Aen Elle. Pływanie tutaj może być niebezpieczne."
       return "xx"
     "f6" -> do
-      putStrLn "To jezioro wydaje się być nasycone silną magią elfów Aen Elle. Pływanie tutaj może być niebezpieczne."
+      putStrLn
+        "To jezioro wydaje się być nasycone silną magią elfów Aen Elle. Pływanie tutaj może być niebezpieczne."
       return "xx"
     "g5" -> do
-      putStrLn "To jezioro wydaje się być nasycone silną magią elfów Aen Elle. Pływanie tutaj może być niebezpieczne."
+      putStrLn
+        "To jezioro wydaje się być nasycone silną magią elfów Aen Elle. Pływanie tutaj może być niebezpieczne."
       return "xx"
     "f1" -> do
-      putStrLn "Wysoki klif na który nie da się wspiąć... Jak Płotka się tam dostała?"
+      putStrLn
+        "Wysoki klif na który nie da się wspiąć... Jak Płotka się tam dostała?"
       return "xx"
     "g2" -> do
-      putStrLn "Wysoki klif na który nie da się wspiąć... Jak Płotka się tam dostała?"
+      putStrLn
+        "Wysoki klif na który nie da się wspiąć... Jak Płotka się tam dostała?"
       return "xx"
     "g4" -> do
       putStrLn "Wysoki klif na który nie da się wspiąć."
       return "xx"
     "a1" -> do
-      putStrLn "Zaraza. Nie jestem Zoltanem żebym się przebił przez pasmo Gór Va'Matz...."
+      putStrLn
+        "Zaraza. Nie jestem Zoltanem żebym się przebił przez pasmo Gór Va'Matz...."
       return "xx"
     "a2" -> do
-      putStrLn "Zaraza. Nie jestem Zoltanem żebym się przebił przez pasmo Gór Va'Matz...."
+      putStrLn
+        "Zaraza. Nie jestem Zoltanem żebym się przebił przez pasmo Gór Va'Matz...."
       return "xx"
     "a3" -> do
-      putStrLn "Zaraza. Nie jestem Zoltanem żebym się przebił przez pasmo Gór Va'Matz...."
+      putStrLn
+        "Zaraza. Nie jestem Zoltanem żebym się przebił przez pasmo Gór Va'Matz...."
       return "xx"
     "a4" -> do
-      putStrLn "Zaraza. Nie jestem Zoltanem żebym się przebił przez pasmo Gór Va'Matz...."
+      putStrLn
+        "Zaraza. Nie jestem Zoltanem żebym się przebił przez pasmo Gór Va'Matz...."
       return "xx"
     "a5" -> do
-      putStrLn "Zaraza. Nie jestem Zoltanem żebym się przebił przez pasmo Gór Va'Matz...."
+      putStrLn
+        "Zaraza. Nie jestem Zoltanem żebym się przebił przez pasmo Gór Va'Matz...."
       return "xx"
     "a6" -> do
-      putStrLn "Zaraza. Nie jestem Zoltanem żebym się przebił przez pasmo Gór Va'Matz...."
+      putStrLn
+        "Zaraza. Nie jestem Zoltanem żebym się przebił przez pasmo Gór Va'Matz...."
       return "xx"
     "a7" -> do
-      putStrLn "Zaraza. Nie jestem Zoltanem żebym się przebił przez pasmo Gór Va'Matz...."
+      putStrLn
+        "Zaraza. Nie jestem Zoltanem żebym się przebił przez pasmo Gór Va'Matz...."
       return "xx"
     _ -> return coord
-
 
 updateGameState :: GameState -> Coordinate -> GameState
 updateGameState gameState newCoord = gameState {currentCoordinates = newCoord}
@@ -179,25 +194,25 @@ enterDoor gameState = do
           let newGameState = updateGameState gameState coord
           let currentMap = currentMapState gameState
           case describePlace coord currentMap of
-                Just description -> putStrLn description
-
+            Just description -> putStrLn description
           return newGameState
         else do
-          putStrLn "Drzwi wydają się być zamknięte, chyba trzeba się ich pozbyć."
+          putStrLn
+            "Drzwi wydają się być zamknięte, chyba trzeba się ich pozbyć."
           return gameState
-    
 
 aard :: GameState -> IO GameState
 aard gameState
   | currentCoordinates gameState /= "f5" = do
-      putStrLn "Nie możesz tutaj użyć znaku aard."
-      return gameState
+    putStrLn "Nie możesz tutaj użyć znaku aard."
+    return gameState
   | doorStatus gameState = do
-      putStrLn "Drzwi są już otwarte, nie ma sensu ponownie traktować ich aardem."
-      return gameState
+    putStrLn "Drzwi są już otwarte, nie ma sensu ponownie traktować ich aardem."
+    return gameState
   | otherwise = do
-      putStrLn "Udało Ci się wyważyć drzwi przy pomocy znaku aard - w końcu będziesz w stanie wejść do wieży."
-      return $ gameState { doorStatus = True }
+    putStrLn
+      "Udało Ci się wyważyć drzwi przy pomocy znaku aard - w końcu będziesz w stanie wejść do wieży."
+    return $ gameState {doorStatus = True}
 
 exitDoor :: GameState -> IO GameState
 exitDoor gameState = do
@@ -212,79 +227,81 @@ exitDoor gameState = do
       let newGameState = updateGameState gameState coord
       let currentMap = currentMapState gameState
       case describePlace coord currentMap of
-            Just description -> putStrLn description
-
+        Just description -> putStrLn description
       return newGameState
-    
 
 useBait :: GameState -> IO GameState
 useBait gameState =
   let bait = "Przynęta na gryfa"
       currentCoord = currentCoordinates gameState
       currentMap = currentMapState gameState
-  in if bait `elem` equipment gameState
-       then if currentCoord == "b7"
-              then do
-                putStrLn "Postawiłeś przynętę, gryf powinien się lada moment zjawić..."
-                putStrLn "Słysz jak gryf przylatuje do gniazda, czas na niego zapolować."
-                let updatedGameState = removeItem bait gameState
-                return $ gameState { currentMapState = addOpponentToPlace currentCoord griffin currentMap }
-              else do
-                putStrLn "Nie możesz użyć przynęty na gryfa tutaj."
-                return gameState
-       else do
-         putStrLn "Nie masz przynęty na gryfa w swoim ekwipunku."
-         return gameState
+   in if bait `elem` equipment gameState
+        then if currentCoord == "b7"
+               then do
+                 putStrLn
+                   "Postawiłeś przynętę, gryf powinien się lada moment zjawić..."
+                 putStrLn
+                   "Słysz jak gryf przylatuje do gniazda, czas na niego zapolować."
+                 let updatedGameState = removeItem bait gameState
+                 return
+                   $ gameState
+                       { currentMapState =
+                           addOpponentToPlace currentCoord griffin currentMap
+                       }
+               else do
+                 putStrLn "Nie możesz użyć przynęty na gryfa tutaj."
+                 return gameState
+        else do
+          putStrLn "Nie masz przynęty na gryfa w swoim ekwipunku."
+          return gameState
 
 ------- Atacks
-
 isCowPresent :: Coordinate -> Places -> Bool
 isCowPresent coord places =
   case findPlaceByCoordinate coord places of
     Just (_, _, _, _, opponents) -> "krowa" `elem` opponents
-    Nothing -> False
+    Nothing                      -> False
 
 atakuj :: Opponent -> GameState -> IO GameState
 atakuj "krowa" gameState
-  | isCowPresent (currentCoordinates gameState) (currentMapState gameState) =
-      do
-        putStrLn "Atakujesz krowę."
-        putStrLn "Zabiłeś krowę i zdobyłeś krowią skórę."
-        return $ addItem leather gameState
-  | otherwise =
-      do
-        putStrLn "W okolicy nie ma żadnej krowy do zabicia."
-        return gameState
-
+  | isCowPresent (currentCoordinates gameState) (currentMapState gameState) = do
+    putStrLn "Atakujesz krowę."
+    putStrLn "Zabiłeś krowę i zdobyłeś krowią skórę."
+    return $ addItem leather gameState
+  | otherwise = do
+    putStrLn "W okolicy nie ma żadnej krowy do zabicia."
+    return gameState
 atakuj "gryf" gameState
   | currentCoordinates gameState == "b7" =
-      case placeInfo of
-        Just (_, _, _, _, [opponent]) -> do
-          putStrLn "Zaatakowałeś gryfa, wybierz co powinieneś zrobić"
-          putStrLn "1. Strzel z kuszy, by go powalić."
-          putStrLn "2. Zaatakuj mieczem"
-          putStrLn "0. Uciekaj"
-          ruch <- getLine
-          case ruch of
-            "1" -> atak_kusza1 gameState
-            "2" -> atak_miecz1 gameState
-            "0" -> ucieczka gameState
-            _ -> do
-              putStrLn "Nie możesz tego zrobić"
-              return gameState
-        Just _ -> do
-          putStrLn "Gniazdo gryfa jest puste, powinieneś najpierw zastawić przynętę."
-          return gameState
+    case placeInfo of
+      Just (_, _, _, _, [opponent]) -> do
+        putStrLn "Zaatakowałeś gryfa, wybierz co powinieneś zrobić"
+        putStrLn "1. Strzel z kuszy, by go powalić."
+        putStrLn "2. Zaatakuj mieczem"
+        putStrLn "0. Uciekaj"
+        ruch <- getLine
+        case ruch of
+          "1" -> atak_kusza1 gameState
+          "2" -> atak_miecz1 gameState
+          "0" -> ucieczka gameState
+          _ -> do
+            putStrLn "Nie możesz tego zrobić"
+            return gameState
+      Just _ -> do
+        putStrLn
+          "Gniazdo gryfa jest puste, powinieneś najpierw zastawić przynętę."
+        return gameState
   | otherwise = do
-      putStrLn "W okolicy nie ma żadnego potwora do zabicia."
-      return gameState
+    putStrLn "W okolicy nie ma żadnego potwora do zabicia."
+    return gameState
   where
-    placeInfo = findPlaceByCoordinate (currentCoordinates gameState) (currentMapState gameState)
-
+    placeInfo =
+      findPlaceByCoordinate
+        (currentCoordinates gameState)
+        (currentMapState gameState)
 atakuj _ gameState = do
   putStrLn "W okolicy nie ma takiego stworzenia."
   return gameState
-
 
 atak_kusza1 :: GameState -> IO GameState
 atak_kusza1 gameState = do
@@ -304,7 +321,8 @@ atak_kusza1 gameState = do
 
 atak_kusza2 :: GameState -> IO GameState
 atak_kusza2 gameState = do
-  putStrLn "Strzał kuszą w obalonego gryfa nie był wystarczający do zabicia bestii."
+  putStrLn
+    "Strzał kuszą w obalonego gryfa nie był wystarczający do zabicia bestii."
   putStrLn "Wybierz, co powinieneś zrobić następnie."
   putStrLn "1. Strzel z kuszy."
   putStrLn "2. Zaatakuj mieczem"
@@ -337,15 +355,24 @@ atak_miecz1 gameState = do
 atak_miecz2 :: GameState -> IO GameState
 atak_miecz2 gameState = do
   putStrLn "Pikujący gryf krytycznie trafił Cię szponem."
-  putStrLn "Niestety odniesiona rana okazała się fatalna i doprowadziła do Twojej śmierci."
+  putStrLn
+    "Niestety odniesiona rana okazała się fatalna i doprowadziła do Twojej śmierci."
   exitSuccess
 
 zabicie_gryfa :: GameState -> IO GameState
 zabicie_gryfa gameState = do
   putStrLn "Gryf padł martwy od ciosu miecza."
   putStrLn "Zdobywasz trofeum z gryfa."
-  let updatedPlaces = removeOpponentFromPlace (currentCoordinates gameState) griffin (currentMapState gameState)
-      updatedGameState = gameState { currentMapState = updatedPlaces, equipment = trophy : equipment gameState }
+  let updatedPlaces =
+        removeOpponentFromPlace
+          (currentCoordinates gameState)
+          griffin
+          (currentMapState gameState)
+      updatedGameState =
+        gameState
+          { currentMapState = updatedPlaces
+          , equipment = trophy : equipment gameState
+          }
   putStrLn "Udało Ci się ukończyć wiedźmińską przygodę, gratulacje."
   exitSuccess
   return updatedGameState
@@ -353,13 +380,10 @@ zabicie_gryfa gameState = do
 ucieczka :: GameState -> IO GameState
 ucieczka gameState = do
   putStrLn "Udało Ci się uciec od gryfa do wsi Jaworek."
-  let updatedGameState = gameState { currentCoordinates = "c3" }
+  let updatedGameState = gameState {currentCoordinates = "c3"}
   return updatedGameState
-  
+
 ----------
-
-
-
 gameLoop :: GameState -> IO ()
 gameLoop gameState = do
   cmd <- readCommand
@@ -499,6 +523,15 @@ gameLoop gameState = do
     "aard" -> do
       let newState = aard gameState
       gameLoop =<< newState
+    "komendy" -> do
+      printInstructions
+      gameLoop gameState
+    "zakoncz" -> do
+      putStrLn "Koniec gry."
+      exitSuccess
+    _ -> do
+      putStrLn "Nieznana komenda."
+      putStrLn ""
     -- "kup" -> do
     --   let itemName = getSecondWord cmd
     --   putStrLn "Podaj cenę przedmiotu: "
@@ -517,22 +550,13 @@ gameLoop gameState = do
     --   let newState = sellItem itemName price gameState
     --   putStrLn $ "Sprzedajesz przedmiot: " ++ itemName
     --   gameLoop newState
-    "komendy" -> do
-      printInstructions
-      gameLoop gameState
-    "zakoncz" -> do
-      putStrLn "Koniec gry."
-      exitSuccess
-    _ -> do
-      putStrLn "Nieznana komenda."
-      putStrLn ""
   gameLoop gameState
 
 main :: IO ()
 main = do
   let state =
         GameState
-          { currentCoordinates = "c4"
+          { currentCoordinates = "c3"
           , equipment = []
           , currentMapState = places
           , money = 0

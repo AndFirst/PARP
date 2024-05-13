@@ -1,0 +1,485 @@
+Geralt z Rivii przemierzając Velen dotarł w końcu na szlak wiodący do wsi Jaworek.
+Po wielu dniach samotnej podróży, nadszedł czas by uzupełnić zapasy i rozejrzeć się za zleceniem.
+Zbliżając się do wioski, czułe zmysły Białego Wilka natychmiast wychwyciły podejrzanie ślady...
+
+Zapoznaj się z zasadami rzucając zaklęcie 'komendy'.
+
+komendy
+ 
+Wprowadź zaklęcia w Starszej Mowie.
+Dostępne zaklęcia:
+n  s  e  w           -- aby przejść w danym kierunku.
+idz <kierunek>       -- aby przejść w danym kierunku.
+patrz                -- aby ponownie rozejrzeć się obok siebie.
+patrz <kierunek>     -- aby spojrzeć w jednym z czterech kierunków.
+komendy              -- aby ponownie zobaczyć tę wiadomość.
+zakoncz              -- aby zakończyć grę i wyjść.
+bestiariusz          -- aby dowiedzieć się więcej o potworach.
+monety               -- aby sprawdzić ilość monet.
+ekwipunek            -- aby zobaczyć zawartość ekwipunku.
+podnies <przedmiot>  -- aby podnieść przedmiot.
+uzyj  <przedmiot>    -- aby użyć przedmiotu.
+rozmawiaj <postac>   -- aby porozmawiać z postacią.
+stworz_przynete      -- aby stworzyć przynętę na gryfa.
+atakuj <przeciwnik>  -- aby zaatakować przeciwnika.
+wejdz                -- aby wejść do wieży.
+wyjdz                -- aby wyjść z wieży.
+aard                 -- aby użyć znaku Aard.
+
+patrz 
+ Patrzysz dookoła siebie.
+Wies Jaworek
+Postacie w tej lokalizacji:
+    kupiec
+    karczmarka
+
+
+n    
+ Idziesz na północ.
+Nowa lokacja:
+Łąka, na której pasą się krowy
+Przeciwnicy w tej lokalizacji:
+    krowa
+    krowa
+    krowa
+
+
+atakuj krowa
+ Atakujesz krowę.
+Zabiłeś krowę i zdobyłeś krowią skórę.
+
+idz w
+ Idziesz na zachód.
+Nowa lokacja:
+Łąka, na której pasą się krowy
+Przeciwnicy w tej lokalizacji:
+    krowa
+    krowa
+
+
+atakuj krowa
+ Atakujesz krowę.
+Zabiłeś krowę i zdobyłeś krowią skórę.
+
+s    
+ Idziesz na południe.
+Nowa lokacja:
+Równiny pełne roślinności
+
+
+e
+ Idziesz na wschód.
+Nowa lokacja:
+Wies Jaworek
+Postacie w tej lokalizacji:
+    kupiec
+    karczmarka
+
+
+e
+ Idziesz na wschód.
+Nowa lokacja:
+Równiny pełne roślinności
+
+
+e
+ Idziesz na wschód.
+Nowa lokacja:
+Równiny pełne roślinności
+
+
+s
+ Idziesz na południe.
+Nowa lokacja:
+Równiny pełne roślinności
+Postacie w tej lokalizacji:
+    rybak
+
+
+s
+ Idziesz na południe.
+Nowa lokacja:
+Równiny pełne roślinności
+
+
+s
+ Idziesz na południe.
+Nowa lokacja:
+Wieża Bab'el. Obok znajdują się ruiny drugiej, ewidentnie uderzonej przez Wiwernę
+
+
+wejdz
+ Drzwi wydają się być zamknięte, chyba trzeba się ich pozbyć.
+
+aard
+ Udało Ci się wyważyć drzwi przy pomocy znaku aard - w końcu będziesz w stanie wejść do wieży.
+
+patrz
+ Patrzysz dookoła siebie.
+Wieża Bab'el. Obok znajdują się ruiny drugiej, ewidentnie uderzonej przez Wiwernę
+
+
+wejdz
+ Drzwi są otwarte, wchodzisz do środka.
+Wnętrze wieży Bab'el. Zdaje się, że nikt tu dawno nie zaglądał.
+Przedmioty, które można znaleźć w tej lokalizacji:
+    Gwyhyr
+
+
+podnies Gwyhyr
+ Podnosisz przedmiot: Gwyhyr
+
+ekwipunek
+ Przeglądasz zawartość ekwipunku.
+Twój ekwipunek zawiera:
+Gwyhyr
+Krowia skóra
+Krowia skóra
+
+wyjdz
+ Opuszczasz to miejsce.
+Wieża Bab'el. Obok znajdują się ruiny drugiej, ewidentnie uderzonej przez Wiwernę
+
+
+n
+ Idziesz na północ.
+Nowa lokacja:
+Równiny pełne roślinności
+
+
+n
+ Idziesz na północ.
+Nowa lokacja:
+Równiny pełne roślinności
+Postacie w tej lokalizacji:
+    rybak
+
+
+n
+ Idziesz na północ.
+Nowa lokacja:
+Równiny pełne roślinności
+
+
+e
+ Idziesz na wschód.
+Nowa lokacja:
+Równiny pełne roślinności
+
+
+e
+ Idziesz na wschód.
+Nowa lokacja:
+Równiny pełne roślinności
+Przeciwnicy w tej lokalizacji:
+    krowa
+
+
+n
+ Idziesz na północ.
+Nowa lokacja:
+Gniazdo gryfa.
+
+
+s
+ Idziesz na południe.
+Nowa lokacja:
+Równiny pełne roślinności
+Przeciwnicy w tej lokalizacji:
+    krowa
+
+
+w
+ Idziesz na zachód.
+Nowa lokacja:
+Równiny pełne roślinności
+
+
+w
+ Idziesz na zachód.
+Nowa lokacja:
+Równiny pełne roślinności
+
+
+w
+ Idziesz na zachód.
+Nowa lokacja:
+Równiny pełne roślinności
+
+
+w
+ Idziesz na zachód.
+Nowa lokacja:
+Wies Jaworek
+Postacie w tej lokalizacji:
+    kupiec
+    karczmarka
+
+
+n
+ Idziesz na północ.
+Nowa lokacja:
+Łąka, na której pasą się krowy
+Przeciwnicy w tej lokalizacji:
+    krowa
+    krowa
+    krowa
+
+
+w
+ Idziesz na zachód.
+Nowa lokacja:
+Łąka, na której pasą się krowy
+Przeciwnicy w tej lokalizacji:
+    krowa
+    krowa
+
+
+w
+ Idziesz na zachód.
+Nowa lokacja:
+Równiny pełne roślinności
+
+
+e
+ Idziesz na wschód.
+Nowa lokacja:
+Łąka, na której pasą się krowy
+Przeciwnicy w tej lokalizacji:
+    krowa
+    krowa
+
+
+e
+ Idziesz na wschód.
+Nowa lokacja:
+Łąka, na której pasą się krowy
+Przeciwnicy w tej lokalizacji:
+    krowa
+    krowa
+    krowa
+
+
+e
+ Idziesz na wschód.
+Nowa lokacja:
+Równiny pełne roślinności
+
+
+w
+ Idziesz na zachód.
+Nowa lokacja:
+Łąka, na której pasą się krowy
+Przeciwnicy w tej lokalizacji:
+    krowa
+    krowa
+    krowa
+
+
+w
+ Idziesz na zachód.
+Nowa lokacja:
+Łąka, na której pasą się krowy
+Przeciwnicy w tej lokalizacji:
+    krowa
+    krowa
+
+
+w
+ Idziesz na zachód.
+Nowa lokacja:
+Równiny pełne roślinności
+
+
+e
+ Idziesz na wschód.
+Nowa lokacja:
+Łąka, na której pasą się krowy
+Przeciwnicy w tej lokalizacji:
+    krowa
+    krowa
+
+
+e
+ Idziesz na wschód.
+Nowa lokacja:
+Łąka, na której pasą się krowy
+Przeciwnicy w tej lokalizacji:
+    krowa
+    krowa
+    krowa
+
+
+e
+ Idziesz na wschód.
+Nowa lokacja:
+Równiny pełne roślinności
+
+
+e
+ Idziesz na wschód.
+Nowa lokacja:
+Równiny pełne roślinności
+Przedmioty, które można znaleźć w tej lokalizacji:
+    Ziele
+
+
+podnies Ziele
+ Podnosisz przedmiot: Ziele
+
+ekwipunek
+ Przeglądasz zawartość ekwipunku.
+Twój ekwipunek zawiera:
+Ziele
+Gwyhyr
+Krowia skóra
+Krowia skóra
+
+e   
+ Idziesz na wschód.
+Nowa lokacja:
+Równiny pełne roślinności
+
+
+e
+ Idziesz na wschód.
+Nowa lokacja:
+Gniazdo gryfa.
+
+
+s
+ Idziesz na południe.
+Nowa lokacja:
+Równiny pełne roślinności
+Przeciwnicy w tej lokalizacji:
+    krowa
+
+
+w
+ Idziesz na zachód.
+Nowa lokacja:
+Równiny pełne roślinności
+
+
+w
+ Idziesz na zachód.
+Nowa lokacja:
+Równiny pełne roślinności
+
+
+w
+ Idziesz na zachód.
+Nowa lokacja:
+Równiny pełne roślinności
+
+
+w
+ Idziesz na zachód.
+Nowa lokacja:
+Wies Jaworek
+Postacie w tej lokalizacji:
+    kupiec
+    karczmarka
+
+
+rozmawiaj kupiec
+ Witaj Mistrzu wiedźminie! Czym mogę służyć?
+1. Pokaż mi swoje towary
+2. Sprzedaj przedmiot
+0. Wyjdź z rozmowy
+2
+Twój ekwipunek zawiera:
+Ziele
+Gwyhyr
+Krowia skóra
+Krowia skóra
+Wybierz przedmiot, który chcesz spieniężyć: 
+Gwyhyr
+Sprzedałeś Gwyhyr za 50 orenów.
+
+patrz 
+ Patrzysz dookoła siebie.
+Wies Jaworek
+Postacie w tej lokalizacji:
+    kupiec
+    karczmarka
+
+
+rozmawiaj kupiec
+ Witaj Mistrzu wiedźminie! Czym mogę służyć?
+1. Pokaż mi swoje towary
+2. Sprzedaj przedmiot
+0. Wyjdź z rozmowy
+1
+Pokażę ci swoje towary. Które z nich chcesz kupić?
+1. Siarka.
+2. Karta do gwinta - Vernon Roche (Partiota, ale zbój)
+0. Wyjdź z rozmowy
+1
+Kupiłeś siarkę za 15 orenów.
+
+stworz_przynete
+ Udało Ci się stworzyć przynętę na gryfa.
+
+e
+ Idziesz na wschód.
+Nowa lokacja:
+Równiny pełne roślinności
+
+
+e
+ Idziesz na wschód.
+Nowa lokacja:
+Równiny pełne roślinności
+
+
+n
+ Idziesz na północ.
+Nowa lokacja:
+Równiny pełne roślinności
+
+
+e
+ Idziesz na wschód.
+Nowa lokacja:
+Równiny pełne roślinności
+
+
+e
+ Idziesz na wschód.
+Nowa lokacja:
+Gniazdo gryfa.
+
+
+patrz
+ Patrzysz dookoła siebie.
+Gniazdo gryfa.
+
+
+ekwipunek
+ Przeglądasz zawartość ekwipunku.
+Twój ekwipunek zawiera:
+Przynęta na gryfa
+
+uzyj Przyneta na gryfa
+ Nie możesz użyć tego przedmiotu.
+
+uzyj Przynęta na gryfa
+ Postawiłeś przynętę, gryf powinien się lada moment zjawić...
+Słysz jak gryf przylatuje do gniazda, czas na niego zapolować.
+
+atakuj gryf
+ Zaatakowałeś gryfa, wybierz co powinieneś zrobić
+1. Strzel z kuszy, by go powalić.
+2. Zaatakuj mieczem
+0. Uciekaj
+1
+Udało Ci się trafć gryfa kuszą strącając go na ziemię.
+Wybierz, co powinieneś zrobić następnie.
+1. Strzel z kuszy.
+2. Zaatakuj mieczem
+0. Uciekaj
+2
+Gryf padł martwy od ciosu miecza.
+Zdobywasz trofeum z gryfa.
+Udało Ci się ukończyć wiedźmińską przygodę, gratulacje.
