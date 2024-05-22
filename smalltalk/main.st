@@ -39,11 +39,12 @@ Object subclass: Game [
 
     init [
         FileStream fileIn: 'map.st'.
+        FileStream fileIn: 'items.st'.
         isGameOver := false.
         money := 0.
         equipment := Set new.
-        commands := Dictionary new.
         map := Map new.
+        commands := Dictionary new.
         x := 3.
         y := 3.
         self initializeCommands.
@@ -140,6 +141,7 @@ Object subclass: Game [
     ]
     
     handleGoNorth [
+        map inTower ifTrue: [ ^self print: 'Jesteś w wieży, najpierw wyjdź na zwenątrz.'].
         self print: 'Idziesz na północ.'.
         y = 1 ifTrue: [ ^self print: 'Chcesz wyjść poza mapę.' ]
         ifFalse: [
@@ -151,6 +153,7 @@ Object subclass: Game [
     ]
 
     handleGoSouth [
+        map inTower ifTrue: [ ^self print: 'Jesteś w wieży, najpierw wyjdź na zwenątrz.'].
         self print: 'Idziesz na południe.'. 
         y = 7 ifTrue: [ ^self print: 'Chcesz wyjść poza mapę.' ]
         ifFalse: [
@@ -162,6 +165,7 @@ Object subclass: Game [
     ]
 
     handleGoWest [
+        map inTower ifTrue: [ ^self print: 'Jesteś w wieży, najpierw wyjdź na zwenątrz.'].
         self print: 'Idziesz na zachód.'.
         x = 1 ifTrue: [ ^self print: 'Chcesz wyjść poza mapę.' ]
         ifFalse: [
@@ -173,6 +177,7 @@ Object subclass: Game [
     ]
 
     handleGoEast [
+        map inTower ifTrue: [ ^self print: 'Jesteś w wieży, najpierw wyjdź na zwenątrz.'].
         self print: 'Idziesz na wschód.'.
         x = 7 ifTrue: [ ^self print: 'Chcesz wyjść poza mapę.' ]
         ifFalse: [
@@ -187,6 +192,7 @@ Object subclass: Game [
         args isEmpty ifTrue: [ ^self handleLookAround]
             ifFalse: [
                 |direction|
+                map inTower ifTrue: [ ^self print: 'Jesteś w wieży, najpierw wyjdź na zwenątrz.'].
                 direction := args first.
                 (direction = 'n') ifTrue: [ ^self handleLookNorth ].
                 (direction = 's') ifTrue: [ ^self handleLookSouth ].
@@ -245,25 +251,43 @@ Object subclass: Game [
 
     handlePickUp: args [
         args isEmpty ifTrue: [ ^self print: 'Nie podałeś przedmiotu.']
-            ifFalse: [
-                |item|
-                item := args first.
+        ifFalse: [
+                |itemName item|
+                itemName := args first.
+                item := map getItemByNameAt: x at: y name: itemName.
+                item ifNil: [ ^self print: 'Nie ma tutaj takiego przedmiotu.'].
                 equipment add: item.
-                self print: 'Podnosisz przedmiot: ', item
+                map removeItemAt: x at: y itemInstance: item. 
+                self print: 'Podnosisz przedmiot: ', itemName.
             ]
     ]
 
     printEquipment [
-        equipment do: [ :item | self print: item ].
+        equipment do: [ :item | self print: item name].
     ]
 
     handleAttack: args [
         args isEmpty ifTrue: [ ^self print: 'Nie podałeś przeciwnika.']
-            ifFalse: [
-                |enemy|
-                enemy := args first.
-                self print: 'Atakujesz przeciwnika: ', enemy
-            ]
+        ifFalse: [
+                |enemyName enemy drop |
+                enemyName := args first.
+                enemy := map getEnemyByNameAt: x at: y name: enemyName.
+                enemy ifNil: [ ^self print: 'Nie ma tutaj takiego przeciwnika.'].
+                self print: 'Atakujesz przeciwnika: ', enemyName.
+                enemy attack ifTrue: [  
+                    self print: 'Pokonałeś przeciwnika: ', enemyName.
+                    drop := enemy getDrop.
+                    drop ifNotNil: [ 
+                        equipment add: drop.
+                        self print: 'Otrzymujesz przedmiot: ', drop name.
+                    ].
+                    map removeEnemyAt: x at: y enemyInstance: enemy.
+                ] 
+                ifFalse: [
+                    self print: 'Przeciwnik: ', enemyName, ' pokonał Cię. Koniec gry.'.
+                    isGameOver := true.
+                ]
+        ]
     ]
 
     handleTalk: args [
@@ -285,20 +309,83 @@ Object subclass: Game [
     ]
 
     craftBait [
-        self print: 'Tworzysz przynętę na gryfa.'
+        | equipmentCounter skinQuantity herbQuantity sulfurQuantity|
+        equipmentCounter := Dictionary new.
+        equipment do: [:item |
+            equipmentCounter at: item class printString ifAbsentPut: [0].
+            equipmentCounter at: item class printString put: (equipmentCounter at: item class printString) + 1
+        ].
+        skinQuantity := equipmentCounter at: 'Skin' ifAbsent: [0].
+        sulfurQuantity := equipmentCounter at: 'Sulfur' ifAbsent: [0].
+        herbQuantity := equipmentCounter at: 'Herb' ifAbsent: [0].
+
+        (skinQuantity > 1 and: [sulfurQuantity > 0 and: [herbQuantity > 1]]) 
+            ifTrue: [
+                equipment add: Bait new.
+                self removeItemFromEquipment: 'Herb'.
+                self removeItemFromEquipment: 'Herb'.
+                self removeItemFromEquipment: 'Sulfur'.
+                self removeItemFromEquipment: 'Skin'.
+                self removeItemFromEquipment: 'Skin'.
+
+                self print: 'Stworzyłeś przynętę na gryfa.'
+            ]
+            ifFalse: [
+                self print: 'Nie masz wystarczającej ilości składników.'
+        ]
     ]
 
+    removeItemFromEquipment: itemClass [
+        | itemToRemove |
+        itemToRemove := equipment detect: [:item | item class printString = itemClass] ifNone: [nil].
+        itemToRemove ifNotNil: [
+            equipment remove: itemToRemove
+        ] ifNil: [
+            self print: 'Nie znaleziono przedmiotu klasy ', itemClass printString, ' w ekwipunku.'
+        ]
+    ]
+    
     handleEnterTower [
-        self print: 'Wchodzisz do wieży.'
+        | place |
+        place := map getPlaceAt: x at: y.
+        place getLocation class = Tower ifTrue: [ 
+            map inTower ifTrue: [^self print: 'Jesteś już w wieży...'].
+            map getTower isClosed ifTrue: [^self print: 'Drzwi zakmknięte. Gdybym tylko mógł je jakoś otworzyć...'].
+            self print: 'Wchodzisz do wieży.'.
+            map enterTower.
+        ]
+        ifFalse: [^self print: 'Nie wejdziesz do wieży jeśli jej tutaj nie ma...'].
     ]
 
     handleExitTower [
-        self print: 'Wychodzisz z wieży.'
+        | place |
+        place := map getPlaceAt: x at: y.
+        place getLocation class = Tower ifTrue: [ 
+            map inTower ifTrue: [
+                map exitTower.
+                ^self print: 'Wychodzisz z wieży.'.
+            ]
+            ifFalse: [
+                ^self print: 'Stoisz przed wieżą... Jak chcesz z niej wyjść...?'.
+            ]
+        ]
+        ifFalse: [^self print: 'Nie ma tu nic, z czego mógłbyś wyjść.'].    
     ]
 
     useAard [
-        self print: 'Używasz znaku Aard.'
-    ]
+        | place|
+        place := map getPlaceAt: x at: y.
+        place getLocation class = Tower ifTrue: [
+            map getTower isClosed ifTrue: [
+                map getTower open.
+                ^self print: 'Udało Ci się wyważyć drzwi przy pomocy znaku aard - w końcu będziesz w stanie wejść do wieży.'
+            ]
+            ifFalse: [
+                ^self print: 'Drzwi są już otwarte, nie ma sensu ponownie traktować ich aardem.'
+            ].
+        ]
+        ifFalse: [^self print: 'Nie możesz tutaj użyć znaku aard.'].
+        ]
 ]
 
 Game new run.

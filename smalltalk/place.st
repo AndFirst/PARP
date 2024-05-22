@@ -1,5 +1,5 @@
 Object subclass: Place [
-    | location  npcs items opponents|
+    | location  npcs items opponents |
 
     Place class >> new [
         | p |
@@ -18,6 +18,10 @@ Object subclass: Place [
     setLocation: aLocation [
         location := aLocation.
     ]    
+
+    getLocation [
+        ^location
+    ]
 
     addNPC: aNpc [
         npcs add: aNpc.
@@ -41,6 +45,27 @@ Object subclass: Place [
 
     removeItem: anItem [
         items remove: anItem.
+    ]
+
+    hasItem: anItemName [
+        items do: [:item | 
+            item name = anItemName ifTrue: [^true]
+        ].
+        ^false
+    ]
+
+    getItemByName: anItemName [
+        items do: [:item | 
+            item name = anItemName ifTrue: [^item]
+        ].
+        ^nil
+    ]
+
+    getEnemyByName: anEnemyName [
+        opponents do: [:opponent | 
+            opponent name = anEnemyName ifTrue: [^opponent]
+        ].
+        ^nil
     ]
 
     describe [

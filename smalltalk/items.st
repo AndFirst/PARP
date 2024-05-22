@@ -16,3 +16,21 @@ Item subclass: Herb [
         ^'Ziele'
     ]
 ]
+
+Item subclass: Sword[
+    name [
+        ^'Gwyhyr'
+    ]
+]
+
+Item subclass: Sulfur[
+    name [
+        ^'Siarka'
+    ]
+]
+
+Item subclass: Bait[
+    name [
+        ^'Przynęta'
+    ]
+]
