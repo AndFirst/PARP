@@ -1,5 +1,5 @@
 Object subclass: Place [
-    | location  npcs items opponents |
+    | location  npcs items opponents dangerous deathMessage|
 
     Place class >> new [
         | p |
@@ -13,6 +13,24 @@ Object subclass: Place [
         npcs := Set new.
         items := Set new.
         opponents := Set new.
+        dangerous := false.
+        deathMessage := ''.
+    ]
+
+    setDangerous: value [
+        dangerous := value.
+    ]
+
+    isDangerous [
+        ^dangerous
+    ]
+
+    setDeathMessage: aMessage [
+        deathMessage := aMessage.
+    ]
+
+    getDeathMessage [
+        ^deathMessage
     ]
 
     setLocation: aLocation [
@@ -64,6 +82,13 @@ Object subclass: Place [
     getEnemyByName: anEnemyName [
         opponents do: [:opponent | 
             opponent name = anEnemyName ifTrue: [^opponent]
+        ].
+        ^nil
+    ]
+
+    getCharacterByName: aCharacterName [
+        npcs do: [:npc | 
+            npc name = aCharacterName ifTrue: [^npc]
         ].
         ^nil
     ]

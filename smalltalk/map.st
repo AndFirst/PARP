@@ -32,6 +32,7 @@ Object subclass: Map [
         self initNPCs.
         self initOpponents.
         self initItems.
+        self initDangerousPlaces.
     ]
     initLocations [
         | westMountains ridge mountains eastMountains forest canyon cliffCanyon canyonWall hill cave nest village tower lake meadow other illegalMove outOfBounds |
@@ -137,10 +138,26 @@ Object subclass: Map [
         self addItemAt: 5 at: 4 to: Herb new.
     ]
 
+    initDangerousPlaces [
+        self setDangerousAt: 4 at: 1 state: true message: 'W gęstym borze wpadasz w pułapkę zastawioną przez Leszych.', (String with: Character lf), 'Po cięzkim boju serce Białego Wilka zostaje brutalnie przebite przez potężnych strażników lasu...'.
+        self setDangerousAt: 5 at: 1 state: true message: 'W gęstym borze wpadasz w pułapkę zastawioną przez Leszych.', (String with: Character lf), 'Po cięzkim boju serce Białego Wilka zostaje brutalnie przebite przez potężnych strażników lasu...'.
+        self setDangerousAt: 7 at: 3 state: true message: 'Cicha, pozbawiona jakiejkolwiek aktywności potwórów jaskinia okazuje się skrywać straszny sekret.',(String with: Character lf), 'Geralt nie zdążył zorientować się jakie monstrum pozbawiło go życia.'.
+        
+    ]
+
     getPlaceAt: j at: i [
         | row |
         row := places at: i.
         ^row at: j
+    ]
+
+    setDangerousAt: i at: j state: aState message: aMessage [
+        | place row |
+        row := places at: i.
+        place := row at: j.
+        place setDangerous: aState.
+        place setDeathMessage: aMessage.
+        row at: j put: place.
     ]
 
     setLocationAt: i at: j to: aLocation [
@@ -218,6 +235,14 @@ Object subclass: Map [
             place := row at: j.        
             ^place describe
         ]
+    ]
+
+    getCharacterByNameAt: j at: i name: aName [
+        | place row |
+        insideTower ifTrue: [^nil ].
+        row := places at: i.
+        place := row at: j.
+        ^place getCharacterByName: aName
     ]
 
     enterTower [

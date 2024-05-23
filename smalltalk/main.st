@@ -40,6 +40,7 @@ Object subclass: Game [
     init [
         FileStream fileIn: 'map.st'.
         FileStream fileIn: 'items.st'.
+        FileStream fileIn: 'trade_state.st'.
         isGameOver := false.
         money := 0.
         equipment := Set new.
@@ -69,11 +70,11 @@ Object subclass: Game [
     commands at: 'wyjdz' put: [ :args | self handleExitTower ].
     commands at: 'aard' put: [ :args | self useAard ].
     commands at: 'komendy' put: [ :args | self printCommands ].
-    commands at: 'zakoncz' put: [ :args | self outro ].
+    commands at: 'zakoncz' put: [ :args | self interruptGame].
     ]
 
-    outro [
-        self print: 'Koniec gry.'.
+    interruptGame [
+        self print: 'Gra została przerwana.'.
         isGameOver := true
     ]
 
@@ -106,11 +107,14 @@ Object subclass: Game [
 
         [isGameOver] whileFalse: [
             cmdParts := (self readCommand subStrings) asArray.
+            cmdParts isEmpty ifTrue: [ self print: 'Nie podałeś komendy.']
+            ifFalse: [
             cmd := cmdParts first.
             action := commands at: cmd ifAbsent: [nil].
             action
                 ifNotNil: [ action value: cmdParts allButFirst ]
                 ifNil: [ self print: 'Nieznana komenda.' ]
+            ]
         ]
     ]
 
@@ -143,48 +147,80 @@ Object subclass: Game [
     handleGoNorth [
         map inTower ifTrue: [ ^self print: 'Jesteś w wieży, najpierw wyjdź na zwenątrz.'].
         self print: 'Idziesz na północ.'.
-        y = 1 ifTrue: [ ^self print: 'Chcesz wyjść poza mapę.' ]
+        y = 1 ifTrue: [ ^self print: 'Zaraza. Muszę zawrócić...' ]
         ifFalse: [
-            |description|
+            |description place|
             y := y - 1.
-            description := map describeAt: x at: y.
-            self print: description.
+            place := map getPlaceAt: x at: y.
+            place isDangerous ifTrue: [
+                description := place getDeathMessage.
+                self print: description.
+                ^self outro: false.
+            ]
+                ifFalse: [
+                    description := map describeAt: x at: y.
+                    self print: description.
+                ].
         ]
     ]
 
     handleGoSouth [
         map inTower ifTrue: [ ^self print: 'Jesteś w wieży, najpierw wyjdź na zwenątrz.'].
         self print: 'Idziesz na południe.'. 
-        y = 7 ifTrue: [ ^self print: 'Chcesz wyjść poza mapę.' ]
+        y = 7 ifTrue: [ ^self print: 'Zaraza. Muszę zawrócić...' ]
         ifFalse: [
-            |description|
+            |description place|
             y := y + 1.
-            description := map describeAt: x at: y.
-            self print: description.
+            place := map getPlaceAt: x at: y.
+            place isDangerous ifTrue: [
+                description := place getDeathMessage.
+                self print: description.
+                ^self outro: false.
+            ]
+                ifFalse: [
+                    description := map describeAt: x at: y.
+                    self print: description.
+                ].
         ]
     ]
 
     handleGoWest [
         map inTower ifTrue: [ ^self print: 'Jesteś w wieży, najpierw wyjdź na zwenątrz.'].
         self print: 'Idziesz na zachód.'.
-        x = 1 ifTrue: [ ^self print: 'Chcesz wyjść poza mapę.' ]
+        x = 1 ifTrue: [ ^self print: 'Zaraza. Muszę zawrócić...' ]
         ifFalse: [
-            |description|
+            |description place|
             x := x - 1.
-            description := map describeAt: x at: y.
-            self print: description.
+            place := map getPlaceAt: x at: y.
+            place isDangerous ifTrue: [
+                description := place getDeathMessage.
+                self print: description.
+                ^self outro: false.
+            ]
+                ifFalse: [
+                    description := map describeAt: x at: y.
+                    self print: description.
+                ].
         ]
     ]
 
     handleGoEast [
         map inTower ifTrue: [ ^self print: 'Jesteś w wieży, najpierw wyjdź na zwenątrz.'].
         self print: 'Idziesz na wschód.'.
-        x = 7 ifTrue: [ ^self print: 'Chcesz wyjść poza mapę.' ]
+        x = 7 ifTrue: [ ^self print: 'Zaraza. Muszę zawrócić...' ]
         ifFalse: [
-            |description|
+            |description place|
             x := x + 1.
-            description := map describeAt: x at: y.
-            self print: description.
+            place := map getPlaceAt: x at: y.
+            place isDangerous ifTrue: [
+                description := place getDeathMessage.
+                self print: description.
+                ^self outro: false.
+            ]
+                ifFalse: [
+                    description := map describeAt: x at: y.
+                    self print: description.
+                ].
         ]
     ]
 
@@ -204,7 +240,7 @@ Object subclass: Game [
 
     handleLookNorth [
         self print: 'Patrzysz na północ.'.
-        y = 1 ifTrue: [ ^self print: 'Patrzysz poza mapę.' ]
+        y = 1 ifTrue: [ ^self print: 'Po co miałbym tam iść...?' ]
         ifFalse: [
             |description|
             description := map describeAt: x at: y - 1.
@@ -214,7 +250,7 @@ Object subclass: Game [
 
     handleLookSouth [
         self print: 'Patrzysz na południe.' .
-        y = 7 ifTrue: [ ^self print: 'Patrzysz poza mapę.' ]
+        y = 7 ifTrue: [ ^self print: 'Po co miałbym tam iść...?' ]
         ifFalse: [
             |description|
             description := map describeAt: x at: y + 1.
@@ -224,7 +260,7 @@ Object subclass: Game [
 
     handleLookWest [
         self print: 'Patrzysz na zachód.' .
-        x = 1 ifTrue: [ ^self print: 'Patrzysz poza mapę.' ]
+        x = 1 ifTrue: [ ^self print: 'Po co miałbym tam iść...?' ]
         ifFalse: [
             |description|
             description := map describeAt: x - 1 at: y.
@@ -234,7 +270,7 @@ Object subclass: Game [
 
     handleLookEast [
         self print: 'Patrzysz na wschód.' .
-        x = 7 ifTrue: [ ^self print: 'Patrzysz poza mapę.' ]
+        x = 7 ifTrue: [ ^self print: 'Po co miałbym tam iść...?' ]
         ifFalse: [
             |description|
             description := map describeAt: x + 1 at: y.
@@ -269,12 +305,18 @@ Object subclass: Game [
     handleAttack: args [
         args isEmpty ifTrue: [ ^self print: 'Nie podałeś przeciwnika.']
         ifFalse: [
-                |enemyName enemy drop |
+                |enemyName enemy drop result|
                 enemyName := args first.
                 enemy := map getEnemyByNameAt: x at: y name: enemyName.
                 enemy ifNil: [ ^self print: 'Nie ma tutaj takiego przeciwnika.'].
                 self print: 'Atakujesz przeciwnika: ', enemyName.
-                enemy attack ifTrue: [  
+                result := enemy attack.
+                result = 'E' ifTrue: [
+                    self print: 'Uciekasz do wioski.'.
+                    x := 3.
+                    y := 3.
+                ].
+                result = 'W' ifTrue:[  
                     self print: 'Pokonałeś przeciwnika: ', enemyName.
                     drop := enemy getDrop.
                     drop ifNotNil: [ 
@@ -282,29 +324,58 @@ Object subclass: Game [
                         self print: 'Otrzymujesz przedmiot: ', drop name.
                     ].
                     map removeEnemyAt: x at: y enemyInstance: enemy.
-                ] 
-                ifFalse: [
-                    self print: 'Przeciwnik: ', enemyName, ' pokonał Cię. Koniec gry.'.
-                    isGameOver := true.
-                ]
+                    self outro: true.
+                ].
+                result = 'L' ifTrue: [
+                    self outro: false.
+                ].
         ]
+    ]
+
+    outro: success[
+        success ifTrue: [
+            self print: 'Gratulacje! Ukończyłeś wiedźmińską przygodę.'.
+        ] ifFalse: [
+            self print: 'Niestety, tym razem się nie udało. Próbuj ponownie.'.
+        ].
+        isGameOver := true.
     ]
 
     handleTalk: args [
         args isEmpty ifTrue: [ ^self print: 'Nie podałeś postaci.']
             ifFalse: [
-                |character|
-                character := args first.
-                self print: 'Rozmawiasz z postacią: ', character
+                |characterName character tradeState|
+                characterName := args first.
+                character := map getCharacterByNameAt: x at: y name: characterName.
+                character ifNil: [ ^self print: 'Nie ma tutaj takiej postaci.'].
+
+                tradeState := TradeState new.
+                tradeState setMoney: money.
+                tradeState setEquipment: equipment.
+
+                tradeState := character talkTo: tradeState.
+                tradeState ifNotNil: [
+                    money := tradeState getMoney.
+                    equipment := tradeState getEquipment.
+                ]
             ]
     ]
 
     handleUseItem: args [
         args isEmpty ifTrue: [ ^self print: 'Nie podałeś przedmiotu.']
             ifFalse: [
-                |item|
-                item := args first.
-                self print: 'Używasz przedmiotu: ', item
+                |itemName item place result|
+                itemName := args first.
+                item := equipment detect: [:item | item name = itemName] ifNone: [nil].
+                item ifNil: [ ^self print: 'Nie masz takiego przedmiotu.'].
+                place := map getPlaceAt: x at: y.
+                result := item use: place.
+                result ifTrue: [
+                    equipment remove: item.
+                ]
+                ifFalse: [
+                    self print: 'Nie możesz użyć tego przedmiotu w tym miejscu.'.
+                ].
             ]
     ]
 
