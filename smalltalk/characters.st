@@ -123,6 +123,7 @@ Character subclass: Inkeeper [
         self print: 'Bestyja ta w głowie ma tylko jedno. Niewiele...'.
         self print: 'Pomóżcie nam Mistrzu, a nie pożałujecie'.
         self print: 'Baron Ozjasz Goldberg, władca naszych ziem zapłaci kufer koron śmiałkowi który pokona bestię.'.
-        self print: 'Czy zechcecie podjąć się tej misji?'.        
+        self print: 'Czy zechcecie podjąć się tej misji?'.
+        ^tradeState        
     ]
 ]
