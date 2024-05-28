@@ -44,6 +44,7 @@ Object subclass: Game [
         isGameOver := false.
         money := 0.
         equipment := Set new.
+        " equipment add: Sword new. "
         map := Map new.
         commands := Dictionary new.
         x := 3.
@@ -324,7 +325,9 @@ Object subclass: Game [
                         self print: 'Otrzymujesz przedmiot: ', drop name.
                     ].
                     map removeEnemyAt: x at: y enemyInstance: enemy.
-                    self outro: true.
+                    enemy class = Griffin ifTrue: [
+                        self outro: true.
+                    ]
                 ].
                 result = 'L' ifTrue: [
                     self outro: false.
