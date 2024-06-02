@@ -8,3 +8,8 @@
     cd haskell
     make
     ./build/witcher
+    
+## Smalltalk
+    cd smalltalk
+    gst main.st
+
