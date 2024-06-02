@@ -1,0 +1,320 @@
+<pre>Geralt z Rivii przemierzając Velen dotarł w końcu na szlak wiodący do wsi Jaworek.
+Po wielu dniach samotnej podróży, nadszedł czas by uzupełnić zapasy i rozejrzeć się za zleceniem.
+Zbliżając się do wioski, czułe zmysły Białego Wilka natychmiast wychwyciły podejrzanie ślady...
+Zapoznaj się z zasadami rzucając zaklęcie &apos;komendy&apos;.
+
+&gt; e
+Idziesz na wschód.
+Równiny pełne roślinności
+
+
+&gt; e
+Idziesz na wschód.
+Równiny pełne roślinności
+
+
+&gt; e
+Idziesz na wschód.
+Równiny pełne roślinności
+
+
+&gt; s
+Idziesz na południe.
+Jezioro emanujące elficką magią.
+
+
+&gt; s
+Idziesz na południe.
+Jezioro emanujące elficką magią.
+
+
+&gt; s
+Idziesz na południe.
+Jezioro emanujące elficką magią.
+
+
+&gt; w
+Idziesz na zachód.
+Wieża Bab-el. Obok znajdują się ruiny drugiej, ewidentnie uderzonej przez Wiwernę
+
+
+&gt; aard 
+Udało Ci się wyważyć drzwi przy pomocy znaku aard - w końcu będziesz w stanie wejść do wieży.
+
+&gt; wejdz
+Wchodzisz do wieży.
+
+&gt; podnies Gwyhyr
+Podnosisz przedmiot: Gwyhyr
+
+&gt; n
+Jesteś w wieży, najpierw wyjdź na zwenątrz.
+
+&gt; wyjdz
+Wychodzisz z wieży.
+
+&gt; n
+Idziesz na północ.
+Równiny pełne roślinności
+
+
+&gt; n
+Idziesz na północ.
+Równiny pełne roślinności
+
+
+&gt; n
+Idziesz na północ.
+Równiny pełne roślinności
+
+
+&gt; w
+Idziesz na zachód.
+Równiny pełne roślinności
+
+
+&gt; w
+Idziesz na zachód.
+Wies Jaworek
+Postacie w tej lokalizacji: 
+    Kupiec
+    Karczmarka
+
+
+&gt; rozmawiaj Kupiec
+Witaj Mistrzu wiedźminie! Czym mogę służyć?
+1. Pokaż mi swoje towary
+2. Sprzedaj przedmiot
+0. Wyjdź z rozmowy
+
+&gt; 2
+Który przedmiot chcesz sprzedać?
+Gwyhyr	50 orenów
+
+&gt; Gwyhyr
+Sprzedałeś przedmiot: Gwyhyr za 50 orenów.
+
+&gt; n
+Idziesz na północ.
+Łąka, na której pasą się krowy
+Przeciwnicy w tej lokalizacji: 
+    Krowa
+    Krowa
+    Krowa
+
+
+&gt; atakuj Krowa
+Atakujesz przeciwnika: Krowa
+Pokonałeś przeciwnika: Krowa
+Otrzymujesz przedmiot: Skóra
+
+&gt; atakuj Krowa
+Atakujesz przeciwnika: Krowa
+Pokonałeś przeciwnika: Krowa
+Otrzymujesz przedmiot: Skóra
+
+&gt; w
+Idziesz na zachód.
+Łąka, na której pasą się krowy
+Przeciwnicy w tej lokalizacji: 
+    Krowa
+    Krowa
+
+
+&gt; w
+Idziesz na zachód.
+Równiny pełne roślinności
+
+
+&gt; s
+Idziesz na południe.
+Równiny pełne roślinności
+Przedmioty w tej lokalizacji: 
+    Ziele
+
+
+&gt; podnies Ziele
+Podnosisz przedmiot: Ziele
+
+&gt; e
+Idziesz na wschód.
+Równiny pełne roślinności
+
+
+&gt; e
+Idziesz na wschód.
+Wies Jaworek
+Postacie w tej lokalizacji: 
+    Kupiec
+    Karczmarka
+
+
+&gt; e
+Idziesz na wschód.
+Równiny pełne roślinności
+
+
+&gt; e
+Idziesz na wschód.
+Równiny pełne roślinności
+
+
+&gt; e
+Idziesz na wschód.
+Równiny pełne roślinności
+
+
+&gt; e
+Idziesz na wschód.
+Równiny pełne roślinności
+Przeciwnicy w tej lokalizacji: 
+    Krowa
+
+
+&gt; n
+Idziesz na północ.
+Gniazdo gryfa.
+
+
+&gt; s
+Idziesz na południe.
+Równiny pełne roślinności
+Przeciwnicy w tej lokalizacji: 
+    Krowa
+
+
+&gt; s
+Idziesz na południe.
+Jezioro emanujące elficką magią.
+
+
+&gt; n
+Idziesz na północ.
+Równiny pełne roślinności
+Przeciwnicy w tej lokalizacji: 
+    Krowa
+
+
+&gt; n
+Idziesz na północ.
+Gniazdo gryfa.
+
+
+&gt; e
+Idziesz na wschód.
+Zaraza. Muszę zawrócić...
+
+&gt; w
+Idziesz na zachód.
+Równiny pełne roślinności
+
+
+&gt; w
+Idziesz na zachód.
+Równiny pełne roślinności
+Przedmioty w tej lokalizacji: 
+    Ziele
+
+
+&gt; podnies Ziele
+Podnosisz przedmiot: Ziele
+
+&gt; s
+Idziesz na południe.
+Równiny pełne roślinności
+
+
+&gt; w
+Idziesz na zachód.
+Równiny pełne roślinności
+
+
+&gt; w
+Idziesz na zachód.
+Wies Jaworek
+Postacie w tej lokalizacji: 
+    Kupiec
+    Karczmarka
+
+
+&gt; rozmawaij Kupiec
+Nieznana komenda.
+
+&gt; rozmawiaj Kupiec
+Witaj Mistrzu wiedźminie! Czym mogę służyć?
+1. Pokaż mi swoje towary
+2. Sprzedaj przedmiot
+0. Wyjdź z rozmowy
+
+&gt; 1
+Pokażę ci swoje towary. Które z nich chcesz kupić?
+1. Siarka.                                                 15 orenów
+2. Karta do gwinta - Vernon Roche (Partiota, ale zbój)     15 orenów
+0. Wyjdź z rozmowy
+
+&gt; 1
+Kupiłeś siarkę za 15 orenów.
+
+&gt; stworz_przynete 
+Stworzyłeś przynętę na gryfa.
+
+&gt; n
+Idziesz na północ.
+Łąka, na której pasą się krowy
+Przeciwnicy w tej lokalizacji: 
+    Krowa
+
+
+&gt; e
+Idziesz na wschód.
+Równiny pełne roślinności
+
+
+&gt; e
+Idziesz na wschód.
+Równiny pełne roślinności
+
+
+&gt; e
+Idziesz na wschód.
+Równiny pełne roślinności
+
+
+&gt; e
+Idziesz na wschód.
+Gniazdo gryfa.
+
+
+&gt; ekwipunek
+Przynęta
+
+&gt; uzyj Przynęta             
+Postawiłeś przynętę, gryf powinien się lada moment zjawić...
+Słysz jak gryf przylatuje do gniazda, czas na niego zapolować.
+
+&gt; patrz
+Patrzysz dookoła siebie.
+Gniazdo gryfa.
+Przeciwnicy w tej lokalizacji: 
+    Gryf
+
+
+&gt; atakuj Gryf
+Atakujesz przeciwnika: Gryf
+Zaatakowałeś gryfa, wybierz co powinieneś zrobić
+1. Strzel z kuszy, by go powalić.
+2. Zaatakuj mieczem
+0. Uciekaj
+
+&gt; 1
+Udało Ci się trafć gryfa kuszą strącając go na ziemię.
+Wybierz, co powinieneś zrobić następnie.
+1. Strzel z kuszy.
+2. Zaatakuj mieczem
+0. Uciekaj
+
+&gt; 2
+Gryf padł martwy od ciosu miecza.
+Pokonałeś przeciwnika: Gryf
+Gratulacje! Ukończyłeś wiedźmińską przygodę.
+</pre>
